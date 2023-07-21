@@ -14,16 +14,7 @@ namespace DataLayer
     
     public partial class Stages
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stages()
-        {
-            this.ShippmentStage = new HashSet<ShippmentStage>();
-        }
-    
         public int IdSStage { get; set; }
         public string StageDescription { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShippmentStage> ShippmentStage { get; set; }
     }
 }

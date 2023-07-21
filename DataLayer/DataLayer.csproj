@@ -111,6 +111,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Transporte.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Validations.cs" />
     <Compile Include="Vehicles.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>

@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class Employees
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
-        {
-            this.ShippmentStage = new HashSet<ShippmentStage>();
-        }
-    
         public int ID { get; set; }
         public string EmpName { get; set; }
         public string EmpLastName { get; set; }
@@ -33,7 +27,5 @@ namespace DataLayer
     
         public virtual Roles Roles { get; set; }
         public virtual Licenses Licenses { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShippmentStage> ShippmentStage { get; set; }
     }
 }

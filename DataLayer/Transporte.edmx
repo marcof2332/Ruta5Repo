@@ -564,7 +564,6 @@
           <Property Name="Licence" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Employees" ToRole="Roles" />
           <NavigationProperty Name="Licenses" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Employees" ToRole="Licenses" />
-          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__EmpID__75A278F5" FromRole="Employees" ToRole="ShippmentStage" />
         </EntityType>
         <EntityType Name="HomePickup">
           <Key>
@@ -586,7 +585,6 @@
           <Property Name="Category" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LicenceDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Capacity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Licenses" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Packages">
           <Key>
@@ -608,7 +606,6 @@
           <Property Name="MinWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="MaxWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__PType__6EF57B66" FromRole="PackageType" ToRole="Packages" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -616,7 +613,6 @@
           </Key>
           <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RolesDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Roles" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Shippments">
           <Key>
@@ -660,7 +656,6 @@
           </Key>
           <Property Name="IdSStage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StageDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__IdSSt__74AE54BC" FromRole="Stages" ToRole="ShippmentStage" />
         </EntityType>
         <EntityType Name="States">
           <Key>
@@ -680,7 +675,6 @@
           <Property Name="BrandModel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="VehicleWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Condition" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__Vehic__76969D2E" FromRole="Vehicles" ToRole="ShippmentStage" />
           <NavigationProperty Name="VehiclesCondition" Relationship="Self.FK__Vehicles__Condit__59063A47" FromRole="Vehicles" ToRole="VehiclesCondition" />
         </EntityType>
         <EntityType Name="VehiclesCondition">
@@ -689,7 +683,6 @@
           </Key>
           <Property Name="IdVC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CondName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Condit__59063A47" FromRole="VehiclesCondition" ToRole="Vehicles" />
         </EntityType>
         <EntityType Name="Zones">
           <Key>
@@ -700,8 +693,6 @@
           <Property Name="City" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BranchOffices" Relationship="Self.FK__BranchOff__Branc__5070F446" FromRole="Zones" ToRole="BranchOffices" />
           <NavigationProperty Name="Cities" Relationship="Self.FK__Zones__City__4D94879B" FromRole="Zones" ToRole="Cities" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Clien__5FB337D6" FromRole="Zones" ToRole="Customers" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__Targe__6477ECF3" FromRole="Zones" ToRole="Shippments" />
         </EntityType>
         <Association Name="FK__BranchOff__Branc__5070F446">
           <End Role="Zones" Type="Self.Zones" Multiplicity="1" />

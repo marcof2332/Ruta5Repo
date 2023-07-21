@@ -14,19 +14,10 @@ namespace DataLayer
     
     public partial class PackageType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PackageType()
-        {
-            this.Packages = new HashSet<Packages>();
-        }
-    
         public int IdPackageType { get; set; }
         public string TypeDescription { get; set; }
         public decimal MinWeight { get; set; }
         public decimal MaxWeight { get; set; }
         public decimal Amount { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Packages> Packages { get; set; }
     }
 }

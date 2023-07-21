@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class Vehicles
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Vehicles()
-        {
-            this.ShippmentStage = new HashSet<ShippmentStage>();
-        }
-    
         public int IdVehicle { get; set; }
         public string Plate { get; set; }
         public string vRegistration { get; set; }
@@ -27,8 +21,6 @@ namespace DataLayer
         public decimal VehicleWeight { get; set; }
         public int Condition { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShippmentStage> ShippmentStage { get; set; }
         public virtual VehiclesCondition VehiclesCondition { get; set; }
     }
 }

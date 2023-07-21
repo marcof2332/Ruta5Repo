@@ -14,16 +14,7 @@ namespace DataLayer
     
     public partial class VehiclesCondition
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public VehiclesCondition()
-        {
-            this.Vehicles = new HashSet<Vehicles>();
-        }
-    
         public int IdVC { get; set; }
         public string CondName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vehicles> Vehicles { get; set; }
     }
 }
