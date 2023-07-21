@@ -1,0 +1,1244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TransporteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BranchOffices">
+          <Key>
+            <PropertyRef Name="IdOffice" />
+          </Key>
+          <Property Name="IdOffice" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchZone" Type="int" Nullable="false" />
+          <Property Name="BranchAddress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="OpTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CloseTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="IdCity" />
+          </Key>
+          <Property Name="IdCity" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CityState" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="DocRut" />
+          </Key>
+          <Property Name="DocRut" Type="bigint" Nullable="false" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CLastName" Type="varchar" MaxLength="50" />
+          <Property Name="Celphone" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="ClientZone" Type="int" />
+          <Property Name="CliAddress" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DropOffPackage">
+          <Key>
+            <PropertyRef Name="IdDropOff" />
+          </Key>
+          <Property Name="IdDropOff" Type="int" Nullable="false" />
+          <Property Name="BranchOffice" Type="int" />
+          <Property Name="Note" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpLastName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="EmpUser" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmpPassword" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Celphone" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="EmpAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="EmpRole" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Licence" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HomePickup">
+          <Key>
+            <PropertyRef Name="IdHomePickup" />
+          </Key>
+          <Property Name="IdHomePickup" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Note" Type="varchar" MaxLength="200" />
+          <Property Name="PickupAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="Category" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="LicenceDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="IdPackage" />
+          </Key>
+          <Property Name="IdPackage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shippment" Type="int" Nullable="false" />
+          <Property Name="PType" Type="int" Nullable="false" />
+          <Property Name="NOfPackages" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="IdPackageType" />
+          </Key>
+          <Property Name="IdPackageType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeDescription" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MinWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MaxWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="RolesDescription" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shippments">
+          <Key>
+            <PropertyRef Name="IdShippment" />
+          </Key>
+          <Property Name="IdShippment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptDate" Type="date" Nullable="false" />
+          <Property Name="Sender" Type="bigint" Nullable="false" />
+          <Property Name="Recipient" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RecipientCel" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="TargetZone" Type="int" Nullable="false" />
+          <Property Name="TargetAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShippmentStage">
+          <Key>
+            <PropertyRef Name="IdShippment" />
+            <PropertyRef Name="IdSStage" />
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="IdShippment" Type="int" Nullable="false" />
+          <Property Name="IdSStage" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="DateTimeStage" Type="datetime" Nullable="false" />
+          <Property Name="Vehicle" Type="int" />
+        </EntityType>
+        <EntityType Name="Stages">
+          <Key>
+            <PropertyRef Name="IdSStage" />
+          </Key>
+          <Property Name="IdSStage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StageDescription" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="IdState" />
+          </Key>
+          <Property Name="IdState" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="IdVehicle" />
+          </Key>
+          <Property Name="IdVehicle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Plate" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="vRegistration" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="BrandModel" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="VehicleWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Condition" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehiclesCondition">
+          <Key>
+            <PropertyRef Name="IdVC" />
+          </Key>
+          <Property Name="IdVC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CondName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zones">
+          <Key>
+            <PropertyRef Name="IdZone" />
+          </Key>
+          <Property Name="IdZone" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZoneName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BranchOff__Branc__5070F446">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
+          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="BranchOffices">
+              <PropertyRef Name="BranchZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cities__CityStat__4AB81AF0">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="IdState" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CityState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Clien__5FB337D6">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ClientZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__Branc__68487DD7">
+          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="0..1" />
+          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchOffices">
+              <PropertyRef Name="IdOffice" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="BranchOffice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__IdDro__6754599E">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="IdDropOff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__EmpRo__44FF419A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="EmpRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__Licen__45F365D3">
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="Category" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Licence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HomePicku__IdHom__6B24EA82">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="HomePickup" Type="Self.HomePickup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="HomePickup">
+              <PropertyRef Name="IdHomePickup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Packages__PType__6EF57B66">
+          <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="IdPackageType" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="PType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Packages__Shippm__6E01572D">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="Shippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__EmpID__75A278F5">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__IdShi__73BA3083">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="IdShippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__IdSSt__74AE54BC">
+          <End Role="Stages" Type="Self.Stages" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stages">
+              <PropertyRef Name="IdSStage" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="IdSStage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Sende__628FA481">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="DocRut" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Targe__6477ECF3">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="TargetZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Vehic__76969D2E">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="IdVehicle" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="Vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Condit__59063A47">
+          <End Role="VehiclesCondition" Type="Self.VehiclesCondition" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehiclesCondition">
+              <PropertyRef Name="IdVC" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zones__City__4D94879B">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Zones" Type="Self.Zones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="IdCity" />
+            </Principal>
+            <Dependent Role="Zones">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteLicense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cat" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Code" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="TransporteModelStoreContainer">
+          <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DropOffPackage" EntityType="Self.DropOffPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomePickup" EntityType="Self.HomePickup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shippments" EntityType="Self.Shippments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippmentStage" EntityType="Self.ShippmentStage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stages" EntityType="Self.Stages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehiclesCondition" EntityType="Self.VehiclesCondition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BranchOff__Branc__5070F446" Association="Self.FK__BranchOff__Branc__5070F446">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cities__CityStat__4AB81AF0" Association="Self.FK__Cities__CityStat__4AB81AF0">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Clien__5FB337D6" Association="Self.FK__Customers__Clien__5FB337D6">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__Branc__68487DD7" Association="Self.FK__DropOffPa__Branc__68487DD7">
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__IdDro__6754599E" Association="Self.FK__DropOffPa__IdDro__6754599E">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__EmpRo__44FF419A" Association="Self.FK__Employees__EmpRo__44FF419A">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__Licen__45F365D3" Association="Self.FK__Employees__Licen__45F365D3">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HomePicku__IdHom__6B24EA82" Association="Self.FK__HomePicku__IdHom__6B24EA82">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="HomePickup" EntitySet="HomePickup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Packages__PType__6EF57B66" Association="Self.FK__Packages__PType__6EF57B66">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Packages__Shippm__6E01572D" Association="Self.FK__Packages__Shippm__6E01572D">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__EmpID__75A278F5" Association="Self.FK__Shippment__EmpID__75A278F5">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__IdShi__73BA3083" Association="Self.FK__Shippment__IdShi__73BA3083">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__IdSSt__74AE54BC" Association="Self.FK__Shippment__IdSSt__74AE54BC">
+            <End Role="Stages" EntitySet="Stages" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Sende__628FA481" Association="Self.FK__Shippment__Sende__628FA481">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Targe__6477ECF3" Association="Self.FK__Shippment__Targe__6477ECF3">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Vehic__76969D2E" Association="Self.FK__Shippment__Vehic__76969D2E">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Condit__59063A47" Association="Self.FK__Vehicles__Condit__59063A47">
+            <End Role="VehiclesCondition" EntitySet="VehiclesCondition" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zones__City__4D94879B" Association="Self.FK__Zones__City__4D94879B">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Zones" EntitySet="Zones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TransporteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BranchOffices">
+          <Key>
+            <PropertyRef Name="IdOffice" />
+          </Key>
+          <Property Name="IdOffice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchZone" Type="Int32" Nullable="false" />
+          <Property Name="BranchAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OpTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Zones" Relationship="Self.FK__BranchOff__Branc__5070F446" FromRole="BranchOffices" ToRole="Zones" />
+          <NavigationProperty Name="DropOffPackage" Relationship="Self.FK__DropOffPa__Branc__68487DD7" FromRole="BranchOffices" ToRole="DropOffPackage" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="IdCity" />
+          </Key>
+          <Property Name="IdCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CityState" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="States" Relationship="Self.FK__Cities__CityStat__4AB81AF0" FromRole="Cities" ToRole="States" />
+          <NavigationProperty Name="Zones" Relationship="Self.FK__Zones__City__4D94879B" FromRole="Cities" ToRole="Zones" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="DocRut" />
+          </Key>
+          <Property Name="DocRut" Type="Int64" Nullable="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celphone" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientZone" Type="Int32" />
+          <Property Name="CliAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Zones" Relationship="Self.FK__Customers__Clien__5FB337D6" FromRole="Customers" ToRole="Zones" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__Sende__628FA481" FromRole="Customers" ToRole="Shippments" />
+        </EntityType>
+        <EntityType Name="DropOffPackage">
+          <Key>
+            <PropertyRef Name="IdDropOff" />
+          </Key>
+          <Property Name="IdDropOff" Type="Int32" Nullable="false" />
+          <Property Name="BranchOffice" Type="Int32" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BranchOffices" Relationship="Self.FK__DropOffPa__Branc__68487DD7" FromRole="DropOffPackage" ToRole="BranchOffices" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__DropOffPa__IdDro__6754599E" FromRole="DropOffPackage" ToRole="Shippments" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpLastName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmpUser" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Celphone" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpRole" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Licence" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Employees" ToRole="Roles" />
+          <NavigationProperty Name="Licenses" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Employees" ToRole="Licenses" />
+          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__EmpID__75A278F5" FromRole="Employees" ToRole="ShippmentStage" />
+        </EntityType>
+        <EntityType Name="HomePickup">
+          <Key>
+            <PropertyRef Name="IdHomePickup" />
+          </Key>
+          <Property Name="IdHomePickup" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PickupAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__HomePicku__IdHom__6B24EA82" FromRole="HomePickup" ToRole="Shippments" />
+        </EntityType>
+        <EntityType Name="Licenses">
+          <Key>
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="Category" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LicenceDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Licenses" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Packages">
+          <Key>
+            <PropertyRef Name="IdPackage" />
+          </Key>
+          <Property Name="IdPackage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shippment" Type="Int32" Nullable="false" />
+          <Property Name="PType" Type="Int32" Nullable="false" />
+          <Property Name="NOfPackages" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PackageType" Relationship="Self.FK__Packages__PType__6EF57B66" FromRole="Packages" ToRole="PackageType" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__Packages__Shippm__6E01572D" FromRole="Packages" ToRole="Shippments" />
+        </EntityType>
+        <EntityType Name="PackageType">
+          <Key>
+            <PropertyRef Name="IdPackageType" />
+          </Key>
+          <Property Name="IdPackageType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeDescription" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MinWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="MaxWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__PType__6EF57B66" FromRole="PackageType" ToRole="Packages" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RolesDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Roles" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Shippments">
+          <Key>
+            <PropertyRef Name="IdShippment" />
+          </Key>
+          <Property Name="IdShippment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sender" Type="Int64" Nullable="false" />
+          <Property Name="Recipient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RecipientCel" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TargetZone" Type="Int32" Nullable="false" />
+          <Property Name="TargetAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Shippment__Sende__628FA481" FromRole="Shippments" ToRole="Customers" />
+          <NavigationProperty Name="DropOffPackage" Relationship="Self.FK__DropOffPa__IdDro__6754599E" FromRole="Shippments" ToRole="DropOffPackage" />
+          <NavigationProperty Name="HomePickup" Relationship="Self.FK__HomePicku__IdHom__6B24EA82" FromRole="Shippments" ToRole="HomePickup" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__Shippm__6E01572D" FromRole="Shippments" ToRole="Packages" />
+          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__IdShi__73BA3083" FromRole="Shippments" ToRole="ShippmentStage" />
+          <NavigationProperty Name="Zones" Relationship="Self.FK__Shippment__Targe__6477ECF3" FromRole="Shippments" ToRole="Zones" />
+        </EntityType>
+        <EntityType Name="ShippmentStage">
+          <Key>
+            <PropertyRef Name="IdShippment" />
+            <PropertyRef Name="IdSStage" />
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="IdShippment" Type="Int32" Nullable="false" />
+          <Property Name="IdSStage" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="DateTimeStage" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Vehicle" Type="Int32" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Shippment__EmpID__75A278F5" FromRole="ShippmentStage" ToRole="Employees" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__IdShi__73BA3083" FromRole="ShippmentStage" ToRole="Shippments" />
+          <NavigationProperty Name="Stages" Relationship="Self.FK__Shippment__IdSSt__74AE54BC" FromRole="ShippmentStage" ToRole="Stages" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Shippment__Vehic__76969D2E" FromRole="ShippmentStage" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Stages">
+          <Key>
+            <PropertyRef Name="IdSStage" />
+          </Key>
+          <Property Name="IdSStage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StageDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__IdSSt__74AE54BC" FromRole="Stages" ToRole="ShippmentStage" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="IdState" />
+          </Key>
+          <Property Name="IdState" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__Cities__CityStat__4AB81AF0" FromRole="States" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="IdVehicle" />
+          </Key>
+          <Property Name="IdVehicle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Plate" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vRegistration" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BrandModel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VehicleWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Condition" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__Vehic__76969D2E" FromRole="Vehicles" ToRole="ShippmentStage" />
+          <NavigationProperty Name="VehiclesCondition" Relationship="Self.FK__Vehicles__Condit__59063A47" FromRole="Vehicles" ToRole="VehiclesCondition" />
+        </EntityType>
+        <EntityType Name="VehiclesCondition">
+          <Key>
+            <PropertyRef Name="IdVC" />
+          </Key>
+          <Property Name="IdVC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CondName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Condit__59063A47" FromRole="VehiclesCondition" ToRole="Vehicles" />
+        </EntityType>
+        <EntityType Name="Zones">
+          <Key>
+            <PropertyRef Name="IdZone" />
+          </Key>
+          <Property Name="IdZone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BranchOffices" Relationship="Self.FK__BranchOff__Branc__5070F446" FromRole="Zones" ToRole="BranchOffices" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK__Zones__City__4D94879B" FromRole="Zones" ToRole="Cities" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Clien__5FB337D6" FromRole="Zones" ToRole="Customers" />
+          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__Targe__6477ECF3" FromRole="Zones" ToRole="Shippments" />
+        </EntityType>
+        <Association Name="FK__BranchOff__Branc__5070F446">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
+          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="BranchOffices">
+              <PropertyRef Name="BranchZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__Branc__68487DD7">
+          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="0..1" />
+          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchOffices">
+              <PropertyRef Name="IdOffice" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="BranchOffice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cities__CityStat__4AB81AF0">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="IdState" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CityState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Zones__City__4D94879B">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Zones" Type="Self.Zones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="IdCity" />
+            </Principal>
+            <Dependent Role="Zones">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customers__Clien__5FB337D6">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="0..1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="ClientZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Sende__628FA481">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="DocRut" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__IdDro__6754599E">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="IdDropOff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__EmpRo__44FF419A">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="EmpRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__Licen__45F365D3">
+          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licenses">
+              <PropertyRef Name="Category" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Licence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__EmpID__75A278F5">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HomePicku__IdHom__6B24EA82">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="HomePickup" Type="Self.HomePickup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="HomePickup">
+              <PropertyRef Name="IdHomePickup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Packages__PType__6EF57B66">
+          <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PackageType">
+              <PropertyRef Name="IdPackageType" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="PType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Packages__Shippm__6E01572D">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="Shippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__IdShi__73BA3083">
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="IdShippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Targe__6477ECF3">
+          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
+          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="TargetZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__IdSSt__74AE54BC">
+          <End Role="Stages" Type="Self.Stages" Multiplicity="1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stages">
+              <PropertyRef Name="IdSStage" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="IdSStage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Vehic__76969D2E">
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
+          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicles">
+              <PropertyRef Name="IdVehicle" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="Vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicles__Condit__59063A47">
+          <End Role="VehiclesCondition" Type="Self.VehiclesCondition" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehiclesCondition">
+              <PropertyRef Name="IdVC" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="Condition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TransporteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="DropOffPackage" EntityType="Self.DropOffPackage" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="HomePickup" EntityType="Self.HomePickup" />
+          <EntitySet Name="Licenses" EntityType="Self.Licenses" />
+          <EntitySet Name="Packages" EntityType="Self.Packages" />
+          <EntitySet Name="PackageType" EntityType="Self.PackageType" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Shippments" EntityType="Self.Shippments" />
+          <EntitySet Name="ShippmentStage" EntityType="Self.ShippmentStage" />
+          <EntitySet Name="Stages" EntityType="Self.Stages" />
+          <EntitySet Name="States" EntityType="Self.States" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" />
+          <EntitySet Name="VehiclesCondition" EntityType="Self.VehiclesCondition" />
+          <EntitySet Name="Zones" EntityType="Self.Zones" />
+          <AssociationSet Name="FK__BranchOff__Branc__5070F446" Association="Self.FK__BranchOff__Branc__5070F446">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__Branc__68487DD7" Association="Self.FK__DropOffPa__Branc__68487DD7">
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cities__CityStat__4AB81AF0" Association="Self.FK__Cities__CityStat__4AB81AF0">
+            <End Role="States" EntitySet="States" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Zones__City__4D94879B" Association="Self.FK__Zones__City__4D94879B">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Zones" EntitySet="Zones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customers__Clien__5FB337D6" Association="Self.FK__Customers__Clien__5FB337D6">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Sende__628FA481" Association="Self.FK__Shippment__Sende__628FA481">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__IdDro__6754599E" Association="Self.FK__DropOffPa__IdDro__6754599E">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__EmpRo__44FF419A" Association="Self.FK__Employees__EmpRo__44FF419A">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__Licen__45F365D3" Association="Self.FK__Employees__Licen__45F365D3">
+            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__EmpID__75A278F5" Association="Self.FK__Shippment__EmpID__75A278F5">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HomePicku__IdHom__6B24EA82" Association="Self.FK__HomePicku__IdHom__6B24EA82">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="HomePickup" EntitySet="HomePickup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Packages__PType__6EF57B66" Association="Self.FK__Packages__PType__6EF57B66">
+            <End Role="PackageType" EntitySet="PackageType" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Packages__Shippm__6E01572D" Association="Self.FK__Packages__Shippm__6E01572D">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__IdShi__73BA3083" Association="Self.FK__Shippment__IdShi__73BA3083">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Targe__6477ECF3" Association="Self.FK__Shippment__Targe__6477ECF3">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__IdSSt__74AE54BC" Association="Self.FK__Shippment__IdSSt__74AE54BC">
+            <End Role="Stages" EntitySet="Stages" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Vehic__76969D2E" Association="Self.FK__Shippment__Vehic__76969D2E">
+            <End Role="Vehicles" EntitySet="Vehicles" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicles__Condit__59063A47" Association="Self.FK__Vehicles__Condit__59063A47">
+            <End Role="VehiclesCondition" EntitySet="VehiclesCondition" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteEmployee">
+            <Parameter Name="empID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteLicense">
+            <Parameter Name="Cat" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteRole">
+            <Parameter Name="Code" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteState">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TransporteModelStoreContainer" CdmEntityContainer="TransporteEntities">
+          <EntitySetMapping Name="BranchOffices">
+            <EntityTypeMapping TypeName="TransporteModel.BranchOffices">
+              <MappingFragment StoreEntitySet="BranchOffices">
+                <ScalarProperty Name="IdOffice" ColumnName="IdOffice" />
+                <ScalarProperty Name="BranchZone" ColumnName="BranchZone" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="OpTime" ColumnName="OpTime" />
+                <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="TransporteModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityState" ColumnName="CityState" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="TransporteModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="DocRut" ColumnName="DocRut" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CLastName" ColumnName="CLastName" />
+                <ScalarProperty Name="Celphone" ColumnName="Celphone" />
+                <ScalarProperty Name="ClientZone" ColumnName="ClientZone" />
+                <ScalarProperty Name="CliAddress" ColumnName="CliAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DropOffPackage">
+            <EntityTypeMapping TypeName="TransporteModel.DropOffPackage">
+              <MappingFragment StoreEntitySet="DropOffPackage">
+                <ScalarProperty Name="IdDropOff" ColumnName="IdDropOff" />
+                <ScalarProperty Name="BranchOffice" ColumnName="BranchOffice" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="TransporteModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmpLastName" ColumnName="EmpLastName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="EmpUser" ColumnName="EmpUser" />
+                <ScalarProperty Name="EmpPassword" ColumnName="EmpPassword" />
+                <ScalarProperty Name="Celphone" ColumnName="Celphone" />
+                <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+                <ScalarProperty Name="EmpRole" ColumnName="EmpRole" />
+                <ScalarProperty Name="Licence" ColumnName="Licence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomePickup">
+            <EntityTypeMapping TypeName="TransporteModel.HomePickup">
+              <MappingFragment StoreEntitySet="HomePickup">
+                <ScalarProperty Name="IdHomePickup" ColumnName="IdHomePickup" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="TransporteModel.Licenses">
+              <MappingFragment StoreEntitySet="Licenses">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="LicenceDescription" ColumnName="LicenceDescription" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="TransporteModel.Packages">
+              <MappingFragment StoreEntitySet="Packages">
+                <ScalarProperty Name="IdPackage" ColumnName="IdPackage" />
+                <ScalarProperty Name="Shippment" ColumnName="Shippment" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="NOfPackages" ColumnName="NOfPackages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackageType">
+            <EntityTypeMapping TypeName="TransporteModel.PackageType">
+              <MappingFragment StoreEntitySet="PackageType">
+                <ScalarProperty Name="IdPackageType" ColumnName="IdPackageType" />
+                <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+                <ScalarProperty Name="MinWeight" ColumnName="MinWeight" />
+                <ScalarProperty Name="MaxWeight" ColumnName="MaxWeight" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TransporteModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="RolesDescription" ColumnName="RolesDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippments">
+            <EntityTypeMapping TypeName="TransporteModel.Shippments">
+              <MappingFragment StoreEntitySet="Shippments">
+                <ScalarProperty Name="IdShippment" ColumnName="IdShippment" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="RecipientCel" ColumnName="RecipientCel" />
+                <ScalarProperty Name="TargetZone" ColumnName="TargetZone" />
+                <ScalarProperty Name="TargetAddress" ColumnName="TargetAddress" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippmentStage">
+            <EntityTypeMapping TypeName="TransporteModel.ShippmentStage">
+              <MappingFragment StoreEntitySet="ShippmentStage">
+                <ScalarProperty Name="IdShippment" ColumnName="IdShippment" />
+                <ScalarProperty Name="IdSStage" ColumnName="IdSStage" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="DateTimeStage" ColumnName="DateTimeStage" />
+                <ScalarProperty Name="Vehicle" ColumnName="Vehicle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stages">
+            <EntityTypeMapping TypeName="TransporteModel.Stages">
+              <MappingFragment StoreEntitySet="Stages">
+                <ScalarProperty Name="IdSStage" ColumnName="IdSStage" />
+                <ScalarProperty Name="StageDescription" ColumnName="StageDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="TransporteModel.States">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="IdState" ColumnName="IdState" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="TransporteModel.Vehicles">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="IdVehicle" ColumnName="IdVehicle" />
+                <ScalarProperty Name="Plate" ColumnName="Plate" />
+                <ScalarProperty Name="vRegistration" ColumnName="vRegistration" />
+                <ScalarProperty Name="BrandModel" ColumnName="BrandModel" />
+                <ScalarProperty Name="VehicleWeight" ColumnName="VehicleWeight" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehiclesCondition">
+            <EntityTypeMapping TypeName="TransporteModel.VehiclesCondition">
+              <MappingFragment StoreEntitySet="VehiclesCondition">
+                <ScalarProperty Name="IdVC" ColumnName="IdVC" />
+                <ScalarProperty Name="CondName" ColumnName="CondName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zones">
+            <EntityTypeMapping TypeName="TransporteModel.Zones">
+              <MappingFragment StoreEntitySet="Zones">
+                <ScalarProperty Name="IdZone" ColumnName="IdZone" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteEmployee" FunctionName="TransporteModel.Store.DeleteEmployee" />
+          <FunctionImportMapping FunctionImportName="DeleteLicense" FunctionName="TransporteModel.Store.DeleteLicense" />
+          <FunctionImportMapping FunctionImportName="DeleteRole" FunctionName="TransporteModel.Store.DeleteRole" />
+          <FunctionImportMapping FunctionImportName="DeleteState" FunctionName="TransporteModel.Store.DeleteState" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

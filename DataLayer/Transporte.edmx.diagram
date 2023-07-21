@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9eea5440d06f43dca1daafc1557370f9" Name="Diagram1" ZoomLevel="104">
+        <EntityTypeShape EntityType="TransporteModel.BranchOffices" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Cities" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Customers" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.DropOffPackage" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Employees" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.HomePickup" Width="1.5" PointX="12" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Licenses" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Packages" Width="1.5" PointX="15" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.PackageType" Width="1.5" PointX="12.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Roles" Width="1.5" PointX="7.5" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Shippments" Width="1.5" PointX="9.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.ShippmentStage" Width="1.5" PointX="12" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Stages" Width="1.5" PointX="9.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.States" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Vehicles" Width="1.5" PointX="9.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.VehiclesCondition" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TransporteModel.Zones" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="TransporteModel.FK__BranchOff__Branc__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__DropOffPa__Branc__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Cities__CityStat__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Zones__City__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Customers__Clien__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Sende__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__DropOffPa__IdDro__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Employees__EmpRo__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Employees__Licen__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__EmpID__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__HomePicku__IdHom__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Packages__PType__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Packages__Shippm__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__IdShi__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Targe__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__IdSSt__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Vehic__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="TransporteModel.FK__Vehicles__Condit__59063A47" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
