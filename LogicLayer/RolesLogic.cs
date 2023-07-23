@@ -8,7 +8,7 @@ using DataLayer;
 
 namespace LogicLayer
 {
-    internal class RolesLogic: Interfaces.IRoleLogic
+    internal class RolesLogic : Interfaces.IRoleLogic
     {
         #region RolesLogicSingleton
         private static RolesLogic _instance = null;
@@ -27,8 +27,9 @@ namespace LogicLayer
         public Roles RSearch(string code)
         {
             return (DbContextSingleton.TransporteContext.Roles.Where(r => r.Code == code).FirstOrDefault());
+
         }
-        public void RAdd(Roles ro) 
+        public void RAdd(Roles ro)
         {
             try
             {
@@ -54,7 +55,7 @@ namespace LogicLayer
                     throw ex;
             }
         }
-        public void RModify(Roles ro) 
+        public void RModify(Roles ro)
         {
             Roles modRo = null;
             try
@@ -69,11 +70,11 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public void RDelete(Roles ro) 
+        public void RDelete(string ro)
         {
             try
             {
-                System.Data.SqlClient.SqlParameter _code = new System.Data.SqlClient.SqlParameter("@Code", ro.Code);
+                System.Data.SqlClient.SqlParameter _code = new System.Data.SqlClient.SqlParameter("@Code", ro);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
                 DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteRole @Code, @ret output", _code, _ret);
@@ -100,5 +101,25 @@ namespace LogicLayer
             return (DbContextSingleton.TransporteContext.Roles.ToList());
         }
         #endregion
+
+        /* Para testear en el navegador debugeando
+        const url = 'https://localhost:44327/api/Roles/RAdd';
+        const data = {
+                        Code: 'PEO',
+                        RolesDescription: 'Peón'
+                     };
+
+            fetch(url, {
+                        method: 'POST',
+                        headers:
+                                {
+                                  'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                                    })
+                       .then(response => response.json())
+                       .then(result => console.log(result))
+                       .catch(error => console.error('Error:', error));
+                       */
     }
 }

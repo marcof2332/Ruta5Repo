@@ -12,7 +12,7 @@ namespace LogicLayer.Interfaces
     {
         Roles RSearch(string code);
         void RAdd(Roles ro);
-        void RDelete(Roles ro);
+        void RDelete(string ro);
         void RModify(Roles ro);
         List<Roles> RList();
     }
