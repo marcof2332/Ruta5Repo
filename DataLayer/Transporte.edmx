@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TransporteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TransporteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BranchOffices">
           <Key>
             <PropertyRef Name="IdOffice" />
@@ -17,6 +17,7 @@
           <Property Name="Phone" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="OpTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="CloseTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Cities">
           <Key>
@@ -42,7 +43,7 @@
             <PropertyRef Name="IdDropOff" />
           </Key>
           <Property Name="IdDropOff" Type="int" Nullable="false" />
-          <Property Name="BranchOffice" Type="int" />
+          <Property Name="BranchOffice" Type="int" Nullable="false" />
           <Property Name="Note" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Employees">
@@ -57,6 +58,7 @@
           <Property Name="EmpPassword" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Celphone" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="EmpAddress" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="EmpRole" Type="varchar" MaxLength="3" Nullable="false" />
           <Property Name="Licence" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
@@ -155,6 +157,7 @@
           <Property Name="vRegistration" Type="varchar" MaxLength="17" Nullable="false" />
           <Property Name="BrandModel" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="VehicleWeight" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="Condition" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="VehiclesCondition">
@@ -172,7 +175,7 @@
           <Property Name="ZoneName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="City" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__BranchOff__Branc__5070F446">
+        <Association Name="FK__BranchOff__Branc__5165187F">
           <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
           <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +187,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Cities__CityStat__4AB81AF0">
+        <Association Name="FK__Cities__CityStat__4BAC3F29">
           <End Role="States" Type="Self.States" Multiplicity="1" />
           <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +199,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Customers__Clien__5FB337D6">
+        <Association Name="FK__Customers__Clien__628FA481">
           <End Role="Zones" Type="Self.Zones" Multiplicity="0..1" />
           <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
           <ReferentialConstraint>
@@ -208,8 +211,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DropOffPa__Branc__68487DD7">
-          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="0..1" />
+        <Association Name="FK__DropOffPa__Branc__6B24EA82">
+          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="1" />
           <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BranchOffices">
@@ -220,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DropOffPa__IdDro__6754599E">
+        <Association Name="FK__DropOffPa__IdDro__6A30C649">
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
           <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -232,7 +235,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__EmpRo__44FF419A">
+        <Association Name="FK__Employees__EmpRo__45F365D3">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,7 +247,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__Licen__45F365D3">
+        <Association Name="FK__Employees__Licen__46E78A0C">
           <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +259,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HomePicku__IdHom__6B24EA82">
+        <Association Name="FK__HomePicku__IdHom__6E01572D">
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
           <End Role="HomePickup" Type="Self.HomePickup" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -268,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Packages__PType__6EF57B66">
+        <Association Name="FK__Packages__PType__71D1E811">
           <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
           <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
           <ReferentialConstraint>
@@ -280,7 +283,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Packages__Shippm__6E01572D">
+        <Association Name="FK__Packages__Shippm__70DDC3D8">
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
           <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
           <ReferentialConstraint>
@@ -292,7 +295,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__EmpID__75A278F5">
+        <Association Name="FK__Shippment__EmpID__787EE5A0">
           <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +307,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__IdShi__73BA3083">
+        <Association Name="FK__Shippment__IdShi__76969D2E">
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
           <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +319,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__IdSSt__74AE54BC">
+        <Association Name="FK__Shippment__IdSSt__778AC167">
           <End Role="Stages" Type="Self.Stages" Multiplicity="1" />
           <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,7 +331,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__Sende__628FA481">
+        <Association Name="FK__Shippment__Sende__656C112C">
           <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,7 +343,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__Targe__6477ECF3">
+        <Association Name="FK__Shippment__Targe__6754599E">
           <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
           <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
           <ReferentialConstraint>
@@ -352,7 +355,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Shippment__Vehic__76969D2E">
+        <Association Name="FK__Shippment__Vehic__797309D9">
           <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="0..1" />
           <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -364,7 +367,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vehicles__Condit__59063A47">
+        <Association Name="FK__Vehicles__Condit__5BE2A6F2">
           <End Role="VehiclesCondition" Type="Self.VehiclesCondition" Multiplicity="1" />
           <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -376,7 +379,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Zones__City__4D94879B">
+        <Association Name="FK__Zones__City__4E88ABD4">
           <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
           <End Role="Zones" Type="Self.Zones" Multiplicity="*" />
           <ReferentialConstraint>
@@ -388,19 +391,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DeleteCity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="DeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="empID" Type="int" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="DeleteHp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="DeleteLicense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Cat" Type="int" Mode="In" />
+          <Parameter Name="Cat" Type="varchar" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteOffice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeletePoD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeletePt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
         <Function Name="DeleteRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Code" Type="int" Mode="In" />
+          <Parameter Name="Code" Type="varchar" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteSStage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
         <Function Name="DeleteState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteVCondition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="ret" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteVehicle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
@@ -422,99 +457,83 @@
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VehiclesCondition" EntityType="Self.VehiclesCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zones" EntityType="Self.Zones" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BranchOff__Branc__5070F446" Association="Self.FK__BranchOff__Branc__5070F446">
+          <AssociationSet Name="FK__BranchOff__Branc__5165187F" Association="Self.FK__BranchOff__Branc__5165187F">
             <End Role="Zones" EntitySet="Zones" />
             <End Role="BranchOffices" EntitySet="BranchOffices" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cities__CityStat__4AB81AF0" Association="Self.FK__Cities__CityStat__4AB81AF0">
+          <AssociationSet Name="FK__Cities__CityStat__4BAC3F29" Association="Self.FK__Cities__CityStat__4BAC3F29">
             <End Role="States" EntitySet="States" />
             <End Role="Cities" EntitySet="Cities" />
           </AssociationSet>
-          <AssociationSet Name="FK__Customers__Clien__5FB337D6" Association="Self.FK__Customers__Clien__5FB337D6">
+          <AssociationSet Name="FK__Customers__Clien__628FA481" Association="Self.FK__Customers__Clien__628FA481">
             <End Role="Zones" EntitySet="Zones" />
             <End Role="Customers" EntitySet="Customers" />
           </AssociationSet>
-          <AssociationSet Name="FK__DropOffPa__Branc__68487DD7" Association="Self.FK__DropOffPa__Branc__68487DD7">
+          <AssociationSet Name="FK__DropOffPa__Branc__6B24EA82" Association="Self.FK__DropOffPa__Branc__6B24EA82">
             <End Role="BranchOffices" EntitySet="BranchOffices" />
             <End Role="DropOffPackage" EntitySet="DropOffPackage" />
           </AssociationSet>
-          <AssociationSet Name="FK__DropOffPa__IdDro__6754599E" Association="Self.FK__DropOffPa__IdDro__6754599E">
+          <AssociationSet Name="FK__DropOffPa__IdDro__6A30C649" Association="Self.FK__DropOffPa__IdDro__6A30C649">
             <End Role="Shippments" EntitySet="Shippments" />
             <End Role="DropOffPackage" EntitySet="DropOffPackage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__EmpRo__44FF419A" Association="Self.FK__Employees__EmpRo__44FF419A">
+          <AssociationSet Name="FK__Employees__EmpRo__45F365D3" Association="Self.FK__Employees__EmpRo__45F365D3">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__Employees__Licen__45F365D3" Association="Self.FK__Employees__Licen__45F365D3">
+          <AssociationSet Name="FK__Employees__Licen__46E78A0C" Association="Self.FK__Employees__Licen__46E78A0C">
             <End Role="Licenses" EntitySet="Licenses" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK__HomePicku__IdHom__6B24EA82" Association="Self.FK__HomePicku__IdHom__6B24EA82">
+          <AssociationSet Name="FK__HomePicku__IdHom__6E01572D" Association="Self.FK__HomePicku__IdHom__6E01572D">
             <End Role="Shippments" EntitySet="Shippments" />
             <End Role="HomePickup" EntitySet="HomePickup" />
           </AssociationSet>
-          <AssociationSet Name="FK__Packages__PType__6EF57B66" Association="Self.FK__Packages__PType__6EF57B66">
+          <AssociationSet Name="FK__Packages__PType__71D1E811" Association="Self.FK__Packages__PType__71D1E811">
             <End Role="PackageType" EntitySet="PackageType" />
             <End Role="Packages" EntitySet="Packages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Packages__Shippm__6E01572D" Association="Self.FK__Packages__Shippm__6E01572D">
+          <AssociationSet Name="FK__Packages__Shippm__70DDC3D8" Association="Self.FK__Packages__Shippm__70DDC3D8">
             <End Role="Shippments" EntitySet="Shippments" />
             <End Role="Packages" EntitySet="Packages" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__EmpID__75A278F5" Association="Self.FK__Shippment__EmpID__75A278F5">
+          <AssociationSet Name="FK__Shippment__EmpID__787EE5A0" Association="Self.FK__Shippment__EmpID__787EE5A0">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="ShippmentStage" EntitySet="ShippmentStage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__IdShi__73BA3083" Association="Self.FK__Shippment__IdShi__73BA3083">
+          <AssociationSet Name="FK__Shippment__IdShi__76969D2E" Association="Self.FK__Shippment__IdShi__76969D2E">
             <End Role="Shippments" EntitySet="Shippments" />
             <End Role="ShippmentStage" EntitySet="ShippmentStage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__IdSSt__74AE54BC" Association="Self.FK__Shippment__IdSSt__74AE54BC">
+          <AssociationSet Name="FK__Shippment__IdSSt__778AC167" Association="Self.FK__Shippment__IdSSt__778AC167">
             <End Role="Stages" EntitySet="Stages" />
             <End Role="ShippmentStage" EntitySet="ShippmentStage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__Sende__628FA481" Association="Self.FK__Shippment__Sende__628FA481">
+          <AssociationSet Name="FK__Shippment__Sende__656C112C" Association="Self.FK__Shippment__Sende__656C112C">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Shippments" EntitySet="Shippments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__Targe__6477ECF3" Association="Self.FK__Shippment__Targe__6477ECF3">
+          <AssociationSet Name="FK__Shippment__Targe__6754599E" Association="Self.FK__Shippment__Targe__6754599E">
             <End Role="Zones" EntitySet="Zones" />
             <End Role="Shippments" EntitySet="Shippments" />
           </AssociationSet>
-          <AssociationSet Name="FK__Shippment__Vehic__76969D2E" Association="Self.FK__Shippment__Vehic__76969D2E">
+          <AssociationSet Name="FK__Shippment__Vehic__797309D9" Association="Self.FK__Shippment__Vehic__797309D9">
             <End Role="Vehicles" EntitySet="Vehicles" />
             <End Role="ShippmentStage" EntitySet="ShippmentStage" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vehicles__Condit__59063A47" Association="Self.FK__Vehicles__Condit__59063A47">
+          <AssociationSet Name="FK__Vehicles__Condit__5BE2A6F2" Association="Self.FK__Vehicles__Condit__5BE2A6F2">
             <End Role="VehiclesCondition" EntitySet="VehiclesCondition" />
             <End Role="Vehicles" EntitySet="Vehicles" />
           </AssociationSet>
-          <AssociationSet Name="FK__Zones__City__4D94879B" Association="Self.FK__Zones__City__4D94879B">
+          <AssociationSet Name="FK__Zones__City__4E88ABD4" Association="Self.FK__Zones__City__4E88ABD4">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Zones" EntitySet="Zones" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TransporteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="BranchOffices">
-          <Key>
-            <PropertyRef Name="IdOffice" />
-          </Key>
-          <Property Name="IdOffice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BranchZone" Type="Int32" Nullable="false" />
-          <Property Name="BranchAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OpTime" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
-          <NavigationProperty Name="Zones" Relationship="Self.FK__BranchOff__Branc__5070F446" FromRole="BranchOffices" ToRole="Zones" />
-          <NavigationProperty Name="DropOffPackage" Relationship="Self.FK__DropOffPa__Branc__68487DD7" FromRole="BranchOffices" ToRole="DropOffPackage" />
-        </EntityType>
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="IdCity" />
@@ -522,7 +541,6 @@
           <Property Name="IdCity" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CityState" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="States" Relationship="Self.FK__Cities__CityStat__4AB81AF0" FromRole="Cities" ToRole="States" />
           <NavigationProperty Name="Zones" Relationship="Self.FK__Zones__City__4D94879B" FromRole="Cities" ToRole="Zones" />
         </EntityType>
         <EntityType Name="Customers">
@@ -535,18 +553,7 @@
           <Property Name="Celphone" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ClientZone" Type="Int32" />
           <Property Name="CliAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Zones" Relationship="Self.FK__Customers__Clien__5FB337D6" FromRole="Customers" ToRole="Zones" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__Sende__628FA481" FromRole="Customers" ToRole="Shippments" />
-        </EntityType>
-        <EntityType Name="DropOffPackage">
-          <Key>
-            <PropertyRef Name="IdDropOff" />
-          </Key>
-          <Property Name="IdDropOff" Type="Int32" Nullable="false" />
-          <Property Name="BranchOffice" Type="Int32" />
-          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BranchOffices" Relationship="Self.FK__DropOffPa__Branc__68487DD7" FromRole="DropOffPackage" ToRole="BranchOffices" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__DropOffPa__IdDro__6754599E" FromRole="DropOffPackage" ToRole="Shippments" />
+          <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__Shippment__Sende__6383C8BA" FromRole="Customers" ToRole="Shippments" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -564,6 +571,7 @@
           <Property Name="Licence" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Employees" ToRole="Roles" />
           <NavigationProperty Name="Licenses" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Employees" ToRole="Licenses" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="HomePickup">
           <Key>
@@ -576,7 +584,7 @@
           <Property Name="PickupAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__HomePicku__IdHom__6B24EA82" FromRole="HomePickup" ToRole="Shippments" />
+          <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__HomePicku__IdHom__6C190EBB" FromRole="HomePickup" ToRole="Shippments" />
         </EntityType>
         <EntityType Name="Licenses">
           <Key>
@@ -595,7 +603,7 @@
           <Property Name="PType" Type="Int32" Nullable="false" />
           <Property Name="NOfPackages" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PackageType" Relationship="Self.FK__Packages__PType__6EF57B66" FromRole="Packages" ToRole="PackageType" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__Packages__Shippm__6E01572D" FromRole="Packages" ToRole="Shippments" />
+          <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__Packages__Shippm__6EF57B66" FromRole="Packages" ToRole="Shippments" />
         </EntityType>
         <EntityType Name="PackageType">
           <Key>
@@ -614,26 +622,6 @@
           <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RolesDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="Shippments">
-          <Key>
-            <PropertyRef Name="IdShippment" />
-          </Key>
-          <Property Name="IdShippment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Sender" Type="Int64" Nullable="false" />
-          <Property Name="Recipient" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RecipientCel" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TargetZone" Type="Int32" Nullable="false" />
-          <Property Name="TargetAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Shippment__Sende__628FA481" FromRole="Shippments" ToRole="Customers" />
-          <NavigationProperty Name="DropOffPackage" Relationship="Self.FK__DropOffPa__IdDro__6754599E" FromRole="Shippments" ToRole="DropOffPackage" />
-          <NavigationProperty Name="HomePickup" Relationship="Self.FK__HomePicku__IdHom__6B24EA82" FromRole="Shippments" ToRole="HomePickup" />
-          <NavigationProperty Name="Packages" Relationship="Self.FK__Packages__Shippm__6E01572D" FromRole="Shippments" ToRole="Packages" />
-          <NavigationProperty Name="ShippmentStage" Relationship="Self.FK__Shippment__IdShi__73BA3083" FromRole="Shippments" ToRole="ShippmentStage" />
-          <NavigationProperty Name="Zones" Relationship="Self.FK__Shippment__Targe__6477ECF3" FromRole="Shippments" ToRole="Zones" />
-        </EntityType>
         <EntityType Name="ShippmentStage">
           <Key>
             <PropertyRef Name="IdShippment" />
@@ -646,9 +634,9 @@
           <Property Name="DateTimeStage" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Vehicle" Type="Int32" />
           <NavigationProperty Name="Employees" Relationship="Self.FK__Shippment__EmpID__75A278F5" FromRole="ShippmentStage" ToRole="Employees" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__IdShi__73BA3083" FromRole="ShippmentStage" ToRole="Shippments" />
           <NavigationProperty Name="Stages" Relationship="Self.FK__Shippment__IdSSt__74AE54BC" FromRole="ShippmentStage" ToRole="Stages" />
           <NavigationProperty Name="Vehicles" Relationship="Self.FK__Shippment__Vehic__76969D2E" FromRole="ShippmentStage" ToRole="Vehicles" />
+          <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__Shippment__IdShi__74AE54BC" FromRole="ShippmentStage" ToRole="Shippments" />
         </EntityType>
         <EntityType Name="Stages">
           <Key>
@@ -676,6 +664,7 @@
           <Property Name="VehicleWeight" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Condition" Type="Int32" Nullable="false" />
           <NavigationProperty Name="VehiclesCondition" Relationship="Self.FK__Vehicles__Condit__59063A47" FromRole="Vehicles" ToRole="VehiclesCondition" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="VehiclesCondition">
           <Key>
@@ -691,33 +680,8 @@
           <Property Name="IdZone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ZoneName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BranchOffices" Relationship="Self.FK__BranchOff__Branc__5070F446" FromRole="Zones" ToRole="BranchOffices" />
-          <NavigationProperty Name="Cities" Relationship="Self.FK__Zones__City__4D94879B" FromRole="Zones" ToRole="Cities" />
+          <NavigationProperty Name="BranchOffices" Relationship="TransporteModel.FK__BranchOff__Branc__5165187F" FromRole="Zones" ToRole="BranchOffices" />
         </EntityType>
-        <Association Name="FK__BranchOff__Branc__5070F446">
-          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
-          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Zones">
-              <PropertyRef Name="IdZone" />
-            </Principal>
-            <Dependent Role="BranchOffices">
-              <PropertyRef Name="BranchZone" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DropOffPa__Branc__68487DD7">
-          <End Role="BranchOffices" Type="Self.BranchOffices" Multiplicity="0..1" />
-          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BranchOffices">
-              <PropertyRef Name="IdOffice" />
-            </Principal>
-            <Dependent Role="DropOffPackage">
-              <PropertyRef Name="BranchOffice" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Cities__CityStat__4AB81AF0">
           <End Role="States" Type="Self.States" Multiplicity="1" />
           <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
@@ -751,30 +715,6 @@
             </Principal>
             <Dependent Role="Customers">
               <PropertyRef Name="ClientZone" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Shippment__Sende__628FA481">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="DocRut" />
-            </Principal>
-            <Dependent Role="Shippments">
-              <PropertyRef Name="Sender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DropOffPa__IdDro__6754599E">
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
-          <End Role="DropOffPackage" Type="Self.DropOffPackage" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Shippments">
-              <PropertyRef Name="IdShippment" />
-            </Principal>
-            <Dependent Role="DropOffPackage">
-              <PropertyRef Name="IdDropOff" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -814,18 +754,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__HomePicku__IdHom__6B24EA82">
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
-          <End Role="HomePickup" Type="Self.HomePickup" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Shippments">
-              <PropertyRef Name="IdShippment" />
-            </Principal>
-            <Dependent Role="HomePickup">
-              <PropertyRef Name="IdHomePickup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Packages__PType__6EF57B66">
           <End Role="PackageType" Type="Self.PackageType" Multiplicity="1" />
           <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
@@ -835,42 +763,6 @@
             </Principal>
             <Dependent Role="Packages">
               <PropertyRef Name="PType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Packages__Shippm__6E01572D">
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
-          <End Role="Packages" Type="Self.Packages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shippments">
-              <PropertyRef Name="IdShippment" />
-            </Principal>
-            <Dependent Role="Packages">
-              <PropertyRef Name="Shippment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Shippment__IdShi__73BA3083">
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="1" />
-          <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shippments">
-              <PropertyRef Name="IdShippment" />
-            </Principal>
-            <Dependent Role="ShippmentStage">
-              <PropertyRef Name="IdShippment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Shippment__Targe__6477ECF3">
-          <End Role="Zones" Type="Self.Zones" Multiplicity="1" />
-          <End Role="Shippments" Type="Self.Shippments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Zones">
-              <PropertyRef Name="IdZone" />
-            </Principal>
-            <Dependent Role="Shippments">
-              <PropertyRef Name="TargetZone" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -911,31 +803,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="TransporteEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BranchOffices" EntityType="Self.BranchOffices" />
           <EntitySet Name="Cities" EntityType="Self.Cities" />
           <EntitySet Name="Customers" EntityType="Self.Customers" />
-          <EntitySet Name="DropOffPackage" EntityType="Self.DropOffPackage" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="HomePickup" EntityType="Self.HomePickup" />
           <EntitySet Name="Licenses" EntityType="Self.Licenses" />
           <EntitySet Name="Packages" EntityType="Self.Packages" />
           <EntitySet Name="PackageType" EntityType="Self.PackageType" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
-          <EntitySet Name="Shippments" EntityType="Self.Shippments" />
           <EntitySet Name="ShippmentStage" EntityType="Self.ShippmentStage" />
           <EntitySet Name="Stages" EntityType="Self.Stages" />
           <EntitySet Name="States" EntityType="Self.States" />
           <EntitySet Name="Vehicles" EntityType="Self.Vehicles" />
           <EntitySet Name="VehiclesCondition" EntityType="Self.VehiclesCondition" />
           <EntitySet Name="Zones" EntityType="Self.Zones" />
-          <AssociationSet Name="FK__BranchOff__Branc__5070F446" Association="Self.FK__BranchOff__Branc__5070F446">
-            <End Role="Zones" EntitySet="Zones" />
-            <End Role="BranchOffices" EntitySet="BranchOffices" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DropOffPa__Branc__68487DD7" Association="Self.FK__DropOffPa__Branc__68487DD7">
-            <End Role="BranchOffices" EntitySet="BranchOffices" />
-            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
-          </AssociationSet>
           <AssociationSet Name="FK__Cities__CityStat__4AB81AF0" Association="Self.FK__Cities__CityStat__4AB81AF0">
             <End Role="States" EntitySet="States" />
             <End Role="Cities" EntitySet="Cities" />
@@ -947,14 +828,6 @@
           <AssociationSet Name="FK__Customers__Clien__5FB337D6" Association="Self.FK__Customers__Clien__5FB337D6">
             <End Role="Zones" EntitySet="Zones" />
             <End Role="Customers" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Shippment__Sende__628FA481" Association="Self.FK__Shippment__Sende__628FA481">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Shippments" EntitySet="Shippments" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DropOffPa__IdDro__6754599E" Association="Self.FK__DropOffPa__IdDro__6754599E">
-            <End Role="Shippments" EntitySet="Shippments" />
-            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
           </AssociationSet>
           <AssociationSet Name="FK__Employees__EmpRo__44FF419A" Association="Self.FK__Employees__EmpRo__44FF419A">
             <End Role="Roles" EntitySet="Roles" />
@@ -968,25 +841,9 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="ShippmentStage" EntitySet="ShippmentStage" />
           </AssociationSet>
-          <AssociationSet Name="FK__HomePicku__IdHom__6B24EA82" Association="Self.FK__HomePicku__IdHom__6B24EA82">
-            <End Role="Shippments" EntitySet="Shippments" />
-            <End Role="HomePickup" EntitySet="HomePickup" />
-          </AssociationSet>
           <AssociationSet Name="FK__Packages__PType__6EF57B66" Association="Self.FK__Packages__PType__6EF57B66">
             <End Role="PackageType" EntitySet="PackageType" />
             <End Role="Packages" EntitySet="Packages" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Packages__Shippm__6E01572D" Association="Self.FK__Packages__Shippm__6E01572D">
-            <End Role="Shippments" EntitySet="Shippments" />
-            <End Role="Packages" EntitySet="Packages" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Shippment__IdShi__73BA3083" Association="Self.FK__Shippment__IdShi__73BA3083">
-            <End Role="Shippments" EntitySet="Shippments" />
-            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Shippment__Targe__6477ECF3" Association="Self.FK__Shippment__Targe__6477ECF3">
-            <End Role="Zones" EntitySet="Zones" />
-            <End Role="Shippments" EntitySet="Shippments" />
           </AssociationSet>
           <AssociationSet Name="FK__Shippment__IdSSt__74AE54BC" Association="Self.FK__Shippment__IdSSt__74AE54BC">
             <End Role="Stages" EntitySet="Stages" />
@@ -1005,38 +862,234 @@
             <Parameter Name="ret" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteLicense">
-            <Parameter Name="Cat" Mode="In" Type="Int32" />
+            <Parameter Name="Cat" Mode="In" Type="String" />
             <Parameter Name="ret" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteRole">
-            <Parameter Name="Code" Mode="In" Type="Int32" />
+            <Parameter Name="Code" Mode="In" Type="String" />
             <Parameter Name="ret" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DeleteState">
             <Parameter Name="ID" Mode="In" Type="Int32" />
             <Parameter Name="ret" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="DeleteCity">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteZone">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="BranchOffices" EntityType="TransporteModel.BranchOffices" />
+          <EntitySet Name="DropOffPackage" EntityType="TransporteModel.DropOffPackage" />
+          <AssociationSet Name="FK__BranchOff__Branc__5165187F" Association="TransporteModel.FK__BranchOff__Branc__5165187F">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__Branc__693CA210" Association="TransporteModel.FK__DropOffPa__Branc__693CA210">
+            <End Role="BranchOffices" EntitySet="BranchOffices" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <EntitySet Name="Shippments" EntityType="TransporteModel.Shippments" />
+          <AssociationSet Name="FK__Shippment__Sende__6383C8BA" Association="TransporteModel.FK__Shippment__Sende__6383C8BA">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DropOffPa__IdDro__68487DD7" Association="TransporteModel.FK__DropOffPa__IdDro__68487DD7">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="DropOffPackage" EntitySet="DropOffPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HomePicku__IdHom__6C190EBB" Association="TransporteModel.FK__HomePicku__IdHom__6C190EBB">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="HomePickup" EntitySet="HomePickup" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Packages__Shippm__6EF57B66" Association="TransporteModel.FK__Packages__Shippm__6EF57B66">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="Packages" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__IdShi__74AE54BC" Association="TransporteModel.FK__Shippment__IdShi__74AE54BC">
+            <End Role="Shippments" EntitySet="Shippments" />
+            <End Role="ShippmentStage" EntitySet="ShippmentStage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shippment__Targe__656C112C" Association="TransporteModel.FK__Shippment__Targe__656C112C">
+            <End Role="Zones" EntitySet="Zones" />
+            <End Role="Shippments" EntitySet="Shippments" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteOffice">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteHp">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePoD">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePt">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSStage">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteVCondition">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteVehicle">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="BranchOffices">
+          <Key>
+            <PropertyRef Name="IdOffice" />
+          </Key>
+          <Property Name="IdOffice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchZone" Type="Int32" Nullable="false" />
+          <Property Name="BranchAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="OpTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="DropOffPackage" Relationship="TransporteModel.FK__DropOffPa__Branc__693CA210" FromRole="BranchOffices" ToRole="DropOffPackage" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DropOffPackage">
+          <Key>
+            <PropertyRef Name="IdDropOff" />
+          </Key>
+          <Property Name="IdDropOff" Type="Int32" Nullable="false" />
+          <Property Name="BranchOffice" Type="Int32" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BranchOffices" Relationship="TransporteModel.FK__DropOffPa__Branc__693CA210" FromRole="DropOffPackage" ToRole="BranchOffices" />
+          <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__DropOffPa__IdDro__68487DD7" FromRole="DropOffPackage" ToRole="Shippments" />
+        </EntityType>
+        <Association Name="FK__BranchOff__Branc__5165187F">
+          <End Type="TransporteModel.Zones" Role="Zones" Multiplicity="1" />
+          <End Type="TransporteModel.BranchOffices" Role="BranchOffices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="BranchOffices">
+              <PropertyRef Name="BranchZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__Branc__693CA210">
+          <End Type="TransporteModel.BranchOffices" Role="BranchOffices" Multiplicity="1" />
+          <End Type="TransporteModel.DropOffPackage" Role="DropOffPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchOffices">
+              <PropertyRef Name="IdOffice" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="BranchOffice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Shippments">
+          <Key>
+            <PropertyRef Name="IdShippment" />
+          </Key>
+          <Property Name="IdShippment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sender" Type="Int64" Nullable="false" />
+          <Property Name="Recipient" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RecipientCel" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="TargetZone" Type="Int32" Nullable="false" />
+          <Property Name="TargetAddress" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Nullable="false" Precision="9" Scale="6" />
+          <NavigationProperty Name="Customers" Relationship="TransporteModel.FK__Shippment__Sende__6383C8BA" FromRole="Shippments" ToRole="Customers" />
+          <NavigationProperty Name="Packages" Relationship="TransporteModel.FK__Packages__Shippm__6EF57B66" FromRole="Shippments" ToRole="Packages" />
+          <NavigationProperty Name="ShippmentStage" Relationship="TransporteModel.FK__Shippment__IdShi__74AE54BC" FromRole="Shippments" ToRole="ShippmentStage" />
+          <NavigationProperty Name="Zones" Relationship="TransporteModel.FK__Shippment__Targe__656C112C" FromRole="Shippments" ToRole="Zones" />
+        </EntityType>
+        <Association Name="FK__Shippment__Sende__6383C8BA">
+          <End Type="TransporteModel.Customers" Role="Customers" Multiplicity="1" />
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="DocRut" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="Sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DropOffPa__IdDro__68487DD7">
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="1" />
+          <End Type="TransporteModel.DropOffPackage" Role="DropOffPackage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="DropOffPackage">
+              <PropertyRef Name="IdDropOff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HomePicku__IdHom__6C190EBB">
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="1" />
+          <End Type="TransporteModel.HomePickup" Role="HomePickup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="HomePickup">
+              <PropertyRef Name="IdHomePickup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Packages__Shippm__6EF57B66">
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="1" />
+          <End Type="TransporteModel.Packages" Role="Packages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="Packages">
+              <PropertyRef Name="Shippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__IdShi__74AE54BC">
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="1" />
+          <End Type="TransporteModel.ShippmentStage" Role="ShippmentStage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shippments">
+              <PropertyRef Name="IdShippment" />
+            </Principal>
+            <Dependent Role="ShippmentStage">
+              <PropertyRef Name="IdShippment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shippment__Targe__656C112C">
+          <End Type="TransporteModel.Zones" Role="Zones" Multiplicity="1" />
+          <End Type="TransporteModel.Shippments" Role="Shippments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zones">
+              <PropertyRef Name="IdZone" />
+            </Principal>
+            <Dependent Role="Shippments">
+              <PropertyRef Name="TargetZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TransporteModelStoreContainer" CdmEntityContainer="TransporteEntities">
-          <EntitySetMapping Name="BranchOffices">
-            <EntityTypeMapping TypeName="TransporteModel.BranchOffices">
-              <MappingFragment StoreEntitySet="BranchOffices">
-                <ScalarProperty Name="IdOffice" ColumnName="IdOffice" />
-                <ScalarProperty Name="BranchZone" ColumnName="BranchZone" />
-                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="OpTime" ColumnName="OpTime" />
-                <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="TransporteModel.Cities">
               <MappingFragment StoreEntitySet="Cities">
@@ -1058,18 +1111,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DropOffPackage">
-            <EntityTypeMapping TypeName="TransporteModel.DropOffPackage">
-              <MappingFragment StoreEntitySet="DropOffPackage">
-                <ScalarProperty Name="IdDropOff" ColumnName="IdDropOff" />
-                <ScalarProperty Name="BranchOffice" ColumnName="BranchOffice" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="TransporteModel.Employees">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="EmpLastName" ColumnName="EmpLastName" />
@@ -1134,21 +1179,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Shippments">
-            <EntityTypeMapping TypeName="TransporteModel.Shippments">
-              <MappingFragment StoreEntitySet="Shippments">
-                <ScalarProperty Name="IdShippment" ColumnName="IdShippment" />
-                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
-                <ScalarProperty Name="Sender" ColumnName="Sender" />
-                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
-                <ScalarProperty Name="RecipientCel" ColumnName="RecipientCel" />
-                <ScalarProperty Name="TargetZone" ColumnName="TargetZone" />
-                <ScalarProperty Name="TargetAddress" ColumnName="TargetAddress" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ShippmentStage">
             <EntityTypeMapping TypeName="TransporteModel.ShippmentStage">
               <MappingFragment StoreEntitySet="ShippmentStage">
@@ -1179,6 +1209,7 @@
           <EntitySetMapping Name="Vehicles">
             <EntityTypeMapping TypeName="TransporteModel.Vehicles">
               <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="IdVehicle" ColumnName="IdVehicle" />
                 <ScalarProperty Name="Plate" ColumnName="Plate" />
                 <ScalarProperty Name="vRegistration" ColumnName="vRegistration" />
@@ -1209,6 +1240,53 @@
           <FunctionImportMapping FunctionImportName="DeleteLicense" FunctionName="TransporteModel.Store.DeleteLicense" />
           <FunctionImportMapping FunctionImportName="DeleteRole" FunctionName="TransporteModel.Store.DeleteRole" />
           <FunctionImportMapping FunctionImportName="DeleteState" FunctionName="TransporteModel.Store.DeleteState" />
+          <FunctionImportMapping FunctionImportName="DeleteCity" FunctionName="TransporteModel.Store.DeleteCity" />
+          <EntitySetMapping Name="BranchOffices">
+            <EntityTypeMapping TypeName="TransporteModel.BranchOffices">
+              <MappingFragment StoreEntitySet="BranchOffices">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CloseTime" ColumnName="CloseTime" />
+                <ScalarProperty Name="OpTime" ColumnName="OpTime" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="BranchAddress" ColumnName="BranchAddress" />
+                <ScalarProperty Name="BranchZone" ColumnName="BranchZone" />
+                <ScalarProperty Name="IdOffice" ColumnName="IdOffice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DropOffPackage">
+            <EntityTypeMapping TypeName="TransporteModel.DropOffPackage">
+              <MappingFragment StoreEntitySet="DropOffPackage">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="BranchOffice" ColumnName="BranchOffice" />
+                <ScalarProperty Name="IdDropOff" ColumnName="IdDropOff" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shippments">
+            <EntityTypeMapping TypeName="TransporteModel.Shippments">
+              <MappingFragment StoreEntitySet="Shippments">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="TargetAddress" ColumnName="TargetAddress" />
+                <ScalarProperty Name="TargetZone" ColumnName="TargetZone" />
+                <ScalarProperty Name="RecipientCel" ColumnName="RecipientCel" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="IdShippment" ColumnName="IdShippment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteOffice" FunctionName="TransporteModel.Store.DeleteOffice" />
+          <FunctionImportMapping FunctionImportName="DeleteHp" FunctionName="TransporteModel.Store.DeleteHp" />
+          <FunctionImportMapping FunctionImportName="DeletePoD" FunctionName="TransporteModel.Store.DeletePoD" />
+          <FunctionImportMapping FunctionImportName="DeletePt" FunctionName="TransporteModel.Store.DeletePt" />
+          <FunctionImportMapping FunctionImportName="DeleteSStage" FunctionName="TransporteModel.Store.DeleteSStage" />
+          <FunctionImportMapping FunctionImportName="DeleteVCondition" FunctionName="TransporteModel.Store.DeleteVCondition" />
+          <FunctionImportMapping FunctionImportName="DeleteVehicle" FunctionName="TransporteModel.Store.DeleteVehicle" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

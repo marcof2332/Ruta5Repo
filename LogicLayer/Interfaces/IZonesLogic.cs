@@ -11,9 +11,9 @@ namespace LogicLayer.Interfaces
     public interface IZonesLogic
     {
         Zones ZoneSearch(int id);
-        void ZAdd(string name, Cities city);
-        void ZModify(string name, Cities city);
+        void ZAdd(Zones zo);
+        void ZModify(Zones zo);
         void ZDelete(int id);
-        List<Zones> ZoneListbyCity(Cities city);
+        List<Zones> ZoneListbyCity(int city);
     }
 }

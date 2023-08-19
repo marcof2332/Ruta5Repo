@@ -15,7 +15,7 @@ namespace DataLayer
     public partial class DropOffPackage
     {
         public int IdDropOff { get; set; }
-        public Nullable<int> BranchOffice { get; set; }
+        public int BranchOffice { get; set; }
         public string Note { get; set; }
     
         public virtual BranchOffices BranchOffices { get; set; }

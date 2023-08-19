@@ -26,8 +26,6 @@ namespace LogicLayer
         public Cities CitySearch(int id)
         {
             Cities ct = DbContextSingleton.TransporteContext.Cities.Where(s => s.IdCity == id).FirstOrDefault();
-            ct.States = LogicFactory.GetStatesLogic().StateSearch(ct.CityState);
-            //Buscar las Zonas asociadas.
             return ct;
         }
         public void CAdd(Cities ct)
@@ -61,7 +59,7 @@ namespace LogicLayer
             Cities modCt = null;
             try
             {
-                modCt = DbContextSingleton.TransporteContext.Cities.Where(c => c.IdCity == ct.IdCity).FirstOrDefault();
+                modCt = CitySearch(ct.IdCity);
                 modCt.CityName = ct.CityName;
                 Validations.CityValidation(modCt);
                 DbContextSingleton.TransporteContext.SaveChanges();
@@ -71,11 +69,11 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public void CDelete(Cities ct)
+        public void CDelete(int ct)
         {
             try
             {
-                System.Data.SqlClient.SqlParameter _id = new System.Data.SqlClient.SqlParameter("@ID", ct.IdCity);
+                System.Data.SqlClient.SqlParameter _id = new System.Data.SqlClient.SqlParameter("@ID", ct);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
                 DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteCity @ID, @ret output", _id, _ret);
@@ -88,7 +86,6 @@ namespace LogicLayer
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
                 {
-                    DbContextSingleton.TransporteContext.Entry(ct).State = System.Data.Entity.EntityState.Detached;
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
             }
@@ -97,14 +94,10 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Cities> CityListByState(States State)
+        public List<Cities> CityListByState(int State)
         {
-            DbContextSingleton.TransporteContext.Cities.ToList();
-
-            List<Cities> cities = (from S in DbContextSingleton.TransporteContext.States
-                                   where S.IdState == State.IdState
-                                   from C in S.Cities
-                                   where S.IdState == C.CityState
+            List<Cities> cities = (from C in DbContextSingleton.TransporteContext.Cities
+                                   where C.CityState == State
                                    orderby C.CityName descending
                                    select C).ToList();
 

@@ -24,6 +24,7 @@ namespace DataLayer
         public string EmpAddress { get; set; }
         public string EmpRole { get; set; }
         public string Licence { get; set; }
+        public bool Active { get; set; }
     
         public virtual Roles Roles { get; set; }
         public virtual Licenses Licenses { get; set; }

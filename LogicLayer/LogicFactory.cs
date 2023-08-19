@@ -30,5 +30,9 @@ namespace LogicLayer
         {
             return (CitiesLogic.GetInstance());
         }
+        public static IZonesLogic GetZonesLogic()
+        {
+            return (ZonesLogic.GetInstance());
+        }
     }
 }

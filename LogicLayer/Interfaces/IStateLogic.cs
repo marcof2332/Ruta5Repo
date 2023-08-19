@@ -13,7 +13,7 @@ namespace LogicLayer.Interfaces
         States StateSearch(int id);
         void SAdd(States st);
         void SModify(States st);
-        void SDelete(States st);
+        void SDelete(int st);
         List<States> StateList();
     }
 }

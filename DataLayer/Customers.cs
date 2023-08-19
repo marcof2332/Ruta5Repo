@@ -27,7 +27,6 @@ namespace DataLayer
         public Nullable<int> ClientZone { get; set; }
         public string CliAddress { get; set; }
     
-        public virtual Zones Zones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Shippments> Shippments { get; set; }
     }

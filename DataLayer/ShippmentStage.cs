@@ -21,8 +21,8 @@ namespace DataLayer
         public Nullable<int> Vehicle { get; set; }
     
         public virtual Employees Employees { get; set; }
-        public virtual Shippments Shippments { get; set; }
         public virtual Stages Stages { get; set; }
         public virtual Vehicles Vehicles { get; set; }
+        public virtual Shippments Shippments { get; set; }
     }
 }

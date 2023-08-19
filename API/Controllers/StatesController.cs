@@ -4,42 +4,41 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Roles")]
-    public class RolesController : ApiController
+    [RoutePrefix("api/States")]
+    public class StatesController : ApiController
     {
         [HttpGet]
-        [Route("GetRol")]
-        public IHttpActionResult GetRol(string code)
+        [Route("GetState")]
+        public IHttpActionResult GetState(int st)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(code);
-                if (r != null)
-                    return Ok(r);
+                States s = LogicFactory.GetStatesLogic().StateSearch(st);
+                if (s != null)
+                    return Ok(s);
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocurrió un error al buscar el rol: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar el departamento: " + ex.Message);
             }
         }
         [HttpPost]
-        [Route("RAdd")]
-        public IHttpActionResult RAdd(Roles ro)
+        [Route("SAdd")]
+        public IHttpActionResult SAdd(States st)
         {
 
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r != null)
-                    return BadRequest("El rol que esta intentando agregar ya existe en el sistema.");
+                States s = LogicFactory.GetStatesLogic().StateSearch(st.IdState);
+                if (s != null)
+                    return BadRequest("El departamento que esta intentando agregar ya existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -47,7 +46,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RAdd(ro);
+                LogicFactory.GetStatesLogic().SAdd(st);
                 return Ok();
             }
             catch (Exception ex)
@@ -56,14 +55,14 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("RModify")]
-        public IHttpActionResult RModify(Roles ro)
+        [Route("SModify")]
+        public IHttpActionResult SModify(States st)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r == null)
-                    return NotFound();
+                States s = LogicFactory.GetStatesLogic().StateSearch(st.IdState);
+                if (s == null)
+                    return BadRequest("El departamento que esta intentando modificar no existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -71,7 +70,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RModify(ro);
+                LogicFactory.GetStatesLogic().SModify(st);
                 return Ok();
             }
             catch (Exception ex)
@@ -80,12 +79,12 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("RDelete")]
-        public IHttpActionResult RDelete(string ro)
+        [Route("SDelete")]
+        public IHttpActionResult SDelete(int st)
         {
             try
             {
-                LogicFactory.GetRolesLogic().RDelete(ro);
+                LogicFactory.GetStatesLogic().SDelete(st);
                 return Ok();
             }
             catch (Exception ex)
@@ -94,20 +93,20 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("RList")]
-        public IHttpActionResult RList()
+        [Route("SList")]
+        public IHttpActionResult SList()
         {
             try
             {
-                List<Roles> r = LogicFactory.GetRolesLogic().RList();
-                if (r != null)
-                    return Ok(r);
+                List<States> s = LogicFactory.GetStatesLogic().StateList();
+                if (s != null)
+                    return Ok(s);
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocurrió un error al listar los roles: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar los departamentos: " + ex.Message);
             }
         }
     }

@@ -4,42 +4,41 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Roles")]
-    public class RolesController : ApiController
+    [RoutePrefix("api/Licenses")]
+    public class LicenceController : ApiController
     {
         [HttpGet]
-        [Route("GetRol")]
-        public IHttpActionResult GetRol(string code)
+        [Route("GetLicence")]
+        public IHttpActionResult GetLicence(string cat)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(code);
-                if (r != null)
-                    return Ok(r);
+                Licenses l = LogicFactory.GetLicenceLogic().LSearch(cat);
+                if (l != null)
+                    return Ok(l);
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocurrió un error al buscar el rol: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar la licencia: " + ex.Message);
             }
         }
         [HttpPost]
-        [Route("RAdd")]
-        public IHttpActionResult RAdd(Roles ro)
+        [Route("LAdd")]
+        public IHttpActionResult LAdd(Licenses li)
         {
 
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r != null)
-                    return BadRequest("El rol que esta intentando agregar ya existe en el sistema.");
+                Licenses Lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
+                if (Lic != null)
+                    return BadRequest("La licencia que esta intentando agregar ya existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -47,7 +46,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RAdd(ro);
+                LogicFactory.GetLicenceLogic().LAdd(li);
                 return Ok();
             }
             catch (Exception ex)
@@ -56,14 +55,14 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("RModify")]
-        public IHttpActionResult RModify(Roles ro)
+        [Route("LModify")]
+        public IHttpActionResult LModify(Licenses li)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r == null)
-                    return NotFound();
+                Licenses lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
+                if (lic == null)
+                    return BadRequest("La licencia que esta intentando modificar no existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -71,7 +70,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RModify(ro);
+                LogicFactory.GetLicenceLogic().LModify(li);
                 return Ok();
             }
             catch (Exception ex)
@@ -80,12 +79,12 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("RDelete")]
-        public IHttpActionResult RDelete(string ro)
+        [Route("LDelete")]
+        public IHttpActionResult LDelete(string cat)
         {
             try
             {
-                LogicFactory.GetRolesLogic().RDelete(ro);
+                LogicFactory.GetLicenceLogic().LDelete(cat);
                 return Ok();
             }
             catch (Exception ex)
@@ -94,20 +93,20 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("RList")]
-        public IHttpActionResult RList()
+        [Route("LList")]
+        public IHttpActionResult LList()
         {
             try
             {
-                List<Roles> r = LogicFactory.GetRolesLogic().RList();
-                if (r != null)
-                    return Ok(r);
+                List<Licenses> l = LogicFactory.GetLicenceLogic().LicenceList();
+                if (l != null)
+                    return Ok(l);
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocurrió un error al listar los roles: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar las licencias: " + ex.Message);
             }
         }
     }

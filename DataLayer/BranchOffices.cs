@@ -28,8 +28,8 @@ namespace DataLayer
         public string Phone { get; set; }
         public System.TimeSpan OpTime { get; set; }
         public System.TimeSpan CloseTime { get; set; }
+        public bool Active { get; set; }
     
-        public virtual Zones Zones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DropOffPackage> DropOffPackage { get; set; }
     }

@@ -32,8 +32,6 @@ namespace DataLayer
         public decimal Longitude { get; set; }
     
         public virtual Customers Customers { get; set; }
-        public virtual DropOffPackage DropOffPackage { get; set; }
-        public virtual HomePickup HomePickup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Packages> Packages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

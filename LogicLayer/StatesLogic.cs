@@ -70,11 +70,11 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public void SDelete(States st)
+        public void SDelete(int st)
         {
             try
             {
-                System.Data.SqlClient.SqlParameter _id = new System.Data.SqlClient.SqlParameter("@ID", st.IdState);
+                System.Data.SqlClient.SqlParameter _id = new System.Data.SqlClient.SqlParameter("@ID", st);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
                 DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteState @ID, @ret output", _id, _ret);
@@ -87,7 +87,6 @@ namespace LogicLayer
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
                 {
-                    DbContextSingleton.TransporteContext.Entry(st).State = System.Data.Entity.EntityState.Detached;
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
             }

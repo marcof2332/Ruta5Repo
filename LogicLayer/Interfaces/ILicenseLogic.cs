@@ -12,8 +12,8 @@ namespace LogicLayer.Interfaces
     {
         Licenses LSearch(string cat);
         void LAdd(Licenses li); //(string cat, string desc, int weight);
-        void SSModify(Licenses li);
-        void LDelete(Licenses li);
+        void LModify(Licenses li);
+        void LDelete(string li);
         List<Licenses> LicenceList();
     }
 }

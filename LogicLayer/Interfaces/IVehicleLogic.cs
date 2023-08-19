@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using DataLayer;
 
 namespace LogicLayer.Interfaces
 {
     public interface IVehicleLogic
     {
-        Vehicles VSearch(int id);
-        void VAdd(string plate, string vRegistration, string brandModel, double capacity, VehiclesCondition condition);
-        void VModify(VehiclesCondition condition);
-        void VDelete(int id);
-        List<Vehicles> AvailableVList(DateTime day);
+        Vehicles VSearch(int ID);
+        void VAdd(Vehicles V);
+        void VModify(Vehicles V);
+        void VDelete(int ID);
+        List<Vehicles> VicenceList();
     }
 }

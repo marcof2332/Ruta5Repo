@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using DataLayer;
 
 namespace LogicLayer
 {
-    internal class LicenceLogic: Interfaces.ILicenseLogic
+    internal class PackageTypeLogic : Interfaces.IPackageType
     {
-        #region LicenceLogicSingleton
-        private static LicenceLogic _instance = null;
-        private LicenceLogic() { }
-        public static LicenceLogic GetInstance()
+        #region PackageTypeLogicSingleton
+        private static PackageTypeLogic _instance = null;
+        private PackageTypeLogic() { }
+        public static PackageTypeLogic GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new LicenceLogic();
+                _instance = new PackageTypeLogic();
             }
             return _instance;
         }
         #endregion
 
-        public Licenses LSearch(string cat)
+        public PackageType PtSearch(int ID)
         {
-            return (DbContextSingleton.TransporteContext.Licenses.Where(l => l.Category == cat).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.PackageType.Where(pt => pt.IdPackageType == ID).FirstOrDefault());
         }
-        public void LAdd(Licenses li)
+        public void PtAdd(PackageType pt)
         {
             try
             {
-                Validations.LicenseValidation(li);
+                Validations.PackageTValidation(pt);
             }
             catch (Exception ex)
             {
@@ -39,21 +38,21 @@ namespace LogicLayer
             }
             try
             {
-                DbContextSingleton.TransporteContext.Licenses.Add(li);
+                DbContextSingleton.TransporteContext.PackageType.Add(pt);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
             {
-                DbContextSingleton.TransporteContext.Entry(li).State = System.Data.Entity.EntityState.Detached;
+                DbContextSingleton.TransporteContext.Entry(pt).State = System.Data.Entity.EntityState.Detached;
                 if (ex.InnerException != null)
                 {
-                    throw new Exception("Ocurrio un error en BD al intentar agregar la licencia, por favor intente nuevamente.");
+                    throw new Exception("Ocurrio un error en BD al intentar agregar el tipo de paquete, por favor intente nuevamente.");
                 }
                 else
                     throw ex;
             }
         }
-        public void LModify(Licenses li)
+        public void PtModify(PackageType li)
         {
             Licenses modLi = null;
             try
@@ -69,19 +68,19 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public void LDelete(string li)
+        public void PtDelete(int ID)
         {
             try
             {
-                System.Data.SqlClient.SqlParameter _cat = new System.Data.SqlClient.SqlParameter("@Cat", li);
+                System.Data.SqlClient.SqlParameter _Id = new System.Data.SqlClient.SqlParameter("@ID", ID);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
-                DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteLicense @Cat, @ret output", _cat, _ret);
+                DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeletePt @ID, @ret output", _Id, _ret);
 
                 if ((int)_ret.Value == -1)
-                    throw new Exception("No se encontro la licencia, por favor intente nuevamente.");
+                    throw new Exception("No se encontro el el tipo de paquete, por favor intente nuevamente.");
                 else if ((int)_ret.Value == -2)
-                    throw new Exception("La licencia tiene empleados asociados en el sistema, no se puede realizar la baja.");
+                    throw new Exception("El tipo de paquete tiene paquetes asociados en el sistema, no se puede realizar la baja.");
                 else if ((int)_ret.Value == -3)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
@@ -92,9 +91,9 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Licenses> LicenceList()
+        public List<PackageType> PtList()
         {
-            return (DbContextSingleton.TransporteContext.Licenses.ToList());
+            return (DbContextSingleton.TransporteContext.PackageType.ToList());
         }
     }
 }

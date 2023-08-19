@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using DataLayer;
 
@@ -87,7 +85,6 @@ namespace LogicLayer
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
                 {
-                    DbContextSingleton.TransporteContext.Entry(ro).State = System.Data.Entity.EntityState.Detached;
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
             }

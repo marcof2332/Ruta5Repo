@@ -20,6 +20,7 @@ namespace DataLayer
         public string BrandModel { get; set; }
         public decimal VehicleWeight { get; set; }
         public int Condition { get; set; }
+        public bool Active { get; set; }
     
         public virtual VehiclesCondition VehiclesCondition { get; set; }
     }

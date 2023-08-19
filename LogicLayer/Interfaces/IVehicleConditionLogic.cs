@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Collections.Generic;
 using DataLayer;
 
 namespace LogicLayer.Interfaces
@@ -11,9 +6,9 @@ namespace LogicLayer.Interfaces
     public interface IVehicleConditionLogic
     {
         VehiclesCondition VCSearch(int id);
-        void VCAdd(string name);
-        void VCModify(string name);
-        void VCDelete(int id);
+        void VCAdd(VehiclesCondition VC);
+        void VCModify(VehiclesCondition VC);
+        void VCDelete(int ID);
         List<VehiclesCondition> VCList();
     }
 }

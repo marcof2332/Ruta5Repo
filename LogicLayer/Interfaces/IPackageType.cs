@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using DataLayer;
 
@@ -10,9 +6,10 @@ namespace LogicLayer.Interfaces
 {
     public interface IPackageType
     {
-        PackageType PTSearch(int id);
-        void PTAdd(string desc, double minWeight, double maxWeight, decimal amount);
-        void PTDelete(string desc, double minWeight, double maxWeight, decimal amount);
-        List<PackageType> PTList();
+        PackageType PtSearch(int ID);
+        void PtAdd(PackageType pt);
+        void PtModify(PackageType li);
+        void PtDelete(int ID);
+        List<PackageType> PtList();
     }
 }
