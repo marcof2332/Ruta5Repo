@@ -7,7 +7,7 @@ using DataLayer;
 
 namespace LogicLayer
 {
-    internal class PackageTypeLogic : Interfaces.IPackageType
+    internal class PackageTypeLogic : Interfaces.IPackageTypeLogic
     {
         #region PackageTypeLogicSingleton
         private static PackageTypeLogic _instance = null;
@@ -52,15 +52,17 @@ namespace LogicLayer
                     throw ex;
             }
         }
-        public void PtModify(PackageType li)
+        public void PtModify(PackageType pt)
         {
-            Licenses modLi = null;
+            PackageType modLi = null;
             try
             {
-                modLi = DbContextSingleton.TransporteContext.Licenses.Where(u => u.Category == li.Category).FirstOrDefault();
-                modLi.LicenceDescription = li.LicenceDescription;
-                modLi.Capacity = li.Capacity;
-                Validations.LicenseValidation(modLi);
+                modLi = DbContextSingleton.TransporteContext.PackageType.Where(p => p.IdPackageType == pt.IdPackageType).FirstOrDefault();
+                modLi.Amount = pt.Amount;
+                modLi.MaxWeight = pt.MaxWeight;
+                modLi.MinWeight = pt.MinWeight;
+                modLi.TypeDescription = pt.TypeDescription;
+                Validations.PackageTValidation(modLi);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)

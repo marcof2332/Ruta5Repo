@@ -55,6 +55,7 @@
     <Compile Include="CitiesLogic.cs" />
     <Compile Include="CustomerLogic.cs" />
     <Compile Include="DbContextSingleton.cs" />
+    <Compile Include="Interfaces\ICustomerLogic.cs" />
     <Compile Include="Interfaces\IPackageLogic.cs" />
     <Compile Include="Interfaces\IStageLogic.cs" />
     <Compile Include="ShippmentLogic.cs" />
@@ -64,7 +65,7 @@
     <Compile Include="Interfaces\IEmployeeLogic.cs" />
     <Compile Include="Interfaces\ILicenseLogic.cs" />
     <Compile Include="Interfaces\IOfficeBranchLogic.cs" />
-    <Compile Include="Interfaces\IPackageType.cs" />
+    <Compile Include="Interfaces\IPackageTypeLogic.cs" />
     <Compile Include="Interfaces\IRoleLogic.cs" />
     <Compile Include="Interfaces\IShippingStatusLogic.cs" />
     <Compile Include="Interfaces\IShippmentLogic.cs" />

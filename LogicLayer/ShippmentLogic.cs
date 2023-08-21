@@ -9,7 +9,7 @@ namespace LogicLayer
 {
     internal class ShippmentLogic : Interfaces.IShippmentLogic
     {
-        #region RolesLogicSingleton
+        #region ShippmentLogicSingleton
         private static ShippmentLogic _instance = null;
         private ShippmentLogic() { }
         public static ShippmentLogic GetInstance()

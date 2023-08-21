@@ -10,10 +10,10 @@ namespace LogicLayer.Interfaces
 {
     public interface IOfficeBranchLogic
     {
-        BranchOffices OBSearch(int id);
-        void OBAdd(Zones zone, string address, double latitude, double longitude, string phone, DateTime opTime, DateTime clTime);
-        void OBModify(Zones zone, string address, double latitude, double longitude, string phone, DateTime opTime, DateTime clTime);
-        void OBDelete(int id);
-        List<BranchOffices> OBListByZone(Zones zone);
+        BranchOffices OfficeSearch(int ID);
+        void OAdd(BranchOffices br);
+        void OModify(BranchOffices br);
+        void ODelete(int br);
+        List<BranchOffices> OfficeListByZone(int Zone);
     }
 }

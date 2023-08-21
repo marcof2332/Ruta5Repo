@@ -6,7 +6,7 @@ using DataLayer;
 
 namespace LogicLayer
 {
-    internal class CustomerLogic: ICustomerLogic
+    internal class CustomerLogic: Interfaces.ICustomerLogic
     {
         #region CustomerLogicSingleton
         private static CustomerLogic _instance = null;

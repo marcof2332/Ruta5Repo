@@ -4,7 +4,7 @@ using DataLayer;
 
 namespace LogicLayer.Interfaces
 {
-    public interface IPackageType
+    public interface IPackageTypeLogic
     {
         PackageType PtSearch(int ID);
         void PtAdd(PackageType pt);

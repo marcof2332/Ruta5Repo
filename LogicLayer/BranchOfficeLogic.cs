@@ -6,7 +6,7 @@ using DataLayer;
 
 namespace LogicLayer
 {
-    internal class BranchOfficeLogic : Interfaces.IBranchOfficeLogic
+    internal class BranchOfficeLogic : Interfaces.IOfficeBranchLogic
     {
         #region BranchOfficeLogicSingleton
         private static BranchOfficeLogic _instance = null;
@@ -23,7 +23,7 @@ namespace LogicLayer
 
         public BranchOffices OfficeSearch(int ID)
         {
-            return DbContextSingleton.TransporteContext.BranchOffices.Where(b => b.IdOffice == ID).FirstOrDefault();
+            return DbContextSingleton.TransporteContext.BranchOffices.Where(b => b.IdOffice == ID && b.Active == true).FirstOrDefault();
         }
         public void OAdd(BranchOffices br)
         {
@@ -37,6 +37,7 @@ namespace LogicLayer
             }
             try
             {
+                br.Active = true;
                 DbContextSingleton.TransporteContext.BranchOffices.Add(br);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
@@ -54,12 +55,16 @@ namespace LogicLayer
             BranchOffices modBr = null;
             try
             {
-                modBr = OfficeSearch(br.IdOffice);
+                modBr = DbContextSingleton.TransporteContext.BranchOffices.Where(b => b.IdOffice == br.IdOffice && b.Active == true).FirstOrDefault(); ;
                 if (modBr != null)
                 {
+                    modBr.Latitude = br.Latitude;
+                    modBr.Longitude = br.Longitude;
+                    modBr.BranchZone = br.BranchZone;
                     modBr.Phone = br.Phone;
                     modBr.OpTime = br.OpTime;
                     modBr.CloseTime = br.CloseTime;
+                    modBr.Active = true;
                     Validations.BranchOValidation(modBr);
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
