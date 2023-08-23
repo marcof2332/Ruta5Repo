@@ -14,14 +14,13 @@ using System.Linq;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Employees")]
-    public class EmployeeController : ApiController
+    [RoutePrefix("/api/employees")]
+    public class EmployeesController : ApiController
     {
         #region Login
         [HttpGet]
-        [Route("Login")]
         [AllowAnonymous]
-        public IHttpActionResult Login(string user, string password)
+        public IHttpActionResult login(string user, string password)
         {
             string token;
             try
@@ -123,8 +122,7 @@ namespace API.Controllers
 
         #region CRUD
         [HttpPost]
-        [Route("EAdd")]
-        public IHttpActionResult EAdd(Employees Emp)
+        public IHttpActionResult add(Employees Emp)
         {
 
             try
@@ -149,8 +147,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        [Route("EModify")]
-        public IHttpActionResult EModify(Employees Emp)
+        public IHttpActionResult modify(Employees Emp)
         {
             try
             {
@@ -173,13 +170,12 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("EDelete")]
-        public IHttpActionResult EDelete(int Emp)
+        [HttpDelete]        
+        public IHttpActionResult delete(int emp)
         {
             try
             {
-                LogicFactory.GetEmployeeLogic().EDelete(Emp);
+                LogicFactory.GetEmployeeLogic().EDelete(emp);
                 return Ok();
             }
             catch (Exception ex)

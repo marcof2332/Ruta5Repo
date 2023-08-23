@@ -45,8 +45,27 @@ namespace LogicLayer
             }
             try
             {
-                DbContextSingleton.TransporteContext.Employees.Add(emp);
-                DbContextSingleton.TransporteContext.SaveChanges();
+                Employees EDeleted = DbContextSingleton.TransporteContext.Employees.Where(e => e.ID == emp.ID && e.Active == false).FirstOrDefault();
+                if (EDeleted != null)
+                {
+                    EDeleted.DateOfBirth = emp.DateOfBirth;
+                    EDeleted.EmpName = emp.EmpName;
+                    EDeleted.EmpLastName = emp.EmpLastName;
+                    EDeleted.EmpAddress = emp.EmpAddress;
+                    EDeleted.Celphone = emp.Celphone;
+                    EDeleted.EmpUser = emp.EmpUser;
+                    EDeleted.EmpPassword = emp.EmpPassword;
+                    EDeleted.EmpRole = emp.EmpRole;
+                    EDeleted.Licence = emp.Licence;
+                    EDeleted.Active = true;
+                    DbContextSingleton.TransporteContext.SaveChanges();
+                }
+                else
+                {
+                    emp.Active = true;
+                    DbContextSingleton.TransporteContext.Employees.Add(emp);
+                    DbContextSingleton.TransporteContext.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -71,7 +90,7 @@ namespace LogicLayer
                 modEmp.DateOfBirth = emp.DateOfBirth;
                 modEmp.Celphone = emp.Celphone;
                 modEmp.EmpAddress = emp.EmpAddress;
-                modEmp.Roles = emp.Roles;
+                modEmp.EmpRole = emp.EmpRole;
                 modEmp.Licence = emp.Licence;
                 Validations.EmpValidation(modEmp);
                 DbContextSingleton.TransporteContext.SaveChanges();

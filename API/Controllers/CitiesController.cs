@@ -1,30 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 using DataLayer;
 using LogicLayer;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Cities")]
+    [RoutePrefix("/api/cities")]
     public class CitiesController : ApiController
     {
         [HttpGet]
-        [Route("GetCity")]
-        public IHttpActionResult GetCity(int id)
+        public IHttpActionResult get (int id)
         {
             try
             {
                 Cities c = LogicFactory.GetCityLogic().CitySearch(id);
                 if (c != null)
                 {
-                    // Configurar la configuración de serialización personalizada
+                    /*// Configurar la configuración de serialización personalizada
                     //Configuramos las JsonSerializerSettings para ignorar los bucles de referencia (ReferenceLoopHandling.Ignore) 
                     //y utilizar CamelCasePropertyNamesContractResolver para cambiar el formato del nombre de las propiedades a minúsculas con notación camelCase.
                     JsonSerializerSettings settings = new JsonSerializerSettings
@@ -44,19 +38,20 @@ namespace API.Controllers
                     //dentro de la respuesta JSON sin problemas de bucle de referencia y con el tipo de contenido adecuado.
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                    return ResponseMessage(response);
+                    return ResponseMessage(response);*/
+
+                    return Ok(c);
                 }
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al buscar la ciudad: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar la ciudad.");
             }
         }
         [HttpPost]
-        [Route("CAdd")]
-        public IHttpActionResult CAdd(Cities cy)
+        public IHttpActionResult add (Cities cy)
         {
             try
             {
@@ -69,8 +64,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("CModify")]
-        public IHttpActionResult CModify(Cities cy)
+        public IHttpActionResult modify (Cities cy)
         {
             try
             {
@@ -83,8 +77,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("CDelete")]
-        public IHttpActionResult CDelete(int cy)
+        public IHttpActionResult delete (int cy)
         {
             try
             {
@@ -97,15 +90,15 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("CListByState")]
-        public IHttpActionResult CListByState(int State)
+        [Route("clist")]
+        public IHttpActionResult clist (int State)
         {
             try
             {
                 List<Cities> c = LogicFactory.GetCityLogic().CityListByState(State);
                 if (c != null)
                 {
-                    // Configurar la configuración de serialización personalizada
+                    /*// Configurar la configuración de serialización personalizada
                     //Configuramos las JsonSerializerSettings para ignorar los bucles de referencia (ReferenceLoopHandling.Ignore) 
                     //y utilizar CamelCasePropertyNamesContractResolver para cambiar el formato del nombre de las propiedades a minúsculas con notación camelCase.
                     JsonSerializerSettings settings = new JsonSerializerSettings
@@ -125,16 +118,16 @@ namespace API.Controllers
                     //dentro de la respuesta JSON sin problemas de bucle de referencia y con el tipo de contenido adecuado.
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                    return ResponseMessage(response);
+                    return ResponseMessage(response);*/
 
-                    //return Ok(r);
+                    return Ok(c);
                 }
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                return BadRequest("Ocurrió un error al listar las ciudades: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar las ciudades.");
             }
         }
     }

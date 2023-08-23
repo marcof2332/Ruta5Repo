@@ -74,7 +74,7 @@
           <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" Nullable="false" />
         </EntityType>
-        <EntityType Name="Licenses">
+        <EntityType Name="Licences">
           <Key>
             <PropertyRef Name="Category" />
           </Key>
@@ -248,10 +248,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Employees__Licen__46E78A0C">
-          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
+          <End Role="Licences" Type="Self.Licences" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Licenses">
+            <Principal Role="Licences">
               <PropertyRef Name="Category" />
             </Principal>
             <Dependent Role="Employees">
@@ -403,7 +403,7 @@
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="DeleteLicense" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="DeleteLicence" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Cat" Type="varchar" Mode="In" />
           <Parameter Name="ret" Type="int" Mode="InOut" />
         </Function>
@@ -446,7 +446,7 @@
           <EntitySet Name="DropOffPackage" EntityType="Self.DropOffPackage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomePickup" EntityType="Self.HomePickup" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Licenses" EntityType="Self.Licenses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Licences" EntityType="Self.Licences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Packages" EntityType="Self.Packages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PackageType" EntityType="Self.PackageType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -482,7 +482,7 @@
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK__Employees__Licen__46E78A0C" Association="Self.FK__Employees__Licen__46E78A0C">
-            <End Role="Licenses" EntitySet="Licenses" />
+            <End Role="Licences" EntitySet="Licences" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK__HomePicku__IdHom__6E01572D" Association="Self.FK__HomePicku__IdHom__6E01572D">
@@ -570,8 +570,8 @@
           <Property Name="EmpRole" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Licence" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Roles" Relationship="Self.FK__Employees__EmpRo__44FF419A" FromRole="Employees" ToRole="Roles" />
-          <NavigationProperty Name="Licenses" Relationship="Self.FK__Employees__Licen__45F365D3" FromRole="Employees" ToRole="Licenses" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Licences" Relationship="TransporteModel.FK__Employees__Licen__46E78A0C" FromRole="Employees" ToRole="Licences" />
         </EntityType>
         <EntityType Name="HomePickup">
           <Key>
@@ -585,14 +585,6 @@
           <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
           <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" Nullable="false" />
           <NavigationProperty Name="Shippments" Relationship="TransporteModel.FK__HomePicku__IdHom__6C190EBB" FromRole="HomePickup" ToRole="Shippments" />
-        </EntityType>
-        <EntityType Name="Licenses">
-          <Key>
-            <PropertyRef Name="Category" />
-          </Key>
-          <Property Name="Category" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LicenceDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Capacity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Packages">
           <Key>
@@ -730,18 +722,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Employees__Licen__45F365D3">
-          <End Role="Licenses" Type="Self.Licenses" Multiplicity="1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Licenses">
-              <PropertyRef Name="Category" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="Licence" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Shippment__EmpID__75A278F5">
           <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="ShippmentStage" Type="Self.ShippmentStage" Multiplicity="*" />
@@ -807,7 +787,6 @@
           <EntitySet Name="Customers" EntityType="Self.Customers" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="HomePickup" EntityType="Self.HomePickup" />
-          <EntitySet Name="Licenses" EntityType="Self.Licenses" />
           <EntitySet Name="Packages" EntityType="Self.Packages" />
           <EntitySet Name="PackageType" EntityType="Self.PackageType" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
@@ -831,10 +810,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__Employees__EmpRo__44FF419A" Association="Self.FK__Employees__EmpRo__44FF419A">
             <End Role="Roles" EntitySet="Roles" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Employees__Licen__45F365D3" Association="Self.FK__Employees__Licen__45F365D3">
-            <End Role="Licenses" EntitySet="Licenses" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK__Shippment__EmpID__75A278F5" Association="Self.FK__Shippment__EmpID__75A278F5">
@@ -942,6 +917,15 @@
           </FunctionImport>
           <FunctionImport Name="DeleteVehicle">
             <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="ret" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Licences" EntityType="TransporteModel.Licences" />
+          <AssociationSet Name="FK__Employees__Licen__46E78A0C" Association="TransporteModel.FK__Employees__Licen__46E78A0C">
+            <End Role="Licences" EntitySet="Licences" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteLicence">
+            <Parameter Name="Cat" Mode="In" Type="String" />
             <Parameter Name="ret" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -1084,6 +1068,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Licences">
+          <Key>
+            <PropertyRef Name="Category" />
+          </Key>
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="LicenceDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="TransporteModel.FK__Employees__Licen__46E78A0C" FromRole="Licences" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__Employees__Licen__46E78A0C">
+          <End Type="TransporteModel.Licences" Role="Licences" Multiplicity="1" />
+          <End Type="TransporteModel.Employees" Role="Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Licences">
+              <PropertyRef Name="Category" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Licence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1138,15 +1143,6 @@
                 <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Licenses">
-            <EntityTypeMapping TypeName="TransporteModel.Licenses">
-              <MappingFragment StoreEntitySet="Licenses">
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="LicenceDescription" ColumnName="LicenceDescription" />
-                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1237,7 +1233,6 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="DeleteEmployee" FunctionName="TransporteModel.Store.DeleteEmployee" />
-          <FunctionImportMapping FunctionImportName="DeleteLicense" FunctionName="TransporteModel.Store.DeleteLicense" />
           <FunctionImportMapping FunctionImportName="DeleteRole" FunctionName="TransporteModel.Store.DeleteRole" />
           <FunctionImportMapping FunctionImportName="DeleteState" FunctionName="TransporteModel.Store.DeleteState" />
           <FunctionImportMapping FunctionImportName="DeleteCity" FunctionName="TransporteModel.Store.DeleteCity" />
@@ -1287,6 +1282,16 @@
           <FunctionImportMapping FunctionImportName="DeleteSStage" FunctionName="TransporteModel.Store.DeleteSStage" />
           <FunctionImportMapping FunctionImportName="DeleteVCondition" FunctionName="TransporteModel.Store.DeleteVCondition" />
           <FunctionImportMapping FunctionImportName="DeleteVehicle" FunctionName="TransporteModel.Store.DeleteVehicle" />
+          <EntitySetMapping Name="Licences">
+            <EntityTypeMapping TypeName="TransporteModel.Licences">
+              <MappingFragment StoreEntitySet="Licences">
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="LicenceDescription" ColumnName="LicenceDescription" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteLicence" FunctionName="TransporteModel.Store.DeleteLicence" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

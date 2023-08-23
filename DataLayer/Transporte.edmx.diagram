@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="TransporteModel.Customers" Width="1.5" PointX="6.25" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TransporteModel.Employees" Width="1.5" PointX="19.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="TransporteModel.HomePickup" Width="1.5" PointX="11.375" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Licenses" Width="1.5" PointX="19.375" PointY="11.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TransporteModel.Packages" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TransporteModel.PackageType" Width="1.5" PointX="13.625" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TransporteModel.Roles" Width="1.5" PointX="21.875" PointY="11.125" IsExpanded="true" />
@@ -23,7 +22,6 @@
         <AssociationConnector Association="TransporteModel.FK__Zones__City__4D94879B" ManuallyRouted="false" />
         <AssociationConnector Association="TransporteModel.FK__Customers__Clien__5FB337D6" ManuallyRouted="false" />
         <AssociationConnector Association="TransporteModel.FK__Employees__EmpRo__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Employees__Licen__45F365D3" ManuallyRouted="false" />
         <AssociationConnector Association="TransporteModel.FK__Shippment__EmpID__75A278F5" ManuallyRouted="false" />
         <AssociationConnector Association="TransporteModel.FK__Packages__PType__6EF57B66" ManuallyRouted="false" />
         <AssociationConnector Association="TransporteModel.FK__Shippment__IdSSt__74AE54BC" ManuallyRouted="false" />
@@ -41,6 +39,8 @@
         <AssociationConnector Association="TransporteModel.FK__Packages__Shippm__6EF57B66" />
         <AssociationConnector Association="TransporteModel.FK__Shippment__IdShi__74AE54BC" />
         <AssociationConnector Association="TransporteModel.FK__Shippment__Targe__656C112C" />
+        <EntityTypeShape EntityType="TransporteModel.Licences" Width="1.5" PointX="18.875" PointY="10.75" />
+        <AssociationConnector Association="TransporteModel.FK__Employees__Licen__46E78A0C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

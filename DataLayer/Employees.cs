@@ -27,6 +27,6 @@ namespace DataLayer
         public bool Active { get; set; }
     
         public virtual Roles Roles { get; set; }
-        public virtual Licenses Licenses { get; set; }
+        public virtual Licences Licences { get; set; }
     }
 }

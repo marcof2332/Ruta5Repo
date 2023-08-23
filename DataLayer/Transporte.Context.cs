@@ -31,7 +31,6 @@ namespace DataLayer
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<HomePickup> HomePickup { get; set; }
-        public virtual DbSet<Licenses> Licenses { get; set; }
         public virtual DbSet<Packages> Packages { get; set; }
         public virtual DbSet<PackageType> PackageType { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -44,6 +43,7 @@ namespace DataLayer
         public virtual DbSet<BranchOffices> BranchOffices { get; set; }
         public virtual DbSet<DropOffPackage> DropOffPackage { get; set; }
         public virtual DbSet<Shippments> Shippments { get; set; }
+        public virtual DbSet<Licences> Licences { get; set; }
     
         public virtual int DeleteEmployee(Nullable<int> empID, ObjectParameter ret)
         {
@@ -160,6 +160,15 @@ namespace DataLayer
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteVehicle", iDParameter, ret);
+        }
+    
+        public virtual int DeleteLicence(string cat, ObjectParameter ret)
+        {
+            var catParameter = cat != null ?
+                new ObjectParameter("Cat", cat) :
+                new ObjectParameter("Cat", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteLicence", catParameter, ret);
         }
     }
 }

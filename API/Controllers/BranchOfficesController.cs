@@ -7,12 +7,11 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/BranchOffice")]
-    public class BranchOfficeController : ApiController
+    [RoutePrefix("/api/branchoffices")]
+    public class BranchOfficesController : ApiController
     {
         [HttpGet]
-        [Route("GetBranchOffice")]
-        public IHttpActionResult GetBranchOffice(int id)
+        public IHttpActionResult get (int id)
         {
             try
             {
@@ -29,8 +28,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("BAdd")]
-        public IHttpActionResult BAdd(BranchOffices B)
+        public IHttpActionResult add (BranchOffices B)
         {
             try
             {
@@ -44,8 +42,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        [Route("BModify")]
-        public IHttpActionResult BModify(BranchOffices B)
+        public IHttpActionResult modify (BranchOffices B)
         {
             try
             {
@@ -59,8 +56,7 @@ namespace API.Controllers
         }
 
         [HttpDelete]
-        [Route("ODelete")]
-        public IHttpActionResult ODelete(int id)
+        public IHttpActionResult delete (int id)
         {
             try
             {
@@ -74,8 +70,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("OListByZone")]
-        public IHttpActionResult OListByZone(int id)
+        [Route("olist")]
+        public IHttpActionResult olist (int id)
         {
             try
             {

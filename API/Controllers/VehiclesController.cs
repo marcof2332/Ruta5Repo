@@ -1,43 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/roles")]
-    public class RolesController : ApiController
+    [RoutePrefix("/api/vehicles")]
+    public class VehiclesController : ApiController
     {
         [HttpGet]
-        public IHttpActionResult get(string code)
+        public IHttpActionResult get(string vreg)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(code);
-                if (r != null)
-                    return Ok(r);
+                 Vehicles v = LogicFactory.GetVehicleLogic().VSearch(vreg);
+                if (v != null)
+                    return Ok(v);
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al buscar el rol: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar el vehiculo.");
             }
         }
         [HttpPost]
-        public IHttpActionResult add(Roles ro)
+        public IHttpActionResult add(Vehicles v)
         {
 
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r != null)
-                    return BadRequest("El rol que esta intentando agregar ya existe en el sistema.");
+                Vehicles vCheck = LogicFactory.GetVehicleLogic().VSearch(v.vRegistration);
+                if (vCheck != null)
+                    return BadRequest("El vehiculo que esta intentando agregar ya existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -45,7 +41,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RAdd(ro);
+                LogicFactory.GetVehicleLogic().VAdd(v);
                 return Ok();
             }
             catch (Exception ex)
@@ -54,13 +50,13 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        public IHttpActionResult modify(Roles ro)
+        public IHttpActionResult modify(Vehicles v)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r == null)
-                    return NotFound();
+                Vehicles vCheck = LogicFactory.GetVehicleLogic().VSearch(v.vRegistration);
+                if (vCheck != null)
+                    return BadRequest("El vehiculo que esta intentando modificar no existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -68,7 +64,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RModify(ro);
+                LogicFactory.GetVehicleLogic().VModify(v);
                 return Ok();
             }
             catch (Exception ex)
@@ -77,11 +73,11 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        public IHttpActionResult delete(string ro)
+        public IHttpActionResult delete(int id)
         {
             try
             {
-                LogicFactory.GetRolesLogic().RDelete(ro);
+                LogicFactory.GetVehicleLogic().VDelete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -94,15 +90,15 @@ namespace API.Controllers
         {
             try
             {
-                List<Roles> r = LogicFactory.GetRolesLogic().RList();
-                if (r != null)
-                    return Ok(r);
+                List<Vehicles> v = LogicFactory.GetVehicleLogic().VList();
+                if (v != null)
+                    return Ok(v);
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al listar los roles: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar los vehiculos.");
             }
         }
     }

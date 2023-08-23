@@ -5,10 +5,10 @@ namespace LogicLayer.Interfaces
 {
     public interface IVehicleLogic
     {
-        Vehicles VSearch(int ID);
+        Vehicles VSearch(string vreg);
         void VAdd(Vehicles V);
         void VModify(Vehicles V);
-        void VDelete(int ID);
-        List<Vehicles> VicenceList();
+        void VDelete(int id);
+        List<Vehicles> VList();
     }
 }

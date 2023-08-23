@@ -23,11 +23,11 @@ namespace LogicLayer
         }
         #endregion
 
-        public Licenses LSearch(string cat)
+        public Licences LSearch(string cat)
         {
-            return (DbContextSingleton.TransporteContext.Licenses.Where(l => l.Category == cat).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.Licences.Where(l => l.Category == cat).FirstOrDefault());
         }
-        public void LAdd(Licenses li)
+        public void LAdd(Licences li)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace LogicLayer
             }
             try
             {
-                DbContextSingleton.TransporteContext.Licenses.Add(li);
+                DbContextSingleton.TransporteContext.Licences.Add(li);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
@@ -53,12 +53,12 @@ namespace LogicLayer
                     throw ex;
             }
         }
-        public void LModify(Licenses li)
+        public void LModify(Licences li)
         {
-            Licenses modLi = null;
+            Licences modLi = null;
             try
             {
-                modLi = DbContextSingleton.TransporteContext.Licenses.Where(u => u.Category == li.Category).FirstOrDefault();
+                modLi = DbContextSingleton.TransporteContext.Licences.Where(u => u.Category == li.Category).FirstOrDefault();
                 modLi.LicenceDescription = li.LicenceDescription;
                 modLi.Capacity = li.Capacity;
                 Validations.LicenseValidation(modLi);
@@ -76,7 +76,7 @@ namespace LogicLayer
                 System.Data.SqlClient.SqlParameter _cat = new System.Data.SqlClient.SqlParameter("@Cat", li);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
-                DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteLicense @Cat, @ret output", _cat, _ret);
+                DbContextSingleton.TransporteContext.Database.ExecuteSqlCommand("exec DeleteLicence @Cat, @ret output", _cat, _ret);
 
                 if ((int)_ret.Value == -1)
                     throw new Exception("No se encontro la licencia, por favor intente nuevamente.");
@@ -92,9 +92,9 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Licenses> LicenceList()
+        public List<Licences> LicenceList()
         {
-            return (DbContextSingleton.TransporteContext.Licenses.ToList());
+            return (DbContextSingleton.TransporteContext.Licences.ToList());
         }
     }
 }

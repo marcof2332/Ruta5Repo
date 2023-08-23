@@ -9,16 +9,15 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Licenses")]
-    public class LicenceController : ApiController
+    [RoutePrefix("/api/licences")]
+    public class LicencesController : ApiController
     {
         [HttpGet]
-        [Route("GetLicence")]
-        public IHttpActionResult GetLicence(string cat)
+        public IHttpActionResult find(string cat)
         {
             try
             {
-                Licenses l = LogicFactory.GetLicenceLogic().LSearch(cat);
+                Licences l = LogicFactory.GetLicenceLogic().LSearch(cat);
                 if (l != null)
                     return Ok(l);
                 else
@@ -30,13 +29,12 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [Route("LAdd")]
-        public IHttpActionResult LAdd(Licenses li)
+        public IHttpActionResult add(Licences li)
         {
 
             try
             {
-                Licenses Lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
+                Licences Lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
                 if (Lic != null)
                     return BadRequest("La licencia que esta intentando agregar ya existe en el sistema.");
             }
@@ -55,12 +53,11 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("LModify")]
-        public IHttpActionResult LModify(Licenses li)
+        public IHttpActionResult modify(Licences li)
         {
             try
             {
-                Licenses lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
+                Licences lic = LogicFactory.GetLicenceLogic().LSearch(li.Category);
                 if (lic == null)
                     return BadRequest("La licencia que esta intentando modificar no existe en el sistema.");
             }
@@ -79,8 +76,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("LDelete")]
-        public IHttpActionResult LDelete(string cat)
+        public IHttpActionResult delete(string cat)
         {
             try
             {
@@ -93,12 +89,11 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("LList")]
-        public IHttpActionResult LList()
+        public IHttpActionResult list()
         {
             try
             {
-                List<Licenses> l = LogicFactory.GetLicenceLogic().LicenceList();
+                List<Licences> l = LogicFactory.GetLicenceLogic().LicenceList();
                 if (l != null)
                     return Ok(l);
                 else

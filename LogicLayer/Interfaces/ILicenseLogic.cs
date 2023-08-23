@@ -10,10 +10,10 @@ namespace LogicLayer.Interfaces
 {
     public interface ILicenseLogic
     {
-        Licenses LSearch(string cat);
-        void LAdd(Licenses li); //(string cat, string desc, int weight);
-        void LModify(Licenses li);
+        Licences LSearch(string cat);
+        void LAdd(Licences li); //(string cat, string desc, int weight);
+        void LModify(Licences li);
         void LDelete(string li);
-        List<Licenses> LicenceList();
+        List<Licences> LicenceList();
     }
 }

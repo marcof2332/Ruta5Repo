@@ -9,12 +9,11 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/States")]
+    [RoutePrefix("api/states")]
     public class StatesController : ApiController
     {
         [HttpGet]
-        [Route("GetState")]
-        public IHttpActionResult GetState(int st)
+        public IHttpActionResult get (int st)
         {
             try
             {
@@ -30,10 +29,8 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        [Route("SAdd")]
-        public IHttpActionResult SAdd(States st)
+        public IHttpActionResult add (States st)
         {
-
             try
             {
                 States s = LogicFactory.GetStatesLogic().StateSearch(st.IdState);
@@ -55,8 +52,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("SModify")]
-        public IHttpActionResult SModify(States st)
+        public IHttpActionResult modify (States st)
         {
             try
             {
@@ -79,8 +75,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("SDelete")]
-        public IHttpActionResult SDelete(int st)
+        public IHttpActionResult delete (int st)
         {
             try
             {
@@ -93,8 +88,7 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("SList")]
-        public IHttpActionResult SList()
+        public IHttpActionResult list()
         {
             try
             {

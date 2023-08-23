@@ -1,43 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/roles")]
-    public class RolesController : ApiController
+    [RoutePrefix("/api/stages")]
+    public class StagesController : ApiController
     {
         [HttpGet]
-        public IHttpActionResult get(string code)
+        public IHttpActionResult get (int id)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(code);
-                if (r != null)
-                    return Ok(r);
+                Stages st = LogicFactory.GetStageLogic().StSearch(id);
+                if (st != null)
+                    return Ok(st);
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al buscar el rol: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar la etapa.");
             }
         }
         [HttpPost]
-        public IHttpActionResult add(Roles ro)
+        public IHttpActionResult add (Stages st)
         {
-
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r != null)
-                    return BadRequest("El rol que esta intentando agregar ya existe en el sistema.");
+                Stages checkst = LogicFactory.GetStageLogic().StSearch(st.IdSStage);
+                if (checkst != null)
+                    return BadRequest("La etapa que esta intentando agregar ya existe en el sistema.");
             }
             catch (Exception ex)
             {
@@ -45,7 +40,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RAdd(ro);
+                LogicFactory.GetStageLogic().StAdd(st);
                 return Ok();
             }
             catch (Exception ex)
@@ -54,12 +49,12 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        public IHttpActionResult modify(Roles ro)
+        public IHttpActionResult modify (Stages st)
         {
             try
             {
-                Roles r = LogicFactory.GetRolesLogic().RSearch(ro.Code);
-                if (r == null)
+                Stages checkSt = LogicFactory.GetStageLogic().StSearch(st.IdSStage);
+                if (checkSt == null)
                     return NotFound();
             }
             catch (Exception ex)
@@ -68,7 +63,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetRolesLogic().RModify(ro);
+                LogicFactory.GetStageLogic().StModify(st);
                 return Ok();
             }
             catch (Exception ex)
@@ -77,11 +72,11 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        public IHttpActionResult delete(string ro)
+        public IHttpActionResult delete (int id)
         {
             try
             {
-                LogicFactory.GetRolesLogic().RDelete(ro);
+                LogicFactory.GetStageLogic().StDelete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -90,19 +85,19 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        public IHttpActionResult list()
+        public IHttpActionResult list ()
         {
             try
             {
-                List<Roles> r = LogicFactory.GetRolesLogic().RList();
-                if (r != null)
-                    return Ok(r);
+                List<Stages> st = LogicFactory.GetStageLogic().StList();
+                if (st != null)
+                    return Ok(st);
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al listar los roles: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar las etapas.");
             }
         }
     }

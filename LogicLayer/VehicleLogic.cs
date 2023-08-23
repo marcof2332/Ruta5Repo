@@ -20,9 +20,9 @@ namespace LogicLayer
         }
         #endregion
 
-        public Vehicles VSearch(int ID)
+        public Vehicles VSearch(string vreg)
         {
-            return (DbContextSingleton.TransporteContext.Vehicles.Where(v => v.IdVehicle == ID && v.Active == true).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.Vehicles.Where(v => v.vRegistration == vreg && v.Active == true).FirstOrDefault());
         }
         public void VAdd(Vehicles V)
         {
@@ -36,13 +36,16 @@ namespace LogicLayer
             }
             try
             {
-                Vehicles VDeleted = DbContextSingleton.TransporteContext.Vehicles.Where(v => v.Plate == V.Plate && v.Active == false).FirstOrDefault();
+                Vehicles VDeleted = DbContextSingleton.TransporteContext.Vehicles.Where(v => v.vRegistration == V.vRegistration && v.Active == false).FirstOrDefault();
                 if (VDeleted != null)
                 {
+                    VDeleted.Plate = V.Plate;
+                    VDeleted.vRegistration = V.vRegistration;
+                    VDeleted.vRegistration = V.vRegistration;
                     VDeleted.BrandModel = V.BrandModel;
                     VDeleted.Condition = V.Condition;
                     VDeleted.VehicleWeight = V.VehicleWeight;
-                    VDeleted.vRegistration = V.vRegistration;                    
+                    VDeleted.vRegistration = V.vRegistration;
                     VDeleted.Active = true;
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
@@ -68,7 +71,8 @@ namespace LogicLayer
             Vehicles modV = null;
             try
             {
-                modV = DbContextSingleton.TransporteContext.Vehicles.Where(v => v.IdVehicle == V.IdVehicle && v.Active == true).FirstOrDefault();
+                modV = DbContextSingleton.TransporteContext.Vehicles.Where(v => v.vRegistration == V.vRegistration && v.Active == true).FirstOrDefault();
+                modV.Plate = V.Plate;
                 modV.Condition = V.Condition;
                 modV.Plate = V.Plate;
                 Validations.VehicleValidation(modV);
@@ -100,7 +104,7 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Vehicles> VicenceList()
+        public List<Vehicles> VList()
         {
             return (DbContextSingleton.TransporteContext.Vehicles.Where(v => v.Active == true).ToList());
         }

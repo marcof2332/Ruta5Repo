@@ -71,7 +71,7 @@
     <Compile Include="HomePickup.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="Licenses.cs">
+    <Compile Include="Licences.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Packages.cs">

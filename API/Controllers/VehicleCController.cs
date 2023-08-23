@@ -1,41 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/packagetype")]
-    public class PackageTypeController : ApiController
+    [RoutePrefix("/api/vehiclec")]
+    public class VehicleCController : ApiController
     {
         [HttpGet]
         public IHttpActionResult get(int id)
         {
             try
             {
-                PackageType pt = LogicFactory.GetPackageTypeLogic().PtSearch(id);
-                if (pt != null)
-                    return Ok(pt);
+                VehiclesCondition vc = LogicFactory.GetVehicleConditionLogic().VCSearch(id);
+                if (vc != null)
+                    return Ok(vc);
                 else
                     return NotFound();
             }
             catch (Exception)
             {
-                return BadRequest("Ocurrio un error al buscar el tipo de paquete.");
-
+                return BadRequest("Ocurrió un error al buscar el estado del vehiculo.");
             }
         }
-
         [HttpPost]
-        public IHttpActionResult add(PackageType PT)
+        public IHttpActionResult add(VehiclesCondition vc)
         {
             try
             {
-                LogicFactory.GetPackageTypeLogic().PtAdd(PT);
+                LogicFactory.GetVehicleConditionLogic().VCAdd(vc);
                 return Ok();
             }
             catch (Exception ex)
@@ -43,13 +39,22 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpPut]
-        public IHttpActionResult modify(PackageType PT)
+        public IHttpActionResult modify(VehiclesCondition vc)
         {
             try
             {
-                LogicFactory.GetPackageTypeLogic().PtModify(PT);
+                VehiclesCondition vCheck = LogicFactory.GetVehicleConditionLogic().VCSearch(vc.IdVC);
+                if (vCheck == null)
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            try
+            {
+                LogicFactory.GetVehicleConditionLogic().VCModify(vc);
                 return Ok();
             }
             catch (Exception ex)
@@ -57,13 +62,12 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpDelete]
         public IHttpActionResult delete(int id)
         {
             try
             {
-                LogicFactory.GetPackageTypeLogic().PtDelete(id);
+                LogicFactory.GetVehicleConditionLogic().VCDelete(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -71,21 +75,20 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpGet]
-        public IHttpActionResult plist()
+        public IHttpActionResult list()
         {
             try
             {
-                List<PackageType> pt = LogicFactory.GetPackageTypeLogic().PtList();
-                if (pt != null)
-                    return Ok(pt);
+                List<VehiclesCondition> vc = LogicFactory.GetVehicleConditionLogic().VCList();
+                if (vc != null)
+                    return Ok(vc);
                 else
                     return NotFound();
             }
             catch (Exception)
             {
-                return BadRequest("Ocurrió un error al listar los tipos de paquete.");
+                return BadRequest("Ocurrió un error al listar los estados de los vehiculos.");
             }
         }
     }

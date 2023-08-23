@@ -32,7 +32,7 @@ namespace DataLayer
             if (emp.EmpAddress.Trim().Length < 3 || emp.EmpAddress.Trim().Length > 50)
                 throw new Exception("Debe ingresar una direccion valida, entre 3 y 50 caracteres.");
         }
-        public static void LicenseValidation(Licenses li)
+        public static void LicenseValidation(Licences li)
         {
             //Patterns
             Regex idPattern = new Regex(@"[A-Z]");
@@ -40,7 +40,7 @@ namespace DataLayer
 
             if (li == null)
                 throw new Exception("Debe ingresar datos validos.");
-            if (!idPattern.IsMatch(li.Category) || !idPattern2.IsMatch(li.Category))
+            if (!idPattern.IsMatch(li.Category) && !idPattern2.IsMatch(li.Category))
                 throw new Exception("Formato de categoría incorrecto");
             if (li.LicenceDescription.Trim().Length < 3)
                 throw new Exception("Debe ingresar una breve descripcion de la categoria, debe contener al menos 3 caracteres.");

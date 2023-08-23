@@ -12,19 +12,18 @@ using Newtonsoft.Json.Serialization;
 
 namespace API.Controllers
 {
-    [RoutePrefix("api/Zones")]
+    [RoutePrefix("api/zones")]
     public class ZonesController : ApiController
     {
         [HttpGet]
-        [Route("GetZone")]
-        public IHttpActionResult GetZone(int id)
+        public IHttpActionResult get (int id)
         {
             try
             {
                 Zones zo = LogicFactory.GetZonesLogic().ZoneSearch(id);
                 if (zo != null)
                 {
-                    // Configurar la configuración de serialización personalizada
+                    /*// Configurar la configuración de serialización personalizada
                     //Configuramos las JsonSerializerSettings para ignorar los bucles de referencia (ReferenceLoopHandling.Ignore) 
                     //y utilizar CamelCasePropertyNamesContractResolver para cambiar el formato del nombre de las propiedades a minúsculas con notación camelCase.
                     JsonSerializerSettings settings = new JsonSerializerSettings
@@ -44,19 +43,19 @@ namespace API.Controllers
                     //dentro de la respuesta JSON sin problemas de bucle de referencia y con el tipo de contenido adecuado.
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                    return ResponseMessage(response);
+                    return ResponseMessage(response);*/
+                    return Ok(zo);
                 }
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al buscar la zona: " + ex.Message);
+                return BadRequest("Ocurrió un error al buscar la zona.");
             }
         }
         [HttpPost]
-        [Route("ZAdd")]
-        public IHttpActionResult ZAdd(Zones zo)
+        public IHttpActionResult add (Zones zo)
         {
             try
             {
@@ -69,8 +68,7 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        [Route("ZModify")]
-        public IHttpActionResult ZModify(Zones zo)
+        public IHttpActionResult modify (Zones zo)
         {
             try
             {
@@ -83,8 +81,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        [Route("ZDelete")]
-        public IHttpActionResult ZDelete(int zo)
+        public IHttpActionResult delete (int zo)
         {
             try
             {
@@ -97,15 +94,15 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("ZListByCity")]
-        public IHttpActionResult ZListByCity(int city)
+        [Route("zlist")]
+        public IHttpActionResult zlist(int city)
         {
             try
             {
                 List<Zones> z = LogicFactory.GetZonesLogic().ZoneListbyCity(city);
                 if (z != null)
                 {
-                    // Configurar la configuración de serialización personalizada
+                    /*// Configurar la configuración de serialización personalizada
                     //Configuramos las JsonSerializerSettings para ignorar los bucles de referencia (ReferenceLoopHandling.Ignore) 
                     //y utilizar CamelCasePropertyNamesContractResolver para cambiar el formato del nombre de las propiedades a minúsculas con notación camelCase.
                     JsonSerializerSettings settings = new JsonSerializerSettings
@@ -125,16 +122,16 @@ namespace API.Controllers
                     //dentro de la respuesta JSON sin problemas de bucle de referencia y con el tipo de contenido adecuado.
                     var response = new HttpResponseMessage(HttpStatusCode.OK);
                     response.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                    return ResponseMessage(response);
+                    return ResponseMessage(response);*/
 
-                    //return Ok(r);
+                    return Ok(z);
                 }
                 else
                     return NotFound();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest("Ocurrió un error al listar las zonas: " + ex.Message);
+                return BadRequest("Ocurrió un error al listar las zonas.");
             }
         }
     }

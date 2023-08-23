@@ -5,7 +5,7 @@ namespace LogicLayer.Interfaces
 {
     public interface ICustomerLogic
     {
-        Customers CSearch(int ID);
+        Customers CSearch(long ID);
         void CAdd(Customers c);
         void CModify(Customers c);
         List<Customers> CustomerList();
