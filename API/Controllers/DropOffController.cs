@@ -7,11 +7,11 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/dropoff")]
+    [RoutePrefix("api/dropoff")]
     public class DropOffController : ApiController
     {
         [HttpGet]
-        public IHttpActionResult find (int id)
+        public IHttpActionResult find(int id)
         {
             try
             {
@@ -27,7 +27,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult add (DropOffPackage dp)
+        public IHttpActionResult add(DropOffPackage dp)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace API.Controllers
             }
         }
         [HttpDelete]
-        public IHttpActionResult delete (int ID)
+        public IHttpActionResult delete(int ID)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-    }
+        }
         [HttpGet]
         public IHttpActionResult list()
         {
@@ -69,3 +69,4 @@ namespace API.Controllers
             }
         }
     }
+}

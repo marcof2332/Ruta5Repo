@@ -1075,7 +1075,6 @@
           <Property Name="Category" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="LicenceDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Capacity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employees" Relationship="TransporteModel.FK__Employees__Licen__46E78A0C" FromRole="Licences" ToRole="Employees" />
         </EntityType>
         <Association Name="FK__Employees__Licen__46E78A0C">
           <End Type="TransporteModel.Licences" Role="Licences" Multiplicity="1" />

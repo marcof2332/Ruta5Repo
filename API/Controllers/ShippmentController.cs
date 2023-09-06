@@ -5,7 +5,7 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/shippment")]
+    [RoutePrefix("api/shippment")]
     public class ShippmentController : ApiController
     {
         [HttpPut]

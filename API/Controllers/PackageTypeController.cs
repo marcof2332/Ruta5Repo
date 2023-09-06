@@ -9,7 +9,7 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/packagetype")]
+    [RoutePrefix("api/packagetype")]
     public class PackageTypeController : ApiController
     {
         [HttpGet]

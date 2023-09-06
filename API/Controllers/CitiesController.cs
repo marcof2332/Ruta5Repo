@@ -7,7 +7,7 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/cities")]
+    [RoutePrefix("api/cities")]
     public class CitiesController : ApiController
     {
         [HttpGet]

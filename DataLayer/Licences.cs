@@ -14,17 +14,8 @@ namespace DataLayer
     
     public partial class Licences
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Licences()
-        {
-            this.Employees = new HashSet<Employees>();
-        }
-    
         public string Category { get; set; }
         public string LicenceDescription { get; set; }
         public int Capacity { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees> Employees { get; set; }
     }
 }

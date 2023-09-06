@@ -7,7 +7,7 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/customers")]
+    [RoutePrefix("api/customers")]
     public class CustomersController : ApiController
     {
         [HttpGet]
@@ -54,7 +54,7 @@ namespace API.Controllers
             }
             try
             {
-                LogicFactory.GetLicenceLogic().LModify(li);
+                LogicFactory.GetCustomerLogic().CModify(c);
                 return Ok();
             }
             catch (Exception ex)

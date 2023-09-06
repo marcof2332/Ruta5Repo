@@ -1,35 +1,35 @@
 ﻿using System.Collections.Generic;
-
 using System.Web.Http;
-
 using DataLayer;
 using LogicLayer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.Configuration;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Linq;
+using API.Models;
+using API.Validations;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/employees")]
+    [RoutePrefix("api/employees")]
     public class EmployeesController : ApiController
     {
         #region Login
-        [HttpGet]
+
+        [HttpPost]
         [AllowAnonymous]
-        public IHttpActionResult login(string user, string password)
+        [Route("login")]
+        public IHttpActionResult login(LoginModel us)
         {
             string token;
             try
             {
-                Employees log = LogicFactory.GetEmployeeLogic().EmpLogin(user, password);
+                Employees log = LogicFactory.GetEmployeeLogic().EmpLogin(us.user, us.password);
                 if (log != null)
                 {
-                    token = JWTGenerator(log);
-                    return Ok(token);
+                    token = TokenValidations.JWTGenerator(log);
+                    LoginModel ret = new LoginModel();
+                    ret.name = log.EmpName + ' ' + log.EmpLastName;
+                    ret.role = log.EmpRole;
+                    ret.token = token;
+                    return Ok(ret);
                 }
                 else
                     return NotFound();
@@ -39,83 +39,39 @@ namespace API.Controllers
                 return BadRequest("Ocurrió un error al realizar el logueo: " + ex.Message);
             }
         }
-
-        // GENERAMOS EL TOKEN CON LA INFORMACIÓN DEL USUARIO
-        private string JWTGenerator(Employees userInfo)
+        [HttpGet]
+        [AllowAnonymous]
+        public IHttpActionResult verAuth(string token)
         {
-            // CREAMOS EL HEADER //
-            var key = Convert.ToBase64String(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["JWT:ClaveSecreta"]));
-            var _symmetricSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(key));
-
-            //var _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["JWT:ClaveSecreta"]));
-            var _signingCredentials = new SigningCredentials(_symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
-            var _Header = new JwtHeader(_signingCredentials);
-
-            // CREAMOS LOS CLAIMS //
-            var _Claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.NameId, userInfo.ID.ToString()),
-                new Claim("role", userInfo.EmpRole),
-                new Claim("user", userInfo.EmpUser),
-            };
-
-            // CREAMOS EL PAYLOAD //
-            var _Payload = new JwtPayload(
-                    issuer: ConfigurationManager.AppSettings["JWT:Issuer"],
-                    audience: ConfigurationManager.AppSettings["JWT:Audience"],
-                    claims: _Claims,
-                    notBefore: DateTime.UtcNow,
-                    // Exipra a la 8 horas.
-                    expires: DateTime.UtcNow.AddHours(8)
-                );
-
-            // GENERAMOS EL TOKEN //
-            var _Token = new JwtSecurityToken(
-                    _Header,
-                    _Payload
-                );
-            return new JwtSecurityTokenHandler().WriteToken(_Token);
-        }
-
-        private Employees getClaimsFromToken(string token)
-        {
-            Employees e = new Employees();
             try
             {
-                var key = Convert.ToBase64String(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["JWT:ClaveSecreta"]));
-                var _symmetricSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(key));
-
-                var tokenValidationParameters = new TokenValidationParameters
+                Employees temp = new Employees();
+                if (token != "" && token != null)
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = _symmetricSecurityKey,
-                    ValidateIssuer = true,
-                    ValidIssuer = ConfigurationManager.AppSettings["JWT:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = ConfigurationManager.AppSettings["JWT:Audience"],
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromHours(8)
-                };
-            }
-            catch (SecurityTokenException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            try 
-            { 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
-                var claimID = securityToken.Claims.FirstOrDefault(c => c.Type == "NameId")?.Value;
-                var claimUs = securityToken.Claims.FirstOrDefault(c => c.Type == "EmpUser")?.Value;
-                var claimRole = securityToken.Claims.FirstOrDefault(c => c.Type == "EmpRole")?.Value;
-                e.ID = Convert.ToInt32(claimID);
-                e.EmpUser = claimUs;
-                e.EmpRole = claimRole;
-                return e;
+                    temp = TokenValidations.getClaimsFromToken(token);
+                    if (temp != null)
+                    {
+                        Employees verify = LogicFactory.GetEmployeeLogic().ESearch(temp.ID);
+
+                        if (verify != null && verify.EmpRole == temp.EmpRole)
+                        {
+                            LoginModel ret = new LoginModel();
+                            ret.name = verify.EmpName + ' ' + verify.EmpLastName;
+                            ret.role = verify.EmpRole;
+                            return Ok(ret);
+                        }
+                        else
+                            return NotFound();
+                    }
+                    else
+                        return NotFound();
+                }
+                else
+                    return NotFound();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
         #endregion
@@ -170,7 +126,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete]        
+        [HttpDelete]
         public IHttpActionResult delete(int emp)
         {
             try

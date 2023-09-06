@@ -10,7 +10,7 @@ using LogicLayer;
 
 namespace API.Controllers
 {
-    [RoutePrefix("/api/roles")]
+    [RoutePrefix("api/roles")]
     public class RolesController : ApiController
     {
         [HttpGet]

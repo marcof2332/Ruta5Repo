@@ -35,7 +35,7 @@ namespace DataLayer
         public static void LicenseValidation(Licences li)
         {
             //Patterns
-            Regex idPattern = new Regex(@"[A-Z]");
+            Regex idPattern = new Regex(@"^[A-Z]$");
             Regex idPattern2 = new Regex(@"^[A-Z][0-9]$");
 
             if (li == null)

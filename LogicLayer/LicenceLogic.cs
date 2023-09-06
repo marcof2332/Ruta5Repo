@@ -41,6 +41,7 @@ namespace LogicLayer
             {
                 DbContextSingleton.TransporteContext.Licences.Add(li);
                 DbContextSingleton.TransporteContext.SaveChanges();
+                DbContextSingleton.TransporteContext.Entry(li).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {
@@ -85,7 +86,7 @@ namespace LogicLayer
                 else if ((int)_ret.Value == -3)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
-                    DbContextSingleton.TransporteContext.SaveChanges();
+                DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
             {
