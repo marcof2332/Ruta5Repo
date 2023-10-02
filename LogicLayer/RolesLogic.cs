@@ -72,6 +72,8 @@ namespace LogicLayer
         {
             try
             {
+                Roles var = DbContextSingleton.TransporteContext.Roles.Where(r => r.Code == ro).FirstOrDefault();
+
                 System.Data.SqlClient.SqlParameter _code = new System.Data.SqlClient.SqlParameter("@Code", ro);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
@@ -84,9 +86,7 @@ namespace LogicLayer
                 else if ((int)_ret.Value == -3)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
-                {
-                    DbContextSingleton.TransporteContext.SaveChanges();
-                }
+                    DbContextSingleton.TransporteContext.Entry(var).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {
@@ -95,28 +95,18 @@ namespace LogicLayer
         }
         public List<Roles> RList()
         {
-            return (DbContextSingleton.TransporteContext.Roles.ToList());
+            try
+            {
+                using (var dbContext = new TransporteEntities())
+                {
+                    return (DbContextSingleton.TransporteContext.Roles.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         #endregion
-
-        /* Para testear en el navegador debugeando
-        const url = 'https://localhost:44327/api/Roles/RAdd';
-        const data = {
-                        Code: 'PEO',
-                        RolesDescription: 'Peón'
-                     };
-
-            fetch(url, {
-                        method: 'POST',
-                        headers:
-                                {
-                                  'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(data)
-                                    })
-                       .then(response => response.json())
-                       .then(result => console.log(result))
-                       .catch(error => console.error('Error:', error));
-                       */
     }
 }

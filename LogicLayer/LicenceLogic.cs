@@ -8,7 +8,7 @@ using DataLayer;
 
 namespace LogicLayer
 {
-    internal class LicenceLogic: Interfaces.ILicenseLogic
+    internal class LicenceLogic : Interfaces.ILicenseLogic
     {
         #region LicenceLogicSingleton
         private static LicenceLogic _instance = null;
@@ -41,7 +41,6 @@ namespace LogicLayer
             {
                 DbContextSingleton.TransporteContext.Licences.Add(li);
                 DbContextSingleton.TransporteContext.SaveChanges();
-                DbContextSingleton.TransporteContext.Entry(li).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {
@@ -74,6 +73,8 @@ namespace LogicLayer
         {
             try
             {
+                Licences licence = DbContextSingleton.TransporteContext.Licences.Where(l => l.Category == li).FirstOrDefault();
+
                 System.Data.SqlClient.SqlParameter _cat = new System.Data.SqlClient.SqlParameter("@Cat", li);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
@@ -86,7 +87,7 @@ namespace LogicLayer
                 else if ((int)_ret.Value == -3)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
-                DbContextSingleton.TransporteContext.SaveChanges();
+                    DbContextSingleton.TransporteContext.Entry(licence).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {
@@ -95,7 +96,17 @@ namespace LogicLayer
         }
         public List<Licences> LicenceList()
         {
-            return (DbContextSingleton.TransporteContext.Licences.ToList());
+            try
+            {
+                using (var dbContext = new TransporteEntities()) //AGREGAR ESTO A LOS LISTAR!!!!!!!!!!!
+                {
+                    return (DbContextSingleton.TransporteContext.Licences.ToList());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

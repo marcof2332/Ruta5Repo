@@ -87,6 +87,8 @@ namespace LogicLayer
         {
             try
             {
+                Vehicles var = DbContextSingleton.TransporteContext.Vehicles.Where(v => v.IdVehicle == ID && v.Active == true).FirstOrDefault();
+
                 System.Data.SqlClient.SqlParameter _cat = new System.Data.SqlClient.SqlParameter("@ID", ID);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
@@ -97,7 +99,7 @@ namespace LogicLayer
                 else if ((int)_ret.Value == -2)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
-                    DbContextSingleton.TransporteContext.SaveChanges();
+                    DbContextSingleton.TransporteContext.Entry(var).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {

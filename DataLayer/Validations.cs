@@ -42,7 +42,7 @@ namespace DataLayer
                 throw new Exception("Debe ingresar datos validos.");
             if (!idPattern.IsMatch(li.Category) && !idPattern2.IsMatch(li.Category))
                 throw new Exception("Formato de categoría incorrecto");
-            if (li.LicenceDescription.Trim().Length < 3)
+            if (li.LicenceDescription == null || li.LicenceDescription.Trim().Length < 3)
                 throw new Exception("Debe ingresar una breve descripcion de la categoria, debe contener al menos 3 caracteres.");
         }
         public static void RoleValidation(Roles Ro)
@@ -54,7 +54,7 @@ namespace DataLayer
                 throw new Exception("Debe ingresar datos validos.");
             if (!idpatern.IsMatch(Ro.Code))
                 throw new Exception("Formato de rol incorrecto, debe incluir 3 letras mayusculas.");
-            if (Ro.RolesDescription.Trim().Length < 3)
+            if (Ro.RolesDescription == null || Ro.RolesDescription.Trim().Length < 3)
                 throw new Exception("Debe ingresar una breve descripcion del rol, debe contener al menos 3 caracteres.");
         }
         public static void StateValidation(States st)

@@ -9,73 +9,9 @@ using API.Validations;
 namespace API.Controllers
 {
     [RoutePrefix("api/employees")]
+    [TokenAuthorizationFilter(new string[] { "GER" })]
     public class EmployeesController : ApiController
     {
-        #region Login
-
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("login")]
-        public IHttpActionResult login(LoginModel us)
-        {
-            string token;
-            try
-            {
-                Employees log = LogicFactory.GetEmployeeLogic().EmpLogin(us.user, us.password);
-                if (log != null)
-                {
-                    token = TokenValidations.JWTGenerator(log);
-                    LoginModel ret = new LoginModel();
-                    ret.name = log.EmpName + ' ' + log.EmpLastName;
-                    ret.role = log.EmpRole;
-                    ret.token = token;
-                    return Ok(ret);
-                }
-                else
-                    return NotFound();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Ocurrió un error al realizar el logueo: " + ex.Message);
-            }
-        }
-        [HttpGet]
-        [AllowAnonymous]
-        public IHttpActionResult verAuth(string token)
-        {
-            try
-            {
-                Employees temp = new Employees();
-                if (token != "" && token != null)
-                {
-                    temp = TokenValidations.getClaimsFromToken(token);
-                    if (temp != null)
-                    {
-                        Employees verify = LogicFactory.GetEmployeeLogic().ESearch(temp.ID);
-
-                        if (verify != null && verify.EmpRole == temp.EmpRole)
-                        {
-                            LoginModel ret = new LoginModel();
-                            ret.name = verify.EmpName + ' ' + verify.EmpLastName;
-                            ret.role = verify.EmpRole;
-                            return Ok(ret);
-                        }
-                        else
-                            return NotFound();
-                    }
-                    else
-                        return NotFound();
-                }
-                else
-                    return NotFound();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-        #endregion
-
         #region CRUD
         [HttpPost]
         public IHttpActionResult add(Employees Emp)
@@ -137,6 +73,23 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult list()
+        {
+            try
+            {
+                List<Employees> e = LogicFactory.GetEmployeeLogic().EList();
+                if (e != null)
+                    return Ok(e);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Ocurrió un error al listar los empleados: " + ex.Message);
             }
         }
         #endregion

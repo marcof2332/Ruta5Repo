@@ -15,5 +15,6 @@ namespace LogicLayer.Interfaces
         void EAdd(Employees emp); 
         void EModify(Employees emp); 
         void EDelete(int emp);
+        List<Employees> EList();
     }
 }

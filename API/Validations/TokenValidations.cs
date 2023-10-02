@@ -49,50 +49,6 @@ namespace API.Validations
                 return new JwtSecurityTokenHandler().WriteToken(_Token);
             }
 
-        // OBTENEMOS LA VALIDACION MEDIANTE EL JWT
-        /*internal static Employees getClaimsFromToken(string token)
-        {
-            Employees e = new Employees();
-            try
-            {
-                var key = Convert.ToBase64String(Encoding.UTF8.GetBytes(ConfigurationManager.AppSettings["JWT:ClaveSecreta"]));
-                var _symmetricSecurityKey = new SymmetricSecurityKey(Convert.FromBase64String(key));
-
-                var tokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = _symmetricSecurityKey,
-                    ValidateIssuer = true,
-                    ValidIssuer = ConfigurationManager.AppSettings["JWT:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = ConfigurationManager.AppSettings["JWT:Audience"],
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromHours(8)
-                };
-            }
-            catch (SecurityTokenException ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
-                var claimID = securityToken.Claims.FirstOrDefault(c => c.Type == "NameId")?.Value;
-                var claimUs = securityToken.Claims.FirstOrDefault(c => c.Type == "EmpUser")?.Value;
-                var claimRole = securityToken.Claims.FirstOrDefault(c => c.Type == "EmpRole")?.Value;
-                e.ID = Convert.ToInt32(claimID);
-                e.EmpUser = claimUs;
-                e.EmpRole = claimRole;
-                return e;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-    }*/
-
         internal static Employees getClaimsFromToken(string token)
         {
             Employees e = new Employees();

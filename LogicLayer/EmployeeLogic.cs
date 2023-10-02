@@ -31,7 +31,10 @@ namespace LogicLayer
         }
         public Employees ESearch(int id)
         {
-            return DbContextSingleton.TransporteContext.Employees.Where(u => u.ID == id && u.Active == true).FirstOrDefault();
+            using (var dbContext = new TransporteEntities())
+            {
+                return DbContextSingleton.TransporteContext.Employees.Where(u => u.ID == id && u.Active == true).FirstOrDefault();
+            }
         }
         public void EAdd(Employees emp)
         {
@@ -104,6 +107,8 @@ namespace LogicLayer
         {
             try
             {
+                Employees var = DbContextSingleton.TransporteContext.Employees.Where(u => u.ID == Emp && u.Active == true).FirstOrDefault();
+
                 System.Data.SqlClient.SqlParameter _usu = new System.Data.SqlClient.SqlParameter("@empID", Emp);
                 System.Data.SqlClient.SqlParameter _return = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _return.Direction = System.Data.ParameterDirection.Output;
@@ -114,11 +119,25 @@ namespace LogicLayer
                 else if ((int)_return.Value == -2)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
                 else
-                    DbContextSingleton.TransporteContext.SaveChanges();
+                    DbContextSingleton.TransporteContext.Entry(var).State = System.Data.Entity.EntityState.Detached;
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public List<Employees> EList()
+        {
+            try
+            {
+                using (var dbContext = new TransporteEntities())
+                {
+                    return DbContextSingleton.TransporteContext.Employees.Where(u => u.Active == true).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
         #endregion
