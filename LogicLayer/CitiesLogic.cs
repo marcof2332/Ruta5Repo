@@ -94,11 +94,10 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Cities> CityListByState(int State)
+        public List<Cities> CitesList()
         {
             List<Cities> cities = (from C in DbContextSingleton.TransporteContext.Cities
-                                   where C.CityState == State
-                                   orderby C.CityName descending
+                                   orderby C.CityState descending
                                    select C).ToList();
 
             return cities;

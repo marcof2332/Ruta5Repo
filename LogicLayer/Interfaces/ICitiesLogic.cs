@@ -14,6 +14,6 @@ namespace LogicLayer.Interfaces
         void CAdd(Cities ct);
         void CModify(Cities ct);
         void CDelete(int ct);
-        List<Cities> CityListByState(int State);
+        List<Cities> CitesList();
     }
 }

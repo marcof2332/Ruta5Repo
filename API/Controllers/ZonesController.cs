@@ -94,12 +94,11 @@ namespace API.Controllers
             }
         }
         [HttpGet]
-        [Route("zlist")]
-        public IHttpActionResult zlist(int city)
+        public IHttpActionResult zlist()
         {
             try
             {
-                List<Zones> z = LogicFactory.GetZonesLogic().ZoneListbyCity(city);
+                List<Zones> z = LogicFactory.GetZonesLogic().ZoneList();
                 if (z != null)
                 {
                     /*// Configurar la configuración de serialización personalizada

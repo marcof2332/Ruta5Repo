@@ -14,6 +14,6 @@ namespace LogicLayer.Interfaces
         void ZAdd(Zones zo);
         void ZModify(Zones zo);
         void ZDelete(int id);
-        List<Zones> ZoneListbyCity(int city);
+        List<Zones> ZoneList();
     }
 }

@@ -102,15 +102,13 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<Zones> ZoneListbyCity(int City)
+        public List<Zones> ZoneList()
         {
             try
             {
                 List<Zones> zonesList = (from Z in DbContextSingleton.TransporteContext.Zones
-                                         where Z.City == City
                                          orderby Z.ZoneName descending
                                          select Z).ToList();
-
                 return zonesList;
             }
             catch (Exception ex)
