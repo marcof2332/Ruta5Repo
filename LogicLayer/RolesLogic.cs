@@ -97,7 +97,7 @@ namespace LogicLayer
         {
             try
             {
-                using (var dbContext = new TransporteEntities())
+                using (var dbContext = new TransportEntities())
                 {
                     return (DbContextSingleton.TransporteContext.Roles.ToList());
                 }

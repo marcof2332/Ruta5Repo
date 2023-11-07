@@ -11,16 +11,16 @@ namespace LogicLayer
     internal class DbContextSingleton
     {
         //Atributo de clase para guardar el contexto que maneja el EF
-        private static TransporteEntities _transporteEntities = null;
+        private static TransportEntities _transporteEntities = null;
 
         //Propiedad que me da acceso al contexto para trabajar 
-        public static TransporteEntities TransporteContext
+        public static TransportEntities TransporteContext
         {
             get
             {
                 if (_transporteEntities == null)
                 {
-                    _transporteEntities = new TransporteEntities();
+                    _transporteEntities = new TransportEntities();
                     _transporteEntities.Configuration.ProxyCreationEnabled = false; //para que no de problemas en la serializacion
                 }
                 return _transporteEntities;

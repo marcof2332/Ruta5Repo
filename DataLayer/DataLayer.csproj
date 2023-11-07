@@ -62,13 +62,13 @@
     <Compile Include="Customers.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="DropOffPackage.cs">
+    <Compile Include="DropOffPackages.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Employees.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="HomePickup.cs">
+    <Compile Include="HomePickups.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Licences.cs">
@@ -77,7 +77,7 @@
     <Compile Include="Packages.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="PackageType.cs">
+    <Compile Include="PackageTypes.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,7 +87,10 @@
     <Compile Include="Shippments.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="ShippmentStage.cs">
+    <Compile Include="ShippmentStages.cs">
+      <DependentUpon>Transporte.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShRoute.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Stages.cs">
@@ -115,7 +118,7 @@
     <Compile Include="Vehicles.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
-    <Compile Include="VehiclesCondition.cs">
+    <Compile Include="VehiclesConditions.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Zones.cs">
@@ -134,6 +137,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Transporte.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Transporte.edmx</DependentUpon>
@@ -144,9 +150,6 @@
       <DependentUpon>Transporte.edmx</DependentUpon>
       <LastGenOutput>Transporte.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

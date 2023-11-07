@@ -11,22 +11,22 @@ namespace LogicLayer.Interfaces
     public interface IShippmentLogic
     {
         #region DropOffPackageMethods
-        DropOffPackage DoPSearch(int code);
-        void DoPAdd(DropOffPackage DoP);
+        DropOffPackages DoPSearch(int code);
+        void DoPAdd(DropOffPackages DoP);
         void DoPDelete(int ID);
-        List<DropOffPackage> DoPList();
+        List<DropOffPackages> DoPList();
         #endregion
 
         #region HomePickupMethods
-        HomePickup HpSearch(int code);
-        void HpAdd(HomePickup Hp);
+        HomePickups HpSearch(int code);
+        void HpAdd(HomePickups Hp);
         void HpDelete(int ID);
-        List<HomePickup> HpList();
+        List<HomePickups> HpList();
         #endregion
 
         #region SharedMethods
         void PackageRemoval(int PackageId);
-        void ShippmentStageAdd(ShippmentStage ShS);
+        void ShippmentStageAdd(ShippmentStages ShS);
         #endregion
     }
 }

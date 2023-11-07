@@ -98,7 +98,7 @@ namespace LogicLayer
         {
             try
             {
-                using (var dbContext = new TransporteEntities()) //AGREGAR ESTO A LOS LISTAR!!!!!!!!!!!
+                using (var dbContext = new TransportEntities()) 
                 {
                     return (DbContextSingleton.TransporteContext.Licences.ToList());
                 }

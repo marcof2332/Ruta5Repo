@@ -22,11 +22,11 @@ namespace LogicLayer
         }
         #endregion
 
-        public PackageType PtSearch(int ID)
+        public PackageTypes PtSearch(int ID)
         {
-            return (DbContextSingleton.TransporteContext.PackageType.Where(pt => pt.IdPackageType == ID).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.PackageTypes.Where(pt => pt.IdPackageType == ID).FirstOrDefault());
         }
-        public void PtAdd(PackageType pt)
+        public void PtAdd(PackageTypes pt)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace LogicLayer
             }
             try
             {
-                DbContextSingleton.TransporteContext.PackageType.Add(pt);
+                DbContextSingleton.TransporteContext.PackageTypes.Add(pt);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
@@ -52,12 +52,12 @@ namespace LogicLayer
                     throw ex;
             }
         }
-        public void PtModify(PackageType pt)
+        public void PtModify(PackageTypes pt)
         {
-            PackageType modLi = null;
+            PackageTypes modLi = null;
             try
             {
-                modLi = DbContextSingleton.TransporteContext.PackageType.Where(p => p.IdPackageType == pt.IdPackageType).FirstOrDefault();
+                modLi = DbContextSingleton.TransporteContext.PackageTypes.Where(p => p.IdPackageType == pt.IdPackageType).FirstOrDefault();
                 modLi.Amount = pt.Amount;
                 modLi.MaxWeight = pt.MaxWeight;
                 modLi.MinWeight = pt.MinWeight;
@@ -74,7 +74,7 @@ namespace LogicLayer
         {
             try
             {
-                PackageType var = DbContextSingleton.TransporteContext.PackageType.Where(pt => pt.IdPackageType == ID).FirstOrDefault();
+                PackageTypes var = DbContextSingleton.TransporteContext.PackageTypes.Where(pt => pt.IdPackageType == ID).FirstOrDefault();
 
                 System.Data.SqlClient.SqlParameter _Id = new System.Data.SqlClient.SqlParameter("@ID", ID);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
@@ -95,9 +95,9 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<PackageType> PtList()
+        public List<PackageTypes> PtList()
         {
-            return (DbContextSingleton.TransporteContext.PackageType.ToList());
+            return (DbContextSingleton.TransporteContext.PackageTypes.ToList());
         }
     }
 }

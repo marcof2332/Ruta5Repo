@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using API.Validations;
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/stages")]
+    [TokenAuthorizationFilter(new string[] { "GER", "ENC" })]
     public class StagesController : ApiController
     {
         [HttpGet]

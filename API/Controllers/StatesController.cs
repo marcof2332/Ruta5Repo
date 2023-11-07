@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using API.Validations;
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/states")]
+    [TokenAuthorizationFilter(new string[] { "GER", "ENC" })]
     public class StatesController : ApiController
     {
         [HttpGet]

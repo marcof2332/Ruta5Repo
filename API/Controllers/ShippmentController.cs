@@ -30,7 +30,7 @@ namespace API.Controllers
         }
         [HttpPut]
         [Route("addstage")]
-        public IHttpActionResult addstage(ShippmentStage st)
+        public IHttpActionResult addstage(ShippmentStages st)
         {
             try
             {

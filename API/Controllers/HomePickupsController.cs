@@ -15,7 +15,7 @@ namespace API.Controllers
         {
             try
             {
-                 HomePickup hp = LogicFactory.GetShippmentLogic().HpSearch(id);
+                 HomePickups hp = LogicFactory.GetShippmentLogic().HpSearch(id);
                 if (hp != null)
                     return Ok(hp);
                 else
@@ -27,7 +27,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult add(HomePickup hp)
+        public IHttpActionResult add(HomePickups hp)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
         {
             try
             {
-                List<HomePickup> hp = LogicFactory.GetShippmentLogic().HpList();
+                List<HomePickups> hp = LogicFactory.GetShippmentLogic().HpList();
                 if (hp != null)
                     return Ok(hp);
                 else

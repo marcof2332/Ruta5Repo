@@ -22,11 +22,11 @@ namespace LogicLayer
         #endregion
 
         #region Methods
-        public VehiclesCondition VCSearch(int id)
+        public VehiclesConditions VCSearch(int id)
         {
-            return DbContextSingleton.TransporteContext.VehiclesCondition.Where(vc => vc.IdVC == id).FirstOrDefault();
+            return DbContextSingleton.TransporteContext.VehiclesConditions.Where(vc => vc.IdVC == id).FirstOrDefault();
         }
-        public void VCAdd(VehiclesCondition VC)
+        public void VCAdd(VehiclesConditions VC)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace LogicLayer
             }
             try
             {
-                DbContextSingleton.TransporteContext.VehiclesCondition.Add(VC);
+                DbContextSingleton.TransporteContext.VehiclesConditions.Add(VC);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
@@ -52,9 +52,9 @@ namespace LogicLayer
                     throw ex;
             }
         }
-        public void VCModify(VehiclesCondition VC)
+        public void VCModify(VehiclesConditions VC)
         {
-            VehiclesCondition modVC = null;
+            VehiclesConditions modVC = null;
             try
             {
                 modVC = VCSearch(VC.IdVC);
@@ -71,7 +71,7 @@ namespace LogicLayer
         {
             try
             {
-                VehiclesCondition var = DbContextSingleton.TransporteContext.VehiclesCondition.Where(vc => vc.IdVC == ID).FirstOrDefault();
+                VehiclesConditions var = DbContextSingleton.TransporteContext.VehiclesConditions.Where(vc => vc.IdVC == ID).FirstOrDefault();
 
                 System.Data.SqlClient.SqlParameter _usu = new System.Data.SqlClient.SqlParameter("@ID", ID);
                 System.Data.SqlClient.SqlParameter _return = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
@@ -92,9 +92,9 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<VehiclesCondition> VCList()
+        public List<VehiclesConditions> VCList()
         {
-            return (DbContextSingleton.TransporteContext.VehiclesCondition.ToList());
+            return (DbContextSingleton.TransporteContext.VehiclesConditions.ToList());
         }
         #endregion
     }

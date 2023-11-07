@@ -12,17 +12,9 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class ShippmentStage
+    public partial class VehiclesConditions
     {
-        public int IdShippment { get; set; }
-        public int IdSStage { get; set; }
-        public int EmpID { get; set; }
-        public System.DateTime DateTimeStage { get; set; }
-        public Nullable<int> Vehicle { get; set; }
-    
-        public virtual Employees Employees { get; set; }
-        public virtual Stages Stages { get; set; }
-        public virtual Vehicles Vehicles { get; set; }
-        public virtual Shippments Shippments { get; set; }
+        public int IdVC { get; set; }
+        public string CondName { get; set; }
     }
 }

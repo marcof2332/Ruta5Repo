@@ -18,7 +18,7 @@ namespace DataLayer
         public Shippments()
         {
             this.Packages = new HashSet<Packages>();
-            this.ShippmentStage = new HashSet<ShippmentStage>();
+            this.ShippmentStages = new HashSet<ShippmentStages>();
         }
     
         public int IdShippment { get; set; }
@@ -32,10 +32,12 @@ namespace DataLayer
         public decimal Longitude { get; set; }
     
         public virtual Customers Customers { get; set; }
+        public virtual DropOffPackages DropOffPackages { get; set; }
+        public virtual HomePickups HomePickups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Packages> Packages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShippmentStage> ShippmentStage { get; set; }
+        public virtual ICollection<ShippmentStages> ShippmentStages { get; set; }
         public virtual Zones Zones { get; set; }
     }
 }

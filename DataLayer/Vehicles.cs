@@ -19,9 +19,7 @@ namespace DataLayer
         public string vRegistration { get; set; }
         public string BrandModel { get; set; }
         public decimal VehicleWeight { get; set; }
-        public int Condition { get; set; }
         public bool Active { get; set; }
-    
-        public virtual VehiclesCondition VehiclesCondition { get; set; }
+        public int Condition { get; set; }
     }
 }

@@ -21,8 +21,9 @@ namespace API
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var corsAttr = new EnableCorsAttribute("http://localhost:4200", "*", "*");
-            config.EnableCors(corsAttr);
+            // Habilita CORS
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }

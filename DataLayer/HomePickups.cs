@@ -12,9 +12,16 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class VehiclesCondition
+    public partial class HomePickups
     {
-        public int IdVC { get; set; }
-        public string CondName { get; set; }
+        public int IdHomePickup { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public string Note { get; set; }
+        public string PickupAddress { get; set; }
+        public decimal Latitude { get; set; }
+        public decimal Longitude { get; set; }
+    
+        public virtual Shippments Shippments { get; set; }
     }
 }

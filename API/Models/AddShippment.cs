@@ -8,8 +8,8 @@ namespace API.Models
 {
     public class AddShippment
     {
-        public DropOffPackage DoP { get; set; }
-        public ShippmentStage ShStage { get; set; }
+        public DropOffPackages DoP { get; set; }
+        public ShippmentStages ShStage { get; set; }
 
         #region Shippment
         public int IdShippment { get; set; }

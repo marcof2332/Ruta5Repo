@@ -12,16 +12,17 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class HomePickup
+    public partial class ShRoute
     {
-        public int IdHomePickup { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
-        public string Note { get; set; }
-        public string PickupAddress { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public int IdRoute { get; set; }
+        public decimal OrigLatitude { get; set; }
+        public decimal OrigLongitude { get; set; }
+        public int IdShSt { get; set; }
+        public int IdShippment { get; set; }
+        public int IdSStage { get; set; }
+        public int EmpID { get; set; }
+        public Nullable<int> Vehicle { get; set; }
     
-        public virtual Shippments Shippments { get; set; }
+        public virtual ShippmentStages ShippmentStages { get; set; }
     }
 }

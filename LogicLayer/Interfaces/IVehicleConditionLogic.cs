@@ -5,10 +5,10 @@ namespace LogicLayer.Interfaces
 {
     public interface IVehicleConditionLogic
     {
-        VehiclesCondition VCSearch(int id);
-        void VCAdd(VehiclesCondition VC);
-        void VCModify(VehiclesCondition VC);
+        VehiclesConditions VCSearch(int id);
+        void VCAdd(VehiclesConditions VC);
+        void VCModify(VehiclesConditions VC);
         void VCDelete(int ID);
-        List<VehiclesCondition> VCList();
+        List<VehiclesConditions> VCList();
     }
 }

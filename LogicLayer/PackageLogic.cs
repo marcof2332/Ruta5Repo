@@ -39,7 +39,7 @@ namespace LogicLayer
                 Shippments shippment = DbContextSingleton.TransporteContext.Shippments.SingleOrDefault(s => s.IdShippment == p.Shippment);
                 if (shippment != null)
                 {
-                    bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStage.Any(s => s.IdShippment == shippment.IdShippment && s.IdSStage == 3);
+                    bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStages.Any(s => s.IdShippment == shippment.IdShippment && s.IdSStage == 3);
                     if (ShippmentAssigned == false)
                     {
                         DbContextSingleton.TransporteContext.Packages.Add(p);

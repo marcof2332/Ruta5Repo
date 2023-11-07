@@ -18,8 +18,5 @@ namespace DataLayer
         public int Shippment { get; set; }
         public int PType { get; set; }
         public int NOfPackages { get; set; }
-    
-        public virtual PackageType PackageType { get; set; }
-        public virtual Shippments Shippments { get; set; }
     }
 }

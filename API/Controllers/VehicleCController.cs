@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
-
+using API.Validations;
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/vehiclec")]
+    [TokenAuthorizationFilter(new string[] { "GER", "ENC", "ADM" })]
     public class VehicleCController : ApiController
     {
         [HttpGet]
@@ -15,7 +16,7 @@ namespace API.Controllers
         {
             try
             {
-                VehiclesCondition vc = LogicFactory.GetVehicleConditionLogic().VCSearch(id);
+                VehiclesConditions vc = LogicFactory.GetVehicleConditionLogic().VCSearch(id);
                 if (vc != null)
                     return Ok(vc);
                 else
@@ -27,7 +28,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult add(VehiclesCondition vc)
+        public IHttpActionResult add(VehiclesConditions vc)
         {
             try
             {
@@ -40,11 +41,11 @@ namespace API.Controllers
             }
         }
         [HttpPut]
-        public IHttpActionResult modify(VehiclesCondition vc)
+        public IHttpActionResult modify(VehiclesConditions vc)
         {
             try
             {
-                VehiclesCondition vCheck = LogicFactory.GetVehicleConditionLogic().VCSearch(vc.IdVC);
+                VehiclesConditions vCheck = LogicFactory.GetVehicleConditionLogic().VCSearch(vc.IdVC);
                 if (vCheck == null)
                     return NotFound();
             }
@@ -80,7 +81,7 @@ namespace API.Controllers
         {
             try
             {
-                List<VehiclesCondition> vc = LogicFactory.GetVehicleConditionLogic().VCList();
+                List<VehiclesConditions> vc = LogicFactory.GetVehicleConditionLogic().VCList();
                 if (vc != null)
                     return Ok(vc);
                 else

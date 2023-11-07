@@ -15,7 +15,7 @@ namespace API.Controllers
         {
             try
             {
-                DropOffPackage dpCheck = LogicFactory.GetShippmentLogic().DoPSearch(id);
+                DropOffPackages dpCheck = LogicFactory.GetShippmentLogic().DoPSearch(id);
                 if (dpCheck != null)
                     return Ok(dpCheck);
                 else
@@ -27,7 +27,7 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult add(DropOffPackage dp)
+        public IHttpActionResult add(DropOffPackages dp)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
         {
             try
             {
-                List<DropOffPackage> dp = LogicFactory.GetShippmentLogic().DoPList();
+                List<DropOffPackages> dp = LogicFactory.GetShippmentLogic().DoPList();
                 if (dp != null)
                     return Ok(dp);
                 else

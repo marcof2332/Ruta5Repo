@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-
+using API.Models;
+using API.Validations;
 using DataLayer;
 using LogicLayer;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace API.Controllers
 {
@@ -55,12 +51,23 @@ namespace API.Controllers
             }
         }
         [HttpPost]
-        public IHttpActionResult add (Zones zo)
+        [ParseZoneShape]
+        public IHttpActionResult add (AddZone zo)
         {
             try
             {
-                LogicFactory.GetZonesLogic().ZAdd(zo);
-                return Ok();
+                Zones newZone = new Zones();
+                if (zo != null)
+                {
+                    newZone.City = zo.City;
+                    newZone.ZoneName = zo.ZoneName;
+                    newZone.ZoneShape = zo.polygon;
+
+                    LogicFactory.GetZonesLogic().ZAdd(newZone);
+                    return Ok();
+                }
+                else
+                    return BadRequest("Ocurrio un error al intentar agregar la Zona.");
             }
             catch (Exception ex)
             {

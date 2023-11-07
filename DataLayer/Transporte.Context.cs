@@ -12,13 +12,11 @@ namespace DataLayer
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class TransporteEntities : DbContext
+    public partial class TransportEntities : DbContext
     {
-        public TransporteEntities()
-            : base("name=TransporteEntities")
+        public TransportEntities()
+            : base("name=TransportEntities")
         {
         }
     
@@ -27,148 +25,23 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BranchOffices> BranchOffices { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<DropOffPackages> DropOffPackages { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<HomePickup> HomePickup { get; set; }
+        public virtual DbSet<HomePickups> HomePickups { get; set; }
+        public virtual DbSet<Licences> Licences { get; set; }
         public virtual DbSet<Packages> Packages { get; set; }
-        public virtual DbSet<PackageType> PackageType { get; set; }
+        public virtual DbSet<PackageTypes> PackageTypes { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<ShippmentStage> ShippmentStage { get; set; }
+        public virtual DbSet<Shippments> Shippments { get; set; }
+        public virtual DbSet<ShippmentStages> ShippmentStages { get; set; }
+        public virtual DbSet<ShRoute> ShRoute { get; set; }
         public virtual DbSet<Stages> Stages { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<Vehicles> Vehicles { get; set; }
-        public virtual DbSet<VehiclesCondition> VehiclesCondition { get; set; }
+        public virtual DbSet<VehiclesConditions> VehiclesConditions { get; set; }
         public virtual DbSet<Zones> Zones { get; set; }
-        public virtual DbSet<BranchOffices> BranchOffices { get; set; }
-        public virtual DbSet<DropOffPackage> DropOffPackage { get; set; }
-        public virtual DbSet<Shippments> Shippments { get; set; }
-        public virtual DbSet<Licences> Licences { get; set; }
-    
-        public virtual int DeleteEmployee(Nullable<int> empID, ObjectParameter ret)
-        {
-            var empIDParameter = empID.HasValue ?
-                new ObjectParameter("empID", empID) :
-                new ObjectParameter("empID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteEmployee", empIDParameter, ret);
-        }
-    
-        public virtual int DeleteLicense(string cat, ObjectParameter ret)
-        {
-            var catParameter = cat != null ?
-                new ObjectParameter("Cat", cat) :
-                new ObjectParameter("Cat", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteLicense", catParameter, ret);
-        }
-    
-        public virtual int DeleteRole(string code, ObjectParameter ret)
-        {
-            var codeParameter = code != null ?
-                new ObjectParameter("Code", code) :
-                new ObjectParameter("Code", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteRole", codeParameter, ret);
-        }
-    
-        public virtual int DeleteState(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteState", iDParameter, ret);
-        }
-    
-        public virtual int DeleteCity(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteCity", iDParameter, ret);
-        }
-    
-        public virtual int DeleteZone(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteZone", iDParameter, ret);
-        }
-    
-        public virtual int DeleteOffice(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteOffice", iDParameter, ret);
-        }
-    
-        public virtual int DeleteHp(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteHp", iDParameter, ret);
-        }
-    
-        public virtual int DeletePoD(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePoD", iDParameter, ret);
-        }
-    
-        public virtual int DeletePt(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeletePt", iDParameter, ret);
-        }
-    
-        public virtual int DeleteSStage(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteSStage", iDParameter, ret);
-        }
-    
-        public virtual int DeleteVCondition(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteVCondition", iDParameter, ret);
-        }
-    
-        public virtual int DeleteVehicle(Nullable<int> iD, ObjectParameter ret)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteVehicle", iDParameter, ret);
-        }
-    
-        public virtual int DeleteLicence(string cat, ObjectParameter ret)
-        {
-            var catParameter = cat != null ?
-                new ObjectParameter("Cat", cat) :
-                new ObjectParameter("Cat", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DeleteLicence", catParameter, ret);
-        }
     }
 }

@@ -31,7 +31,7 @@ namespace LogicLayer
         }
         public Employees ESearch(int id)
         {
-            using (var dbContext = new TransporteEntities())
+            using (var dbContext = new TransportEntities())
             {
                 return DbContextSingleton.TransporteContext.Employees.Where(u => u.ID == id && u.Active == true).FirstOrDefault();
             }
@@ -130,7 +130,7 @@ namespace LogicLayer
         {
             try
             {
-                using (var dbContext = new TransporteEntities())
+                using (var dbContext = new TransportEntities())
                 {
                     return DbContextSingleton.TransporteContext.Employees.Where(u => u.Active == true).ToList();
                 }

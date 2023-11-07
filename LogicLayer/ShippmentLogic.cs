@@ -23,11 +23,11 @@ namespace LogicLayer
         #endregion
 
         #region DropOffPackageMethods
-        public DropOffPackage DoPSearch(int code)
+        public DropOffPackages DoPSearch(int code)
         {
-            return (DbContextSingleton.TransporteContext.DropOffPackage.Where(dr => dr.IdDropOff == code).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.DropOffPackages.Where(dr => dr.IdDropOff == code).FirstOrDefault());
         }
-        public void DoPAdd(DropOffPackage DoP)
+        public void DoPAdd(DropOffPackages DoP)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace LogicLayer
             try
             {
                 DoP.Shippments = DbContextSingleton.TransporteContext.Shippments.Add(DoP.Shippments);
-                DbContextSingleton.TransporteContext.DropOffPackage.Add(DoP); //Posible error
+                DbContextSingleton.TransporteContext.DropOffPackages.Add(DoP); //Posible error
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
@@ -79,18 +79,18 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<DropOffPackage> DoPList()
+        public List<DropOffPackages> DoPList()
         {
-            return (DbContextSingleton.TransporteContext.DropOffPackage.ToList());
+            return (DbContextSingleton.TransporteContext.DropOffPackages.ToList());
         }
         #endregion
 
         #region HomePickupMethods
-        public HomePickup HpSearch(int code)
+        public HomePickups HpSearch(int code)
         {
-            return (DbContextSingleton.TransporteContext.HomePickup.Where(hp => hp.IdHomePickup == code).FirstOrDefault());
+            return (DbContextSingleton.TransporteContext.HomePickups.Where(hp => hp.IdHomePickup == code).FirstOrDefault());
         }
-        public void HpAdd(HomePickup Hp)
+        public void HpAdd(HomePickups Hp)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace LogicLayer
             try
             {
                 Hp.Shippments = DbContextSingleton.TransporteContext.Shippments.Add(Hp.Shippments);
-                DbContextSingleton.TransporteContext.HomePickup.Add(Hp); //Posible error
+                DbContextSingleton.TransporteContext.HomePickups.Add(Hp); //Posible error
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
             catch (Exception ex)
@@ -142,16 +142,16 @@ namespace LogicLayer
                 throw ex;
             }
         }
-        public List<HomePickup> HpList()
+        public List<HomePickups> HpList()
         {
-            return (DbContextSingleton.TransporteContext.HomePickup.ToList());
+            return (DbContextSingleton.TransporteContext.HomePickups.ToList());
         }
         #endregion
 
         #region SharedMethods
         public void PackageRemoval(int PackageId)
         {
-            DropOffPackage modDoP = null;
+            DropOffPackages modDoP = null;
             try
             {
                 Shippments shippment = DbContextSingleton.TransporteContext.Shippments.SingleOrDefault(s => s.IdShippment == modDoP.Shippments.IdShippment);
@@ -163,7 +163,7 @@ namespace LogicLayer
 
                     if (packageToRemove != null)
                     {
-                        bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStage.Any(s => s.IdShippment == shippment.IdShippment && s.IdSStage == 3);
+                        bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStages.Any(s => s.IdShippment == shippment.IdShippment && s.IdSStage == 3);
                         if (ShippmentAssigned == false)
                         {
                             shippment.Packages.Remove(packageToRemove); // Remueve el paquete de la lista
@@ -184,7 +184,7 @@ namespace LogicLayer
                 throw new Exception(ex.Message);
             }
         }
-        public void ShippmentStageAdd(ShippmentStage ShS)
+        public void ShippmentStageAdd(ShippmentStages ShS)
         {
             try
             {
@@ -201,7 +201,7 @@ namespace LogicLayer
 
                 if (ShippmentExists == true && EmployeeExists == true)
                 {
-                    DbContextSingleton.TransporteContext.ShippmentStage.Add(ShS);
+                    DbContextSingleton.TransporteContext.ShippmentStages.Add(ShS);
                     DbContextSingleton.TransporteContext.SaveChanges();
                 }
                 else

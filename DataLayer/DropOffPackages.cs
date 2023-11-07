@@ -12,7 +12,7 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class DropOffPackage
+    public partial class DropOffPackages
     {
         public int IdDropOff { get; set; }
         public int BranchOffice { get; set; }

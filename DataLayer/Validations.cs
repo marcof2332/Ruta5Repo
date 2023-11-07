@@ -77,6 +77,8 @@ namespace DataLayer
                 throw new Exception("Debe ingresar datos validos.");
             if (zn.ZoneName.Trim().Length < 3)
                 throw new Exception("Debe ingresar un nombre valido, debe contener al menos 3 caracteres.");
+            if (zn.ZoneShape.Length < 3)
+                throw new Exception("Una zona debe contar con al menos 3 puntos que la delimiten.");
         }
         public static void BranchOValidation(BranchOffices bo)
         {
@@ -94,7 +96,7 @@ namespace DataLayer
             if (!PhonePattern.IsMatch(bo.Phone))
                 throw new Exception("Debe ingresar un numero de telefono valido, debe contener 8 numeros.");
         }
-        public static void VConditionValidation(VehiclesCondition ve)
+        public static void VConditionValidation(VehiclesConditions ve)
         {
             if (ve == null)
                 throw new Exception("Debe ingresar datos validos.");
@@ -118,7 +120,7 @@ namespace DataLayer
             if (v.VehicleWeight < 0)
                 throw new Exception("Debe ingresar una capacidad valida.");
         }
-        public static void PackageTValidation(PackageType pt)
+        public static void PackageTValidation(PackageTypes pt)
         {
             if (pt == null)
                 throw new Exception("Debe ingresar datos validos.");
@@ -147,7 +149,7 @@ namespace DataLayer
             if (!celPattern.IsMatch(cu.Celphone))
                 throw new Exception("Debe ingresar un numero de celular valido, debe contener 9 numeros.");
         }
-        public static void DropOffValidation(DropOffPackage dop)
+        public static void DropOffValidation(DropOffPackages dop)
         {
             //Patterns
             Regex celPattern = new Regex(@"^\d{9}$");
@@ -165,7 +167,7 @@ namespace DataLayer
             if (!(dop.Shippments.Longitude >= -180 && dop.Shippments.Longitude <= 180))
                 throw new Exception("La longitud ingresada no es valida.");
         }
-        public static void HomePickupValidation(HomePickup hpu)
+        public static void HomePickupValidation(HomePickups hpu)
         {
             //Patterns
             Regex celPattern = new Regex(@"^\d{9}$");
@@ -206,7 +208,7 @@ namespace DataLayer
             if (stg.StageDescription.Trim().Length < 2)
                 throw new Exception("Debe ingresar un nombre valido, conteniendo al menos 2 caracteres.");
         }
-        public static void ShStageValidation(ShippmentStage sstg)
+        public static void ShStageValidation(ShippmentStages sstg)
         {
             if (sstg == null)
                 throw new Exception("Debe ingresar datos validos.");

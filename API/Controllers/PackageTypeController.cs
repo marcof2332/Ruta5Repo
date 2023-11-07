@@ -4,12 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using API.Validations;
 using DataLayer;
 using LogicLayer;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/packagetype")]
+    [TokenAuthorizationFilter(new string[] { "GER", "ENC" })]
     public class PackageTypeController : ApiController
     {
         [HttpGet]
@@ -17,7 +19,7 @@ namespace API.Controllers
         {
             try
             {
-                PackageType pt = LogicFactory.GetPackageTypeLogic().PtSearch(id);
+                PackageTypes pt = LogicFactory.GetPackageTypeLogic().PtSearch(id);
                 if (pt != null)
                     return Ok(pt);
                 else
@@ -31,7 +33,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult add(PackageType PT)
+        public IHttpActionResult add(PackageTypes PT)
         {
             try
             {
@@ -45,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpPut]
-        public IHttpActionResult modify(PackageType PT)
+        public IHttpActionResult modify(PackageTypes PT)
         {
             try
             {
@@ -77,7 +79,7 @@ namespace API.Controllers
         {
             try
             {
-                List<PackageType> pt = LogicFactory.GetPackageTypeLogic().PtList();
+                List<PackageTypes> pt = LogicFactory.GetPackageTypeLogic().PtList();
                 if (pt != null)
                     return Ok(pt);
                 else
