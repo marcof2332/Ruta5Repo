@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Http;
 
+using API.Models;
+using API.Validations;
 using DataLayer;
 using LogicLayer;
 
@@ -28,11 +30,20 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult add (BranchOffices B)
+        [ParseMarkerAttribute]
+        public IHttpActionResult add (addOffice B)
         {
             try
             {
-                LogicFactory.GetBranchLogic().OAdd(B);
+                BranchOffices newOffice = new BranchOffices();
+                newOffice.BranchZone = B.BranchZone;
+                newOffice.BranchAddress = B.BranchAddress;
+                newOffice.OpTime = B.OpTime;
+                newOffice.CloseTime = B.CloseTime;
+                newOffice.Phone = B.Phone;
+                newOffice.MarkerLocation = B.marker;
+                newOffice.Active = true;
+                LogicFactory.GetBranchLogic().OAdd(newOffice);
                 return Ok();
             }
             catch (Exception ex)
@@ -70,12 +81,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Route("olist")]
-        public IHttpActionResult olist (int id)
+        public IHttpActionResult olist ()
         {
             try
             {
-                List<BranchOffices> b = LogicFactory.GetBranchLogic().OfficeListByZone(id);
+                List<BranchOffices> b = LogicFactory.GetBranchLogic().OfficeList();
                 if (b != null)
                     return Ok(b);
                 else

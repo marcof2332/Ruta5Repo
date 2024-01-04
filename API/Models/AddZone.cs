@@ -13,5 +13,5 @@ namespace API.Models
         public string WellKnownValue { get; set; }
         public int CoordinateSystemId { get; set; }
         public System.Data.Entity.Spatial.DbGeography polygon { get; set; }
-}
+    }
 }

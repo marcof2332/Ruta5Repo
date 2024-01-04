@@ -14,6 +14,6 @@ namespace LogicLayer.Interfaces
         void OAdd(BranchOffices br);
         void OModify(BranchOffices br);
         void ODelete(int br);
-        List<BranchOffices> OfficeListByZone(int Zone);
+        List<BranchOffices> OfficeList();
     }
 }

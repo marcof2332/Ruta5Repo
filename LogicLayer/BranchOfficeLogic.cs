@@ -37,7 +37,6 @@ namespace LogicLayer
             }
             try
             {
-                br.Active = true;
                 DbContextSingleton.TransporteContext.BranchOffices.Add(br);
                 DbContextSingleton.TransporteContext.SaveChanges();
             }
@@ -58,8 +57,8 @@ namespace LogicLayer
                 modBr = DbContextSingleton.TransporteContext.BranchOffices.Where(b => b.IdOffice == br.IdOffice && b.Active == true).FirstOrDefault(); ;
                 if (modBr != null)
                 {
-                    modBr.Latitude = br.Latitude;
-                    modBr.Longitude = br.Longitude;
+                    /*modBr.Latitude = br.Latitude;
+                    modBr.Longitude = br.Longitude;*/
                     modBr.BranchZone = br.BranchZone;
                     modBr.Phone = br.Phone;
                     modBr.OpTime = br.OpTime;
@@ -78,8 +77,6 @@ namespace LogicLayer
         {
             try
             {
-                BranchOffices var = DbContextSingleton.TransporteContext.BranchOffices.Where(bo => bo.IdOffice == br).FirstOrDefault();
-
                 System.Data.SqlClient.SqlParameter _id = new System.Data.SqlClient.SqlParameter("@ID", br);
                 System.Data.SqlClient.SqlParameter _ret = new System.Data.SqlClient.SqlParameter("@ret", System.Data.SqlDbType.Int);
                 _ret.Direction = System.Data.ParameterDirection.Output;
@@ -89,19 +86,18 @@ namespace LogicLayer
                     throw new Exception("No se encontro la oficina, por favor intente nuevamente.");
                 else if ((int)_ret.Value == -2)
                     throw new Exception("Ocurrio un error interno al realizar la baja, por favor intente nuevamente mas tarde.");
-                else
-                    DbContextSingleton.TransporteContext.Entry(var).State = System.Data.Entity.EntityState.Detached;
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public List<BranchOffices> OfficeListByZone(int Zone)
+        public List<BranchOffices> OfficeList()
         {
             List<BranchOffices> Offices = (from B in DbContextSingleton.TransporteContext.BranchOffices
-                                   where B.BranchZone == Zone
-                                   select B).ToList();
+                                           where B.Active == true
+                                           select B).ToList();
 
             return Offices;
         }

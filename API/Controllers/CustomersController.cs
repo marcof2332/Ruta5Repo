@@ -11,7 +11,7 @@ namespace API.Controllers
     [TokenAuthorizationFilter(new string[] { "GER", "ENC", "ADM" })]
     public class CustomersController : ApiController
     {
-        [HttpGet]
+        /*[HttpGet]
         public IHttpActionResult find (int id)
         {
             try
@@ -26,7 +26,7 @@ namespace API.Controllers
             {
                 return BadRequest("Ocurrió un error al buscar el usuario.");
             }
-        }
+        }*/
         [HttpPost]
         public IHttpActionResult add(Customers c)
         {

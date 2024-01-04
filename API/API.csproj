@@ -246,10 +246,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\addOffice.cs" />
     <Compile Include="Models\AddShippment.cs" />
     <Compile Include="Models\AddZone.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validations\ParseMarkerAttribute.cs" />
     <Compile Include="Validations\ParseZoneShapeAttribute.cs" />
     <Compile Include="Validations\TokenAuthorizationFilter.cs" />
     <Compile Include="Validations\TokenValidations.cs" />

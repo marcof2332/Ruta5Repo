@@ -4,7 +4,7 @@ using API.Models;
 
 namespace API.Validations
 {
-    public class ParseZoneShapeAttribute : System.Web.Http.Filters.ActionFilterAttribute
+    public class ParseMarkerAttribute : System.Web.Http.Filters.ActionFilterAttribute
     {
         public void OnActionExecuted(HttpActionExecutedContext context)//ActionExecutedContext context)
         {
@@ -12,13 +12,13 @@ namespace API.Validations
         }
         public override void OnActionExecuting(HttpActionContext context)
         {
-            if (context.ActionArguments.ContainsKey("zo"))
+            if (context.ActionArguments.ContainsKey("B"))
             {
-                var zo = context.ActionArguments["zo"] as AddZone;
-                if (zo != null)
+                var B = context.ActionArguments["B"] as addOffice;
+                if (B != null)
                 {
                     // Realiza el análisis y conversión aquí
-                    zo.polygon = ParseZoneShape(zo.WellKnownValue);
+                    B.marker = ParseZoneShape(B.WellKnownValue);
                 }
             }
 
@@ -30,7 +30,7 @@ namespace API.Validations
             // Realiza la conversión o análisis necesario aquí
             // Por ejemplo, puedes analizar una cadena WKT y crear una instancia de DbGeography
             // o realizar cualquier otro procesamiento requerido.
-            // Asegúrate de establecer el sistema de coordenadas (SRID) correcto.
+            // Establecer el sistema de coordenadas (SRID) correcto.
 
             var wkt = zoneShape;
             var srid = 4326;

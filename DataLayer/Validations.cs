@@ -89,10 +89,8 @@ namespace DataLayer
                 throw new Exception("Debe ingresar datos validos.");
             if (bo.BranchAddress.Trim().Length < 3 || bo.BranchAddress.Trim().Length > 50)
                 throw new Exception("Debe ingresar una direccion valida, entre 3 y 50 caracteres.");
-            if (!(bo.Latitude >= -90 && bo.Latitude <= 90))
-                throw new Exception("La latitud ingresada no es valida.");
-            if (!(bo.Longitude >= -180 && bo.Longitude <= 180))
-                throw new Exception("La longitud ingresada no es valida.");
+            /*if (!(bo.MarkerLocation != null))
+                throw new Exception("Debe ingresar un marcador.");*/
             if (!PhonePattern.IsMatch(bo.Phone))
                 throw new Exception("Debe ingresar un numero de telefono valido, debe contener 8 numeros.");
         }

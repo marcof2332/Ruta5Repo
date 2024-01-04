@@ -538,8 +538,6 @@
           <Property Name="OpTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="CloseTime" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Zones" Relationship="Self.FK__BranchOff__Branc__5165187F" FromRole="BranchOffices" ToRole="Zones" />
-          <NavigationProperty Name="DropOffPackages" Relationship="Self.FK__DropOffPa__Branc__6C190EBB" FromRole="BranchOffices" ToRole="DropOffPackages" />
           <Property Name="MarkerLocation" Type="Geography" Nullable="false" />
         </EntityType>
         <EntityType Name="Cities">
@@ -561,7 +559,6 @@
           <Property Name="Celphone" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ClientZone" Type="Int32" />
           <Property Name="CliAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Shippments" Relationship="Self.FK__Shippment__Sende__66603565" FromRole="Customers" ToRole="Shippments" />
         </EntityType>
         <EntityType Name="DropOffPackages">
           <Key>
@@ -733,7 +730,6 @@
           <Property Name="ZoneName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BranchOffices" Relationship="Self.FK__BranchOff__Branc__5165187F" FromRole="Zones" ToRole="BranchOffices" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK__Customers__Clien__6383C8BA" FromRole="Zones" ToRole="Customers" />
           <Property Name="ZoneShape" Type="Geography" Nullable="false" />
         </EntityType>
         <Association Name="FK__BranchOff__Branc__5165187F">

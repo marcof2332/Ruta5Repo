@@ -14,12 +14,6 @@ namespace DataLayer
     
     public partial class BranchOffices
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BranchOffices()
-        {
-            this.DropOffPackages = new HashSet<DropOffPackages>();
-        }
-    
         public int IdOffice { get; set; }
         public int BranchZone { get; set; }
         public string BranchAddress { get; set; }
@@ -28,9 +22,5 @@ namespace DataLayer
         public System.TimeSpan CloseTime { get; set; }
         public bool Active { get; set; }
         public System.Data.Entity.Spatial.DbGeography MarkerLocation { get; set; }
-    
-        public virtual Zones Zones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DropOffPackages> DropOffPackages { get; set; }
     }
 }

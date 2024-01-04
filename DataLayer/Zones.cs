@@ -18,7 +18,6 @@ namespace DataLayer
         public Zones()
         {
             this.BranchOffices = new HashSet<BranchOffices>();
-            this.Customers = new HashSet<Customers>();
         }
     
         public int IdZone { get; set; }
@@ -28,7 +27,5 @@ namespace DataLayer
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BranchOffices> BranchOffices { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customers> Customers { get; set; }
     }
 }
