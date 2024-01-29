@@ -18,14 +18,18 @@ namespace DataLayer
         public Zones()
         {
             this.BranchOffices = new HashSet<BranchOffices>();
+            this.HomePickups = new HashSet<HomePickups>();
         }
     
         public int IdZone { get; set; }
         public string ZoneName { get; set; }
-        public int City { get; set; }
         public System.Data.Entity.Spatial.DbGeography ZoneShape { get; set; }
+        public int City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BranchOffices> BranchOffices { get; set; }
+        public virtual Cities Cities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HomePickups> HomePickups { get; set; }
     }
 }

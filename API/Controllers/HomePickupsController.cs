@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Web.Http;
 using DataLayer;
 using LogicLayer;
@@ -31,8 +32,9 @@ namespace API.Controllers
         {
             try
             {
-                LogicFactory.GetShippmentLogic().HpAdd(hp);
-                return Ok();
+                var response = LogicFactory.GetShippmentLogic().HpAdd(hp);
+
+                return Ok(response);
             }
             catch (Exception ex)
             {

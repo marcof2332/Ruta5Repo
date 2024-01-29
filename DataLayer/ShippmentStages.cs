@@ -14,24 +14,18 @@ namespace DataLayer
     
     public partial class ShippmentStages
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ShippmentStages()
-        {
-            this.ShRoute = new HashSet<ShRoute>();
-        }
-    
         public int IdShSt { get; set; }
-        public int IdShippment { get; set; }
-        public int IdSStage { get; set; }
-        public int EmpID { get; set; }
+        public int ShippmentID { get; set; }
+        public int StageID { get; set; }
+        public int EmployeeID { get; set; }
         public System.DateTime DateTimeStage { get; set; }
-        public int Vehicle { get; set; }
+        public Nullable<int> RouteShapeID { get; set; }
+        public Nullable<int> VehicleID { get; set; }
     
         public virtual Employees Employees { get; set; }
         public virtual Shippments Shippments { get; set; }
+        public virtual ShRoute ShRoute { get; set; }
         public virtual Stages Stages { get; set; }
         public virtual Vehicles Vehicles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShRoute> ShRoute { get; set; }
     }
 }

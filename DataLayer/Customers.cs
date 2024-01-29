@@ -14,11 +14,23 @@ namespace DataLayer
     
     public partial class Customers
     {
-        public long DocRut { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Customers()
+        {
+            this.Shippments = new HashSet<Shippments>();
+            this.Shippments1 = new HashSet<Shippments>();
+        }
+    
+        public string DocRut { get; set; }
         public string CustomerName { get; set; }
         public string CLastName { get; set; }
         public string Celphone { get; set; }
         public Nullable<int> ClientZone { get; set; }
         public string CliAddress { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shippments> Shippments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Shippments> Shippments1 { get; set; }
     }
 }

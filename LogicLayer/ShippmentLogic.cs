@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,7 +91,7 @@ namespace LogicLayer
         {
             return (DbContextSingleton.TransporteContext.HomePickups.Where(hp => hp.IdHomePickup == code).FirstOrDefault());
         }
-        public void HpAdd(HomePickups Hp)
+        public int HpAdd(HomePickups Hp)
         {
             try
             {
@@ -102,9 +103,18 @@ namespace LogicLayer
             }
             try
             {
-                Hp.Shippments = DbContextSingleton.TransporteContext.Shippments.Add(Hp.Shippments);
-                DbContextSingleton.TransporteContext.HomePickups.Add(Hp); //Posible error
+                Hp.PickUpLocation = DbGeography.FromText($"POINT({Hp.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)} {Hp.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)})", 4326);
+                Hp.Shippments.TargetLocation = DbGeography.FromText($"POINT({Hp.Shippments.Longitude.ToString(System.Globalization.CultureInfo.InvariantCulture)} {Hp.Shippments.Latitude.ToString(System.Globalization.CultureInfo.InvariantCulture)})", 4326);
+
+                DbContextSingleton.TransporteContext.Shippments.Add(Hp.Shippments);
                 DbContextSingleton.TransporteContext.SaveChanges();
+
+                Hp.ShippmentId = Hp.Shippments.IdShippment;
+                
+                DbContextSingleton.TransporteContext.HomePickups.Add(Hp);
+                DbContextSingleton.TransporteContext.SaveChanges();
+
+                return Hp.Shippments.IdShippment;
             }
             catch (Exception ex)
             {
@@ -163,7 +173,7 @@ namespace LogicLayer
 
                     if (packageToRemove != null)
                     {
-                        bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStages.Any(s => s.IdShippment == shippment.IdShippment && s.IdSStage == 3);
+                        bool ShippmentAssigned = DbContextSingleton.TransporteContext.ShippmentStages.Any(s => s.IdShSt == shippment.IdShippment && s.ShippmentID == 3);
                         if (ShippmentAssigned == false)
                         {
                             shippment.Packages.Remove(packageToRemove); // Remueve el paquete de la lista
@@ -196,8 +206,8 @@ namespace LogicLayer
             }
             try
             {
-                bool ShippmentExists = DbContextSingleton.TransporteContext.Shippments.Any(s => s.IdShippment == ShS.IdShippment);
-                bool EmployeeExists = DbContextSingleton.TransporteContext.Employees.Any(e => e.ID == ShS.EmpID && e.Active);
+                bool ShippmentExists = DbContextSingleton.TransporteContext.Shippments.Any(s => s.IdShippment == ShS.ShippmentID);
+                bool EmployeeExists = DbContextSingleton.TransporteContext.Employees.Any(e => e.ID == ShS.EmployeeID && e.Active);
 
                 if (ShippmentExists == true && EmployeeExists == true)
                 {

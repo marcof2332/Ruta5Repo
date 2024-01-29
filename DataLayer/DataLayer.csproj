@@ -93,10 +93,19 @@
     <Compile Include="ShRoute.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Transporte.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>Transporte.tt</DependentUpon>
+    </Compile>
     <Compile Include="Stages.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="States.cs">
+      <DependentUpon>Transporte.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>Transporte.tt</DependentUpon>
     </Compile>
     <Compile Include="Transporte.Context.cs">

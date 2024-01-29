@@ -9,6 +9,7 @@ using LogicLayer;
 namespace API.Controllers
 {
     [RoutePrefix("api/zones")]
+    [TokenAuthorizationFilter(new string[] { "GER", "ENC" })]
     public class ZonesController : ApiController
     {
         [HttpGet]

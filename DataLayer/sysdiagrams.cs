@@ -12,14 +12,12 @@ namespace DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Packages
+    public partial class sysdiagrams
     {
-        public int IdPackage { get; set; }
-        public int Shippment { get; set; }
-        public int PType { get; set; }
-        public int NOfPackages { get; set; }
-    
-        public virtual PackageTypes PackageTypes { get; set; }
-        public virtual Shippments Shippments { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

@@ -4,45 +4,45 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8d8a90847214b558f6004a5d2216fb9" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="TransporteModel.BranchOffices" Width="1.5" PointX="4.875" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Cities" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Customers" Width="1.5" PointX="6.625" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.DropOffPackages" Width="1.5" PointX="11" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Employees" Width="1.5" PointX="7.625" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.HomePickups" Width="1.5" PointX="13" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Licences" Width="1.5" PointX="10.125" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Packages" Width="1.5" PointX="15.5" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.PackageTypes" Width="1.5" PointX="18.625" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Roles" Width="1.5" PointX="4.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Shippments" Width="1.5" PointX="9.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.ShippmentStages" Width="1.5" PointX="13.875" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.ShRoute" Width="1.5" PointX="19.125" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Stages" Width="1.5" PointX="13.75" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.States" Width="1.5" PointX="0.5" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Vehicles" Width="1.5" PointX="16.875" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.VehiclesConditions" Width="1.5" PointX="19.5" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TransporteModel.Zones" Width="1.5" PointX="5" PointY="7.875" IsExpanded="true" />
-        <AssociationConnector Association="TransporteModel.FK__BranchOff__Branc__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__DropOffPa__Branc__6C190EBB" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="TransporteModel.FK__Cities__CityStat__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Zones__City__4E88ABD4" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Customers__Clien__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__Sende__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__DropOffPa__IdDro__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Employees__EmpRo__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Employees__Licen__46E78A0C" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__EmpID__797309D9" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__HomePicku__IdHom__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Packages__PType__72C60C4A" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Packages__Shippm__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__IdShi__778AC167" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__Targe__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__IdSSt__787EE5A0" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Shippment__Vehic__7A672E12" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__ShRoute__7D439ABD" ManuallyRouted="false" />
-        <AssociationConnector Association="TransporteModel.FK__Vehicles__Condit__5BE2A6F2" ManuallyRouted="false" />
+      <Diagram DiagramId="c8d8a90847214b558f6004a5d2216fb9" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="TransporteModel.BranchOffices" Width="1.5" PointX="3" PointY="12.5" />
+        <EntityTypeShape EntityType="TransporteModel.Cities" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="TransporteModel.Customers" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="TransporteModel.DropOffPackages" Width="1.5" PointX="5.25" PointY="7.875" />
+        <EntityTypeShape EntityType="TransporteModel.Employees" Width="1.5" PointX="6" PointY="17.25" />
+        <EntityTypeShape EntityType="TransporteModel.HomePickups" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="TransporteModel.Licences" Width="1.5" PointX="3.75" PointY="19.5" />
+        <EntityTypeShape EntityType="TransporteModel.Packages" Width="1.5" PointX="5.25" PointY="10.875" />
+        <EntityTypeShape EntityType="TransporteModel.PackageTypes" Width="1.5" PointX="3" PointY="25.875" />
+        <EntityTypeShape EntityType="TransporteModel.Roles" Width="1.5" PointX="3.75" PointY="17.125" />
+        <EntityTypeShape EntityType="TransporteModel.Shippments" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="TransporteModel.ShippmentStages" Width="1.5" PointX="8.25" PointY="7.25" />
+        <EntityTypeShape EntityType="TransporteModel.ShRoute" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="TransporteModel.Stages" Width="1.5" PointX="6" PointY="14.5" />
+        <EntityTypeShape EntityType="TransporteModel.States" Width="1.5" PointX="1.5" PointY="1.125" />
+        <EntityTypeShape EntityType="TransporteModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="3.875" />
+        <EntityTypeShape EntityType="TransporteModel.Vehicles" Width="1.5" PointX="6" PointY="22" />
+        <EntityTypeShape EntityType="TransporteModel.VehiclesConditions" Width="1.5" PointX="3.75" PointY="22.5" />
+        <EntityTypeShape EntityType="TransporteModel.Zones" Width="1.5" PointX="3" PointY="3.75" />
+        <AssociationConnector Association="TransporteModel.FK__BranchOff__Branc__412EB0B6" />
+        <AssociationConnector Association="TransporteModel.FK__DropOffPa__Branc__656C112C" />
+        <AssociationConnector Association="TransporteModel.FK__Cities__CityStat__38996AB5" />
+        <AssociationConnector Association="TransporteModel.FK__Zones__City__3C69FB99" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Recip__60A75C0F" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Sende__5FB337D6" />
+        <AssociationConnector Association="TransporteModel.FK__DropOffPa__IdDro__6477ECF3" />
+        <AssociationConnector Association="TransporteModel.FK__Employees__EmpRo__32E0915F" />
+        <AssociationConnector Association="TransporteModel.FK__Employees__Licen__33D4B598" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Emplo__05D8E0BE" />
+        <AssociationConnector Association="TransporteModel.FK_HomePickups_Shipment" />
+        <AssociationConnector Association="TransporteModel.FK_HomePickups_Zones" />
+        <AssociationConnector Association="TransporteModel.FK__Packages__PType__6D0D32F4" />
+        <AssociationConnector Association="TransporteModel.FK__Packages__Shippm__6C190EBB" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Shipp__03F0984C" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Route__06CD04F7" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Stage__04E4BC85" />
+        <AssociationConnector Association="TransporteModel.FK__Shippment__Vehic__07C12930" />
+        <AssociationConnector Association="TransporteModel.FK__Vehicles__Condit__49C3F6B7" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

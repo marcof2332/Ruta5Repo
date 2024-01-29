@@ -24,6 +24,7 @@ namespace DataLayer
         public string CityName { get; set; }
         public int CityState { get; set; }
     
+        public virtual States States { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zones> Zones { get; set; }
     }

@@ -26,6 +26,7 @@ namespace API.Controllers
                 {
                     token = TokenValidations.JWTGenerator(log);
                     LoginModel ret = new LoginModel();
+                    ret.Id = log.ID;
                     ret.name = log.EmpName + ' ' + log.EmpLastName;
                     ret.role = log.EmpRole;
                     ret.token = token;

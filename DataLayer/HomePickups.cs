@@ -19,9 +19,13 @@ namespace DataLayer
         public Nullable<System.DateTime> EndTime { get; set; }
         public string Note { get; set; }
         public string PickupAddress { get; set; }
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
-    
+        public int PickUpZone { get; set; }
+        public System.Data.Entity.Spatial.DbGeography PickUpLocation { get; set; }
+        public int ShippmentId { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
         public virtual Shippments Shippments { get; set; }
+        public virtual Zones Zones { get; set; }
     }
 }

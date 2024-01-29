@@ -19,7 +19,7 @@ namespace LogicLayer.Interfaces
 
         #region HomePickupMethods
         HomePickups HpSearch(int code);
-        void HpAdd(HomePickups Hp);
+        int HpAdd(HomePickups Hp);
         void HpDelete(int ID);
         List<HomePickups> HpList();
         #endregion

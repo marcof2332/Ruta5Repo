@@ -14,15 +14,16 @@ namespace DataLayer
     
     public partial class ShRoute
     {
-        public int IdRoute { get; set; }
-        public decimal OrigLatitude { get; set; }
-        public decimal OrigLongitude { get; set; }
-        public int IdShSt { get; set; }
-        public int IdShippment { get; set; }
-        public int IdSStage { get; set; }
-        public int EmpID { get; set; }
-        public Nullable<int> Vehicle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ShRoute()
+        {
+            this.ShippmentStages = new HashSet<ShippmentStages>();
+        }
     
-        public virtual ShippmentStages ShippmentStages { get; set; }
+        public int IdRoute { get; set; }
+        public System.Data.Entity.Spatial.DbGeography routeShape { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShippmentStages> ShippmentStages { get; set; }
     }
 }

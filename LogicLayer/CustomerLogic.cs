@@ -21,7 +21,7 @@ namespace LogicLayer
         }
         #endregion
 
-        public Customers CSearch(long ID)
+        public Customers CSearch(string ID)
         {
             return (DbContextSingleton.TransporteContext.Customers.Where(c => c.DocRut == ID).FirstOrDefault());
         }

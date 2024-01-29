@@ -7,6 +7,7 @@ namespace API.Models
 {
     public class LoginModel
     {
+        public int Id { get; set; }
         public string name { get; set; }
         public string user { get; set; }
         public string password { get; set; }

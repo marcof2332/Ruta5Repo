@@ -154,16 +154,16 @@ namespace DataLayer
 
             if (dop == null)
                 throw new Exception("Debe ingresar datos validos.");
-            if (dop.Shippments.Recipient.Trim().Length < 2 || dop.Shippments.Recipient.Trim().Length > 50)
-                throw new Exception("Debe ingresar un nombre valido, conteniendo entre 2 y 50 caracteres.");
+            //if (dop.Shippments.Recipient.Trim().Length < 2 || dop.Shippments.Recipient.Trim().Length > 50)
+            //    throw new Exception("Debe ingresar un nombre valido, conteniendo entre 2 y 50 caracteres.");
             if (!celPattern.IsMatch(dop.Shippments.RecipientCel))
                 throw new Exception("Debe ingresar un numero de celular valido, debe contener 9 numeros.");
             if (dop.Shippments.TargetAddress.Trim().Length < 3 || dop.Shippments.TargetAddress.Length > 50)
                 throw new Exception("Debe ingresar una direccion valida, entre 3 y 50 caracteres.");
-            if (!(dop.Shippments.Latitude >= -90 && dop.Shippments.Latitude <= 90))
-                throw new Exception("La latitud ingresada no es valida.");
-            if (!(dop.Shippments.Longitude >= -180 && dop.Shippments.Longitude <= 180))
-                throw new Exception("La longitud ingresada no es valida.");
+            //if (!(dop.Shippments.Latitude >= -90 && dop.Shippments.Latitude <= 90))
+            //    throw new Exception("La latitud ingresada no es valida.");
+            //if (!(dop.Shippments.Longitude >= -180 && dop.Shippments.Longitude <= 180))
+            //    throw new Exception("La longitud ingresada no es valida.");
         }
         public static void HomePickupValidation(HomePickups hpu)
         {
@@ -172,25 +172,25 @@ namespace DataLayer
 
             if (hpu == null)
                 throw new Exception("Debe ingresar datos validos.");
-            if (hpu.Shippments.Recipient.Trim().Length < 2 || hpu.Shippments.Recipient.Trim().Length > 50)
-                throw new Exception("Debe ingresar un nombre valido, conteniendo entre 2 y 50 caracteres.");
+            //if (hpu.Shippments.Recipient.Trim().Length < 2 || hpu.Shippments.Recipient.Trim().Length > 50)
+            //    throw new Exception("Debe ingresar un nombre valido, conteniendo entre 2 y 50 caracteres.");
             if (!celPattern.IsMatch(hpu.Shippments.RecipientCel))
                 throw new Exception("Debe ingresar un numero de celular valido, debe contener 9 numeros.");
             if (hpu.Shippments.TargetAddress.Trim().Length < 3 || hpu.Shippments.TargetAddress.Length > 50)
                 throw new Exception("Debe ingresar una direccion valida, entre 3 y 50 caracteres.");
-            if (!(hpu.Shippments.Latitude >= -90 && hpu.Shippments.Latitude <= 90))
-                throw new Exception("La latitud ingresada no es valida.");
-            if (!(hpu.Shippments.Longitude >= -180 && hpu.Shippments.Longitude <= 180))
-                throw new Exception("La longitud ingresada no es valida.");
+            //if (!(hpu.Shippments.Latitude >= -90 && hpu.Shippments.Latitude <= 90))
+            //    throw new Exception("La latitud ingresada no es valida.");
+            //if (!(hpu.Shippments.Longitude >= -180 && hpu.Shippments.Longitude <= 180))
+            //    throw new Exception("La longitud ingresada no es valida.");
             if (hpu.StartTime < hpu.EndTime)
                 throw new Exception("Debe ingresar un rango horario valido.");
             if (hpu.Shippments.TargetAddress.Trim().Length < 3 || hpu.Shippments.TargetAddress.Length > 50)
                 throw new Exception("Debe ingresar una direccion valida, entre 3 y 50 caracteres.");
             //Latitud y longitud de el retiro
-            if (!(hpu.Latitude >= -90 && hpu.Latitude <= 90))
-                throw new Exception("La latitud ingresada no es valida.");
-            if (!(hpu.Longitude >= -180 && hpu.Longitude <= 180))
-                throw new Exception("La longitud ingresada no es valida.");
+            //if (!(hpu.Latitude >= -90 && hpu.Latitude <= 90))
+            //    throw new Exception("La latitud ingresada no es valida.");
+            //if (!(hpu.Longitude >= -180 && hpu.Longitude <= 180))
+            //    throw new Exception("La longitud ingresada no es valida.");
         }
         public static void PackageValidation(Packages pkg)
         {

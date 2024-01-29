@@ -6,7 +6,10 @@ namespace LogicLayer.Interfaces
     public interface IPackageLogic
     {
         Packages PSearch(int ID);
-        void PAdd(Packages p);
+        Packages PAdd(Packages p);
+
+        List<Packages> PAddMany(List<Packages> p);
+
         List<Packages> PList();
     }
 }

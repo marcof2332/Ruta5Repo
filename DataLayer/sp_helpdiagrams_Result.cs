@@ -10,16 +10,13 @@
 namespace DataLayer
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Packages
+    public partial class sp_helpdiagrams_Result
     {
-        public int IdPackage { get; set; }
-        public int Shippment { get; set; }
-        public int PType { get; set; }
-        public int NOfPackages { get; set; }
-    
-        public virtual PackageTypes PackageTypes { get; set; }
-        public virtual Shippments Shippments { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

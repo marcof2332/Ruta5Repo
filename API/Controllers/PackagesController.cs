@@ -33,8 +33,23 @@ namespace API.Controllers
         {
             try
             {
-                LogicFactory.GetPackageLogic().PAdd(PK);
-                return Ok();
+                Packages pk = LogicFactory.GetPackageLogic().PAdd(PK);
+                return Ok(pk);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("addMany")]
+        public IHttpActionResult addMany(List<Packages> PKs)
+        {
+            try
+            {
+                List<Packages> result = LogicFactory.GetPackageLogic().PAddMany(PKs);
+                return Ok(result);
             }
             catch (Exception ex)
             {
